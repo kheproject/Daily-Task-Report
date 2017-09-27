@@ -182,7 +182,7 @@
     <Compile Include="StartupAuth.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AESEncrypt.dll" />
+    <Content Include="App_Data\AESEncrypt.dll" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -214,9 +214,7 @@
     <Content Include="Views\Index\Login.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
