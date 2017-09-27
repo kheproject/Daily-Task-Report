@@ -1,19 +1,31 @@
 ﻿body {
-    background-color: grey;
+    background-color: lightgrey;
 }
 header {
-    background-color: black;
-    color: lightgray;
     line-height: 50px;
     height: 50px;
     width: 100%;
     position: fixed;
     top: 0px;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 body > div {
-    border: 1px solid green; height: 100px; margin-top: 60px; padding: 15px;
+    border: 1px solid green;
+    margin-top: 60px;
+    
+    padding: 15px;
 }
 
-.themeRed {
-    background-color: #
+.bgcred {
+    background-color: #ca0f0f;
+}
+.defaultbdy {
+    background: url('../Images/mlhuillier-logo.svg') no-repeat fixed lightgrey; 
+    background-size: contain;
+    background-position: center;
+}
+.fontWhite {
+    color: white;
 }

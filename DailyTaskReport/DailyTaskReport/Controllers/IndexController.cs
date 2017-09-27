@@ -39,13 +39,13 @@ namespace DailyTaskReport.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult LogIn(LoginCredentials login)
+        public ActionResult LogIn(AccountResponse login)
         {
             if (ModelState.IsValid)
             {
-                AccountResponse usr = getUser(login);
+                AccountResponse usr = getUser(login.userInfo.credentials);
             }
-            return PartialView("LogIn");
+            return /*Partial*/View("LogIn");
         }
 
         private AccountResponse getUser(LoginCredentials login)
@@ -58,7 +58,7 @@ namespace DailyTaskReport.Controllers
                     using (MySqlCommand cmd = con.CreateCommand())
                     {
                         cmd.CommandText = "SELECT * FROM kpDailyTask.employees WHERE IDno = @idno AND password = @pwrd;";
-                        cmd.Parameters.AddWithValue("idno", login.idno);
+                        cmd.Parameters.AddWithValue("idno", login.user);
                         cmd.Parameters.AddWithValue("pwrd", login.password);
 
                         MySqlDataReader rdr = cmd.ExecuteReader();

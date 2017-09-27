@@ -185,10 +185,16 @@
     <Content Include="App_Data\AESEncrypt.dll" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="favicon.ico" />
+    <Content Include="Content\_SVGImageLoad.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\favicon.ico" />
+    <Content Include="Images\mlhuillier-logo.svg" />
+    <Content Include="Images\Sinulog2.jpg" />
+    <Content Include="Images\_CircleAjaxLoad.svg" />
+    <Content Include="Images\_MLAjaxLoad.svg" />
+    <Content Include="Images\_Sinulog.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

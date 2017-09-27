@@ -1,5 +1,69 @@
-﻿@model DailyTaskReport.Models.LoginCredentials
+﻿@model DailyTaskReport.Models.AccountResponse
+<style>
+    #Login {
+        padding: 15px;
+        display: inline-block;
+        margin-left: 190px;
+    }
+    button {
+        border: none;
+        padding: 5px 15px;
+        border-radius: 5px;
+        float: right;
+    }
+    button:hover {
+        background-color: red;
+    }
+    .input-group-addon {
+        background: none;
+    }
+    .input-group .form-control {
+        background: none;
+        color: white;
+    }
+    .form-control.form-controlFor:focus::-webkit-input-placeholder,
+    .form-control.form-controlFor:active::-webkit-input-placeholder {
+      text-indent: -100%;
+      transition: 0.5s ease-in-out;
+      opacity: 1;
+    }
+    ::-webkit-input-placeholder { /* WebKit browsers */
+        text-transform: none;
+    }
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        text-transform: none;
+    }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        text-transform: none;
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10+ */
+        text-transform: none;
+    }
+</style>
 
-<div>
-    Login....
+<div style="position: relative; max-width: 450px; background-color: rgba(0,0,0,0.9); border-radius: 10px; margin: 100px auto; overflow: hidden;">
+    <div style="position: absolute; top: -25px;">
+        <img class="diamond horizontal-flipOn" src="../Images/_MLAjaxLoad.svg" draggable="false"/>
+    </div>
+    
+    @using (Html.BeginForm("LogIn", "Index", FormMethod.Post, new { @id = "Login" }))
+    {
+        @Html.AntiForgeryToken()
+        <div style="min-height: 60px;">
+            <div class="input-group" style="width: 100%;">
+                <div class="input-group-addon form-group"><span class="glyphicon glyphicon-user icon-a"></span></div>
+                @Html.TextBoxFor(m => m.userInfo.credentials.user, new { @class = "form-control form-controlFor", @placeholder = "user", @autofocus = "autofocus", @style = "text-transform:uppercase;" })
+            </div>
+            @Html.ValidationMessageFor(m => m.userInfo.credentials.user)
+        </div>
+        <div style="min-height: 60px;">
+            <div class="input-group" style="width: 100%;">
+                <div class="input-group-addon form-group"><span class="glyphicon glyphicon-lock icon-a"></span></div>
+                @Html.PasswordFor(m => m.userInfo.credentials.password, new { @class = "form-control form-controlFor", @placeholder = "password", style = "padding-right: 30px;" })
+            </div>
+            @Html.ValidationMessageFor(m => m.userInfo.credentials.password)
+        </div>
+
+        <button class="bgcred fontWhite" type="submit">Login</button>
+    }
 </div>

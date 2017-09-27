@@ -3,17 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="@Url.Content("~/Images/favicon.ico")" />
     <title>@ViewBag.Title Daily Task Report</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>
-    <header style="">
-        @{Html.RenderPartial("_Menu"); }
+<body class="fontWhite">
+    <header class="bgcred">
+        @{Html.RenderPartial("_Menu");}
     </header>
     <div style="">
-        Page Content...
         @RenderBody()
     </div>
 

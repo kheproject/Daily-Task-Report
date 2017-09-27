@@ -25,6 +25,7 @@ namespace DailyTaskReport
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/_SVGImageLoad.css",
                       "~/Content/site.css"));
         }
     }

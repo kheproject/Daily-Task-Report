@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Text.RegularExpressions;
 
 namespace DailyTaskReport.Models
 {
@@ -48,10 +49,10 @@ namespace DailyTaskReport.Models
     public class LoginCredentials
     {
         [Required]
-        [Display(Name = "ID No.")]
-        [StringLength(8, ErrorMessage = "{0} must consist of 8 numeric digits")]
-        [RegularExpression("[0-1]")]
-        public String idno { get; set; }
+        [Display(Name = "User")]
+        [StringLength(12, ErrorMessage = "{0} must consist of 12 numeric digits")]
+        //[RegularExpression("\\W", ErrorMessage = "{0} accepts alphanumberic only")]
+        public String user { get; set; }
 
         [Required]
         [Display(Name = "Password")]
