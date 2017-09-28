@@ -1,28 +1,4 @@
-﻿<style>
-    header > ul {
-        list-style: none
-    }
-    header > ul > li {
-        float: left;
-    }
-    header > ul > li > a {
-        transition-duration: 0.3s;
-        text-decoration: none;
-        display: block; 
-        padding: 0 10px;
-        cursor: pointer;
-        color: lightgray;
-    }
-    header > ul > li > a:hover {
-        line-height: 46px;
-        border-bottom: 4px solid white;
-        text-decoration: none;
-        background-color: red;
-        color: white;
-     }
-</style>
-
-<ul>
+﻿<ul>
     <li>
         <a>Home</a>
     </li>
@@ -30,6 +6,53 @@
         <a>Employees</a>
     </li>
     <li>
+        <a id="AddTask">Add Task</a>
+    </li>
+    <li>
+        <a>My Recent Tasks</a>
+    </li>
+    <li>
         <a>Search</a>
     </li>
 </ul>
+
+<nav>
+    <ul>
+        <li>
+            @Html.ActionLink("Logout", "LogOut", "Index", "", new { @style = "" })
+        </li>
+    </ul>
+</nav>
+
+<script>
+    $(function () {
+        var isAddTaskClicked = false;
+        $('#AddTask').click(function () {
+            if (!isAddTaskClicked) {
+                toggleUIBlocker();
+                $.ajax({
+                    async: true,
+                    type: 'GET',
+                    url: '/Home/getAddTask',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    dataType: 'html',
+                    cache: false,
+                    success: function (result) {
+                        isAddTaskClicked = true;
+                        setTimeout(function () {
+                            $('#body-content').html(result);
+                            setTimeout(function () { toggleUIBlocker(); }, 300);
+                        }, 300);
+                    },
+                    error: function () {
+                        alert('an error has occured');
+                    }
+                })
+            }
+            else {
+                isAddTaskClicked = false;
+                $('#body-content').html("");
+            }
+        });
+    });
+</script>

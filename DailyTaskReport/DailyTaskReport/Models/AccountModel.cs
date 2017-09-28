@@ -9,6 +9,10 @@ namespace DailyTaskReport.Models
 {
     public class AccountResponse
     {
+        public AccountResponse()
+        {
+            userInfo = new AccountModel();
+        }
         public Int16 code { get; set; }
         public String msg { get; set; }
         public AccountModel userInfo { get; set; }
@@ -18,16 +22,20 @@ namespace DailyTaskReport.Models
     {
         public LoginCredentials credentials { get; set; }
 
+        [Display(Name = "ID Number")]
+        [RegularExpression("[0-9]")]
+        public String idNo { get; set; }
+
         [Display(Name = "First Name")]
-        [RegularExpression("[a-zA-Z")]
+        [RegularExpression("[a-zA-Z]")]
         public String fName { get; set; }
         
         [Display(Name = "Middle Name")]
-        [RegularExpression("[a-zA-Z")]
+        [RegularExpression("[a-zA-Z]")]
         public String mName { get; set; }
 
         [Display(Name = "Last Name")]
-        [RegularExpression("[a-zA-Z")]
+        [RegularExpression("[a-zA-Z]")]
         public String lName { get; set; }
 
         [Display(Name = "First Name")]
@@ -51,7 +59,7 @@ namespace DailyTaskReport.Models
         [Required]
         [Display(Name = "User")]
         [StringLength(12, ErrorMessage = "{0} must consist of 12 numeric digits")]
-        //[RegularExpression("\\W", ErrorMessage = "{0} accepts alphanumberic only")]
+        [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "{0} accepts alphanumberic only")]
         public String user { get; set; }
 
         [Required]

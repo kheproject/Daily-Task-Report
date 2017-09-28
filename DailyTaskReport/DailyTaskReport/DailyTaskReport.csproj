@@ -173,11 +173,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StartupAuth.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\TaskModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StartupAuth.cs" />
   </ItemGroup>
@@ -206,6 +208,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_Layout.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -219,6 +222,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Index\Login.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Index\LoginFormContent.cshtml" />
+    <Content Include="Views\Shared\_HomeSCHD.cshtml" />
+    <Content Include="Views\Home\getAddTask.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

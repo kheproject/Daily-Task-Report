@@ -5,19 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="@Url.Content("~/Images/favicon.ico")" />
     <title>@ViewBag.Title Daily Task Report</title>
+    @Scripts.Render("~/bundles/jquery")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body class="fontWhite">
-    <header class="bgcred">
-        @{Html.RenderPartial("_Menu");}
-    </header>
-    <div style="">
+    <header class="bgcred"></header>
+    <div id="body-content">
         @RenderBody()
     </div>
-
-    @Scripts.Render("~/bundles/jquery")
+    <div id="uiBlocker" class="elementHide">
+        <img id="MLLogo-Diamond" src="~/Images/_MLAjaxLoad.svg" draggable="false" />
+        <img id="MLLogo-Ajax-Circle" src="~/Images/_CircleAjaxLoad.svg" draggable="false" />
+        <div>
+            Please wait...
+        </div>
+    </div>
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

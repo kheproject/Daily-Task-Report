@@ -1,9 +1,40 @@
-﻿@model DailyTaskReport.Models.AccountResponse
-<style>
-    #Login {
+﻿<style>
+    #login-holder {
+        transition-duration: 0.5s;
+        box-shadow: rgba(0,0,0,0.4) 0px 0px 25px 5px;
+        background-color: #121212;
+        border: 2px solid grey;
+        border-radius: 10px;
+        position: relative;
+        margin: 100px auto;
+        overflow: hidden;
+        max-width: 450px;
+        height: 184px;
+    }
+    #login-holder > div {
+        position: absolute;
+        top: -25px;
+    }
+    #login-holder > span {
+        font-family: 'Eras ITC';
+        margin-left: 240px;
+        font-size: 26px;
+    }
+    #frmLogin {
+        transition-duration: 0.3s;
         padding: 15px;
         display: inline-block;
         margin-left: 190px;
+        overflow: hidden;
+        background-color: #121212;
+    }
+    .frmHide {
+        height: 70px;
+        border-bottom: 2px solid white;
+    }
+    .frmShow {
+        height: 182px;
+        border-bottom: 2px solid #121212;
     }
     button {
         border: none;
@@ -39,31 +70,57 @@
     :-ms-input-placeholder { /* Internet Explorer 10+ */
         text-transform: none;
     }
+    button {
+        outline: none;
+    }
 </style>
 
-<div style="position: relative; max-width: 450px; background-color: rgba(0,0,0,0.9); border-radius: 10px; margin: 100px auto; overflow: hidden;">
-    <div style="position: absolute; top: -25px;">
+<div id="login-holder">
+    <div>
         <img class="diamond horizontal-flipOn" src="../Images/_MLAjaxLoad.svg" draggable="false"/>
     </div>
-    
-    @using (Html.BeginForm("LogIn", "Index", FormMethod.Post, new { @id = "Login" }))
-    {
-        @Html.AntiForgeryToken()
-        <div style="min-height: 60px;">
-            <div class="input-group" style="width: 100%;">
-                <div class="input-group-addon form-group"><span class="glyphicon glyphicon-user icon-a"></span></div>
-                @Html.TextBoxFor(m => m.userInfo.credentials.user, new { @class = "form-control form-controlFor", @placeholder = "user", @autofocus = "autofocus", @style = "text-transform:uppercase;" })
-            </div>
-            @Html.ValidationMessageFor(m => m.userInfo.credentials.user)
-        </div>
-        <div style="min-height: 60px;">
-            <div class="input-group" style="width: 100%;">
-                <div class="input-group-addon form-group"><span class="glyphicon glyphicon-lock icon-a"></span></div>
-                @Html.PasswordFor(m => m.userInfo.credentials.password, new { @class = "form-control form-controlFor", @placeholder = "password", style = "padding-right: 30px;" })
-            </div>
-            @Html.ValidationMessageFor(m => m.userInfo.credentials.password)
-        </div>
 
-        <button class="bgcred fontWhite" type="submit">Login</button>
+    @using (Html.BeginForm("LogIn", "Index", FormMethod.Post, new { @id = "frmLogin", @class = "frmShow" }))
+    {
+        Html.RenderPartial("LoginFormContent");
     }
+    <span>Logging in...</span>
 </div>
+
+<script>
+    $(function () {
+        $('#frmLogin').on("submit", function (e) {
+            e.preventDefault();
+            toggleForm();
+            $('#userInfo_credentials_user').attr('readonly', 'true');
+
+            $.ajax({
+                async: true,
+                type: 'POST',
+                url: $(this).attr("action"),
+                data: $('form :input').serializeArray(),
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'html',
+                cache: false,
+                success: function (result) {
+                    setTimeout(function () { $('form#frmLogin').html(result); toggleForm(); }, 300);
+                },
+                error: function () {
+                    alert('an error has occured');
+                    setTimeout(function () { $('#userInfo_credentials_user').removeAttr('readonly'); toggleForm(); }, 300);
+                }
+            });
+        });
+    });
+
+    function toggleForm() {
+        if ($('#frmLogin').hasClass('frmShow')) {
+            $('#frmLogin').removeClass('frmShow');
+            $('#frmLogin').addClass('frmHide');
+        }
+        else {
+            $('#frmLogin').removeClass('frmHide');
+            $('#frmLogin').addClass('frmShow');
+        }
+    }
+</script>
