@@ -175,6 +175,7 @@
     <Compile Include="App_Start\StartupAuth.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -224,9 +225,11 @@
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Index\LoginFormContent.cshtml" />
     <Content Include="Views\Shared\_HomeSCHD.cshtml" />
-    <Content Include="Views\Home\getAddTask.cshtml" />
+    <Content Include="Views\Task\getAddTask.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Home\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

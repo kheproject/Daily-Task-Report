@@ -1,5 +1,6 @@
 ﻿body {
     background-color: lightgrey;
+    min-width: 600px;
 }
 header {
     line-height: 50px;

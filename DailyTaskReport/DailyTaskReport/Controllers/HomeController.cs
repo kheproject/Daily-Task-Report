@@ -14,10 +14,5 @@ namespace DailyTaskReport.Controllers
         {
             return PartialView("_Menu");
         }
-
-        public ActionResult getAddTask()
-        {
-            return PartialView();
-        }
     }
 }

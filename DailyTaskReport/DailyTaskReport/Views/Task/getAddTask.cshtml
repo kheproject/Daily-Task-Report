@@ -1,0 +1,138 @@
+﻿@model DailyTaskReport.Models.TaskLists
+<style>
+    .add-task-holder {
+        border-radius: 10px;
+        border: 2px solid #ca0f0f;
+        max-width: 1000px;
+        overflow: hidden;
+        margin: 0 auto;
+        box-shadow: rgba(0,0,0,0.4) 0px 0px 25px 5px;
+        background-color: white;
+    }
+    .add-task-holder > div:first-child {
+        background-color: #ca0f0f;
+        font-size: 16px;
+        color: white;
+        padding: 10px 20px;
+    }
+    .add-task-holder > div {
+        color: black;
+        padding: 20px;
+    }
+    .add-task-content > form > div:first-child {
+        color: white;
+        padding: 5px 10px;
+        display: inline-block;
+        background-color: grey;
+        border: 1px solid darkgrey;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        box-shadow: rgba(0,0,0,0.4) 0px -1px 5px 1px;
+        
+    }
+    .add-task-content > form > div {
+        display: block;
+        border: 1px solid darkgrey;
+        border-top-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        box-shadow: rgba(0,0,0,0.4) 0px 0px 5px 1px;
+    }
+    div#todaystasks > div {
+        padding: 10px 20px;
+        border: 1px solid rgba(150,150,150,0.2);
+    }
+    div#todaystasks > div:nth-child(2n+1) {
+        background-color: rgba(150,150,150,0.2);
+    }
+    .add-task-content > form > div:last-child {
+        border: none;
+        box-shadow: none;
+        text-align: right;
+        padding: 10px 0 0 0;
+    }
+</style>
+
+<div class="add-task-holder">
+    <div>
+        Add Task Form
+    </div>
+    
+    <div class="add-task-content">
+        @using (Html.BeginForm("AddTasks", "Task", FormMethod.Post, new { @id = "frmAddTask", @class = "add-task-content" }))
+        {
+            <div>
+                @*<b>ID No.</b> : @Html.TextBoxFor(m => m.idNo) <br />*@
+                <b>Date</b> : @Html.TextBoxFor(m => m.dateTime, new { @type = "date" })
+            </div>
+            <div id="todaystasks">
+                <div>
+                    <div>
+                        Time : @Html.TextBoxFor(m => m.taskLists[0].timeFrom, new { @type = "time" })
+                             ─ @Html.TextBoxFor(m => m.taskLists[0].timeTo, new { @type = "time" })
+                    </div>
+                    <div>
+                        Work Order : @Html.TextBoxFor(m => m.taskLists[0].woNo)
+                    </div>
+                    <div>
+                        Task : @Html.TextBoxFor(m => m.taskLists[0].task)
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button id="addTimeList" type="button">Add Time List</button>
+                <button type="submit">Submit</button>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if(dd<10) dd='0'+dd;
+        if (mm < 10) mm = '0' + mm;
+        var today = yyyy+'-'+mm+'-'+dd;
+        document.getElementById('dateTime').value = today;
+
+        $('#frmAddTask').on("submit", function (e) {
+            e.preventDefault();
+            $.ajax({
+                async: true,
+                type: 'POST',
+                url: $(this).attr("action"),
+                data: $('form :input').serializeArray(),
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'html',
+                cache: false,
+                success: function (result) {
+                    alert(result)
+                },
+                error: function () {
+                    alert('an error has occured');
+                }
+            });
+        });
+
+        var ListCount = 0;
+        $('#addTimeList').on("click", function (e) {
+            ListCount++;
+            var timeForm = '<div><div>'
+                         + 'Time : <input id="taskLists_' + ListCount + '__timeFrom" name="taskLists[' + ListCount + '].timeFrom" type="time" value="">'
+                         + '     ─ <input id="taskLists_' + ListCount + '__timeTo" name="taskLists[' + ListCount + '].timeTo" type="time" value="">'
+                         + '</div><div>'
+                         + 'Work Order : <input id="taskLists_' + ListCount + '__woNo" name="taskLists[' + ListCount + '].woNo" type="text" value="">'
+                         + '</div><div>'
+                         + 'Task : <input id="taskLists_' + ListCount + '__task" name="taskLists[' + ListCount + '].task" type="text" value="">'
+                         + '</div></div>';
+            document.getElementById('todaystasks').insertAdjacentHTML('beforeend', timeForm);
+        });
+    });
+</script>
+
+    
