@@ -20,7 +20,7 @@ namespace DailyTaskReport.Controllers
         private String connection = string.Empty;
         //private ILog kplog;
         private AESEncryption encdata = new AESEncryption();
-        //private String encStringKey = "B905BD7BFBD902DCB115B327F9018CEA";
+        private String encStringKey = "B905BD7BFBD902DCB115B327F9018CEA";
 
         public IndexController()
         {
@@ -47,14 +47,15 @@ namespace DailyTaskReport.Controllers
             else
                 return View("LogIn");
         }
+
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult LogIn(AccountResponse login)
+        public ActionResult LogIn(LoginCredentials login)
         {
             if (ModelState.IsValid)
             {
-                AccountResponse usr = getUser(login.userInfo.credentials);
+                AccountResponse usr = getUser(login);
                 if (usr.code == 1)
                 {
                     var userLogged = new ClaimsIdentity(new[] { new Claim(ClaimTypes.UserData, usr.userInfo.credentials.user),
@@ -63,6 +64,8 @@ namespace DailyTaskReport.Controllers
                                                                 new Claim(ClaimTypes.GivenName, usr.userInfo.fName)
                                                               }, "KP8DTR");
                     Request.GetOwinContext().Authentication.SignIn(new AuthenticationProperties { IsPersistent = false }, userLogged);
+                    
+                    this.Session["_user"] = encdata.AESEncrypt(usr.userInfo.credentials.user, encStringKey);
                     this.Session["FName"] = usr.userInfo.fName;
                     this.Session["MName"] = usr.userInfo.mName;
                     this.Session["LName"] = usr.userInfo.lName;
@@ -81,10 +84,8 @@ namespace DailyTaskReport.Controllers
         private AccountResponse getUser(LoginCredentials login)
         {
             AccountResponse user = new AccountResponse();
-            user.userInfo.credentials = login;
-            //user.userInfo.credentials = new LoginCredentials { user = login.user , password = login.password };
             try
-            {   
+            {
                 using (MySqlConnection con = new MySqlConnection(connection))
                 {
                     con.Open();

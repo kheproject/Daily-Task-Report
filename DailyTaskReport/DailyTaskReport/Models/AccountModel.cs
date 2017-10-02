@@ -20,33 +20,42 @@ namespace DailyTaskReport.Models
 
     public class AccountModel
     {
+        public AccountModel()
+        {
+            credentials = new LoginCredentials();
+        }
         public LoginCredentials credentials { get; set; }
 
+        [Required]
         [Display(Name = "ID Number")]
         [RegularExpression("[0-9]")]
         public String idNo { get; set; }
 
+        [Required]
         [Display(Name = "First Name")]
         [RegularExpression("[a-zA-Z]")]
         public String fName { get; set; }
-        
+
+        [Required]
         [Display(Name = "Middle Name")]
         [RegularExpression("[a-zA-Z]")]
         public String mName { get; set; }
 
+        [Required]
         [Display(Name = "Last Name")]
         [RegularExpression("[a-zA-Z]")]
         public String lName { get; set; }
 
-        [Display(Name = "First Name")]
+        [Required]
+        [Display(Name = "Birth date")]
         public DateTime birthdate { get; set; }
 
-        [Display(Name = "Birthdate")]
+        [Display(Name = "Designation")]
         public String Designation { get; set; }
 
         [Display(Name = "Contact No.")]
         public String ContactNo { get; set; }
-
+        
         [Display(Name = "Role")]
         public String Role { get; set; }
 
@@ -57,13 +66,13 @@ namespace DailyTaskReport.Models
     public class LoginCredentials
     {
         [Required]
-        [Display(Name = "User")]
-        [StringLength(12, ErrorMessage = "{0} must consist of 12 numeric digits")]
-        [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "{0} accepts alphanumberic only")]
+        [Display(Name = "user")]
+        [StringLength(12, ErrorMessage = "must consist of 12 characters")]
+        [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "accepts alphanumeric only")]
         public String user { get; set; }
 
         [Required]
-        [Display(Name = "Password")]
+        [Display(Name = "password")]
         public String password { get; set; }
     }
 }

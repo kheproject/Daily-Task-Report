@@ -92,7 +92,7 @@
         $('#frmLogin').on("submit", function (e) {
             e.preventDefault();
             toggleForm();
-            $('#userInfo_credentials_user').attr('readonly', 'true');
+            $('#user').attr('readonly', 'true');
 
             $.ajax({
                 async: true,
@@ -107,7 +107,7 @@
                 },
                 error: function () {
                     alert('an error has occured');
-                    setTimeout(function () { $('#userInfo_credentials_user').removeAttr('readonly'); toggleForm(); }, 300);
+                    setTimeout(function () { $('#user').removeAttr('readonly'); toggleForm(); }, 300);
                 }
             });
         });

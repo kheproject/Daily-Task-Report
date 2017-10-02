@@ -41,11 +41,30 @@
         box-shadow: rgba(0,0,0,0.4) 0px 0px 5px 1px;
     }
     div#todaystasks > div {
-        padding: 10px 20px;
-        border: 1px solid rgba(150,150,150,0.2);
+        border: 1px solid rgba(150,150,150,0.5);
+        margin: 0 auto;
     }
-    div#todaystasks > div:nth-child(2n+1) {
-        background-color: rgba(150,150,150,0.2);
+    div#todaystasks > div > div {
+        padding: 0;
+        
+    }
+    div#todaystasks > div > div > div {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    div#todaystasks > div > div > div > input[type=time] {
+        width: 100px;
+    }
+    div#todaystasks > div:before,
+    div#todaystasks > div:after {
+        display: table;
+        content: " ";
+    }
+    div#todaystasks > div:after {
+        clear: both;
+    }
+    div#todaystasks > div:nth-child(2n) {
+        background-color: rgba(150,150,150,0.3);
     }
     .add-task-content > form > div:last-child {
         border: none;
@@ -64,20 +83,25 @@
         @using (Html.BeginForm("AddTasks", "Task", FormMethod.Post, new { @id = "frmAddTask", @class = "add-task-content" }))
         {
             <div>
-                @*<b>ID No.</b> : @Html.TextBoxFor(m => m.idNo) <br />*@
+                @Html.TextBoxFor(m => m.encUser, new { @style = "display: none;", Value = @Session["_user"] })
                 <b>Date</b> : @Html.TextBoxFor(m => m.dateTime, new { @type = "date" })
             </div>
             <div id="todaystasks">
-                <div>
-                    <div>
-                        Time : @Html.TextBoxFor(m => m.taskLists[0].timeFrom, new { @type = "time" })
-                             ─ @Html.TextBoxFor(m => m.taskLists[0].timeTo, new { @type = "time" })
+                <div class="col-md-12">
+                    <div class="col-md-8">
+                        <div class="col-xs-6">
+                            Time : @Html.TextBoxFor(m => m.taskLists[0].timeFrom, new { @type = "time" })
+                                 ─ @Html.TextBoxFor(m => m.taskLists[0].timeTo, new { @type = "time" })
+                        </div>
+                        <div class="col-xs-6">
+                            Work Order : @Html.TextBoxFor(m => m.taskLists[0].woNo, new { @maxlength = "18"})
+                        </div>
                     </div>
-                    <div>
-                        Work Order : @Html.TextBoxFor(m => m.taskLists[0].woNo)
-                    </div>
-                    <div>
-                        Task : @Html.TextBoxFor(m => m.taskLists[0].task)
+                    <div class="col-md-4">
+                        <div class="col-md-12">
+                            Task : 
+                            @Html.TextBoxFor(m => m.taskLists[0].task, new { @placeholder = "description"})
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,18 +145,23 @@
 
         var ListCount = 0;
         $('#addTimeList').on("click", function (e) {
-            ListCount++;
-            var timeForm = '<div><div>'
-                         + 'Time : <input id="taskLists_' + ListCount + '__timeFrom" name="taskLists[' + ListCount + '].timeFrom" type="time" value="">'
-                         + '     ─ <input id="taskLists_' + ListCount + '__timeTo" name="taskLists[' + ListCount + '].timeTo" type="time" value="">'
-                         + '</div><div>'
-                         + 'Work Order : <input id="taskLists_' + ListCount + '__woNo" name="taskLists[' + ListCount + '].woNo" type="text" value="">'
-                         + '</div><div>'
-                         + 'Task : <input id="taskLists_' + ListCount + '__task" name="taskLists[' + ListCount + '].task" type="text" value="">'
-                         + '</div></div>';
-            document.getElementById('todaystasks').insertAdjacentHTML('beforeend', timeForm);
+            if ($('input#taskLists_' + ListCount + '__timeFrom').val() != "" 
+               && $('input#taskLists_' + ListCount + '__timeTo').val() != ""
+               && $('input#taskLists_' + ListCount + '__task').val() != "") {
+                ListCount++;
+                var timeForm = '<div class="col-md-12"><div class="col-md-8"><div class="col-xs-6">'
+                             + 'Time : <input id="taskLists_' + ListCount + '__timeFrom" name="taskLists[' + ListCount + '].timeFrom" type="time" value="">'
+                             + '     ─ <input id="taskLists_' + ListCount + '__timeTo" name="taskLists[' + ListCount + '].timeTo" type="time" value="">'
+                             + '</div><div class="col-xs-6">'
+                             + 'Work Order : <input id="taskLists_' + ListCount + '__woNo" name="taskLists[' + ListCount + '].woNo" type="text" value="">'
+                             + '</div></div><div class="col-md-4"><div class="col-md-12">'
+                             + 'Task : <input id="taskLists_' + ListCount + '__task" name="taskLists[' + ListCount + '].task" type="text" value="" placeholder = "description">'
+                             + '</div></div></div>';
+                document.getElementById('todaystasks').insertAdjacentHTML('beforeend', timeForm);
+            }
+            else {
+                alert("Fill out the form first");
+            }
         });
     });
 </script>
-
-    
