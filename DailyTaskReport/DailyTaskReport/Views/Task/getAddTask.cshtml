@@ -80,7 +80,7 @@
     </div>
     
     <div class="add-task-content">
-        @using (Html.BeginForm("AddTasks", "Task", FormMethod.Post, new { @id = "frmAddTask", @class = "add-task-content" }))
+        @using (Html.BeginForm("addTasks", "Task", FormMethod.Post, new { @id = "frmAddTask", @class = "add-task-content" }))
         {
             <div>
                 @Html.TextBoxFor(m => m.encUser, new { @style = "display: none;", Value = @Session["_user"] })

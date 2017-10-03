@@ -27,6 +27,8 @@ namespace DailyTaskReport.Controllers
         {
             String user = encdata.AESDecrypt(tasks.encUser.Replace(' ', '+'), encStringKey);
 
+
+
             return new JsonResult { Data = tasks };
         }
     }
