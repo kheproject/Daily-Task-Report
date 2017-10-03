@@ -26,7 +26,11 @@ namespace DailyTaskReport.Controllers
         public JsonResult AddTasks(TaskLists tasks)
         {
             String user = encdata.AESDecrypt(tasks.encUser.Replace(' ', '+'), encStringKey);
-
+            
+            if (ModelState.IsValid)
+            { 
+            
+            }
 
 
             return new JsonResult { Data = tasks };

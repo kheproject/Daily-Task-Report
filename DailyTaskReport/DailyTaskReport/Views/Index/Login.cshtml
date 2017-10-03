@@ -2,8 +2,8 @@
     #login-holder {
         transition-duration: 0.5s;
         box-shadow: rgba(0,0,0,0.4) 0px 0px 25px 5px;
-        background-color: #121212;
-        border: 2px solid grey;
+        background-color: rgba(56,5,4,1);
+        background: linear-gradient(to bottom, #273030, #7a1111, #7a2020, #273030);
         border-radius: 10px;
         position: relative;
         margin: 100px auto;
@@ -26,7 +26,6 @@
         display: inline-block;
         margin-left: 190px;
         overflow: hidden;
-        background-color: #121212;
     }
     .frmHide {
         height: 70px;
@@ -34,17 +33,9 @@
     }
     .frmShow {
         height: 182px;
-        border-bottom: 2px solid #121212;
+        border-bottom: 2px solid rgba(255,255,255,0);
     }
-    button {
-        border: none;
-        padding: 5px 15px;
-        border-radius: 5px;
-        float: right;
-    }
-    button:hover {
-        background-color: red;
-    }
+    
     .input-group-addon {
         background: none;
     }
@@ -70,9 +61,7 @@
     :-ms-input-placeholder { /* Internet Explorer 10+ */
         text-transform: none;
     }
-    button {
-        outline: none;
-    }
+
 </style>
 
 <div id="login-holder">

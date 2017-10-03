@@ -20,37 +20,40 @@
         padding: 20px;
     }
     .add-task-content > form > div:first-child {
-        color: white;
         padding: 5px 10px;
         display: inline-block;
-        background-color: grey;
-        border: 1px solid darkgrey;
+        /*background-color: #eab9b9;*/
+        border: 1px solid #2e0905;
+        border-bottom: none;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
         box-shadow: rgba(0,0,0,0.4) 0px -1px 5px 1px;
-        
+        background-color: #b05b5b;
+        z-index: 2;
     }
-    .add-task-content > form > div {
-        display: block;
-        border: 1px solid darkgrey;
+    .add-task-content > form > div#todaystasks {
+        /*display: block;*/
+        border: 1px solid #2e0905;
         border-top-right-radius: 5px;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         box-shadow: rgba(0,0,0,0.4) 0px 0px 5px 1px;
+        height: 100px;
     }
     div#todaystasks > div {
-        border: 1px solid rgba(150,150,150,0.5);
-        margin: 0 auto;
+        border: 1px solid black;
+        /*margin: 0 auto;*/
+        padding: 0px;
     }
-    div#todaystasks > div > div {
+    /*div#todaystasks > div > div {
         padding: 0;
-        
     }
     div#todaystasks > div > div > div {
         padding-top: 10px;
         padding-bottom: 10px;
+        display: inline-block;
     }
     div#todaystasks > div > div > div > input[type=time] {
         width: 100px;
@@ -65,7 +68,7 @@
     }
     div#todaystasks > div:nth-child(2n) {
         background-color: rgba(150,150,150,0.3);
-    }
+    }*/
     .add-task-content > form > div:last-child {
         border: none;
         box-shadow: none;
@@ -75,10 +78,7 @@
 </style>
 
 <div class="add-task-holder">
-    <div>
-        Add Task Form
-    </div>
-    
+    <div> Add Task </div>
     <div class="add-task-content">
         @using (Html.BeginForm("addTasks", "Task", FormMethod.Post, new { @id = "frmAddTask", @class = "add-task-content" }))
         {
@@ -87,10 +87,12 @@
                 <b>Date</b> : @Html.TextBoxFor(m => m.dateTime, new { @type = "date" })
             </div>
             <div id="todaystasks">
-                <div class="col-md-12">
+
+                @*<div class="col-md-12">
                     <div class="col-md-8">
                         <div class="col-xs-6">
-                            Time : @Html.TextBoxFor(m => m.taskLists[0].timeFrom, new { @type = "time" })
+                            Time
+                                 : @Html.TextBoxFor(m => m.taskLists[0].timeFrom, new { @type = "time" })
                                  ─ @Html.TextBoxFor(m => m.taskLists[0].timeTo, new { @type = "time" })
                         </div>
                         <div class="col-xs-6">
@@ -103,11 +105,12 @@
                             @Html.TextBoxFor(m => m.taskLists[0].task, new { @placeholder = "description"})
                         </div>
                     </div>
-                </div>
+                </div>*@
             </div>
             <div>
-                <button id="addTimeList" type="button">Add Time List</button>
-                <button type="submit">Submit</button>
+                <button id="addTimeList" class="bgcred fontWhite" type="button"
+                        style="margin-right: 10px;">Add Time Line</button>
+                <button class="bgcred fontWhite" type="submit">Submit</button>
             </div>
         }
     </div>

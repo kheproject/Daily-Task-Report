@@ -13,6 +13,7 @@ C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\Dail
 C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\DailyTaskReport.dll.config
 C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\DailyTaskReport.dll
 C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\DailyTaskReport.pdb
+C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\AESEncrypt.dll
 C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\Antlr3.Runtime.dll
 C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\EntityFramework.dll
 C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\EntityFramework.SqlServer.dll
@@ -30,6 +31,7 @@ C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\Dail
 C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\Microsoft.Owin.Security.OAuth.dll
 C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\Microsoft.Owin.Security.Twitter.dll
 C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\MySql.Data.dll
 C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\Newtonsoft.Json.dll
 C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\Owin.dll
 C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\System.Web.Helpers.dll
@@ -67,5 +69,3 @@ C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\Dail
 C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Debug\DailyTaskReport.csprojResolveAssemblyReference.cache
 C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Debug\DailyTaskReport.dll
 C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Debug\DailyTaskReport.pdb
-C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\AESEncrypt.dll
-C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\MySql.Data.dll
