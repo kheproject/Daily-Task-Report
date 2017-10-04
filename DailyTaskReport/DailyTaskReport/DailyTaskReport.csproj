@@ -223,14 +223,13 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Index\Login.cshtml" />
-    <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Shared\_MenuSCHD.cshtml" />
     <Content Include="Views\Index\LoginFormContent.cshtml" />
-    <Content Include="Views\Shared\_HomeSCHD.cshtml" />
+    <Content Include="Views\Shared\_Home.cshtml" />
     <Content Include="Views\Task\getAddTask.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Home\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

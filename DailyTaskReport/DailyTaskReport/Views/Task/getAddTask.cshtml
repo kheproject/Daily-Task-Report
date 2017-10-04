@@ -1,51 +1,51 @@
-﻿@model DailyTaskReport.Models.TaskLists
+﻿@model DailyTaskReport.Models.user_tasks
 <style>
     .add-task-holder {
-        border-radius: 10px;
-        border: 2px solid #ca0f0f;
+        /*border-radius: 10px;*/
         max-width: 1000px;
         overflow: hidden;
         margin: 0 auto;
-        box-shadow: rgba(0,0,0,0.4) 0px 0px 25px 5px;
-        background-color: white;
     }
     .add-task-holder > div:first-child {
-        background-color: #ca0f0f;
+        /*background-color: #ca0f0f;*/
+        background-color: #821616;
+        display: inline-block;
         font-size: 16px;
         color: white;
         padding: 10px 20px;
     }
-    .add-task-holder > div {
+    .add-task-content {
         color: black;
-        padding: 20px;
+        background-color: rgba(255,198,198, 0.4);
+        border-top-right-radius: 100px;
+        border-bottom-left-radius: 100px;
     }
     .add-task-content > form > div:first-child {
         padding: 5px 10px;
         display: inline-block;
         /*background-color: #eab9b9;*/
-        border: 1px solid #2e0905;
+        /*border: 1px solid #2e0905;*/
         border-bottom: none;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
-        box-shadow: rgba(0,0,0,0.4) 0px -1px 5px 1px;
-        background-color: #b05b5b;
-        z-index: 2;
+    }
+    .add-task-content > form {
+        padding: 20px;
     }
     .add-task-content > form > div#todaystasks {
         /*display: block;*/
-        border: 1px solid #2e0905;
+        /*border: 1px solid #2e0905;*/
         border-top-right-radius: 5px;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
-        box-shadow: rgba(0,0,0,0.4) 0px 0px 5px 1px;
-        height: 100px;
+        /*box-shadow: rgba(0,0,0,0.4) 0px 0px 15px 1px;*/
     }
     div#todaystasks > div {
-        border: 1px solid black;
         /*margin: 0 auto;*/
-        padding: 0px;
+        padding: 10px 0;
+        
     }
     /*div#todaystasks > div > div {
         padding: 0;
@@ -57,7 +57,7 @@
     }
     div#todaystasks > div > div > div > input[type=time] {
         width: 100px;
-    }
+    }*/
     div#todaystasks > div:before,
     div#todaystasks > div:after {
         display: table;
@@ -66,9 +66,10 @@
     div#todaystasks > div:after {
         clear: both;
     }
+    
     div#todaystasks > div:nth-child(2n) {
-        background-color: rgba(150,150,150,0.3);
-    }*/
+        background-color: rgba(190,50,50,0.2);
+    }
     .add-task-content > form > div:last-child {
         border: none;
         box-shadow: none;
@@ -83,29 +84,28 @@
         @using (Html.BeginForm("addTasks", "Task", FormMethod.Post, new { @id = "frmAddTask", @class = "add-task-content" }))
         {
             <div>
-                @Html.TextBoxFor(m => m.encUser, new { @style = "display: none;", Value = @Session["_user"] })
-                <b>Date</b> : @Html.TextBoxFor(m => m.dateTime, new { @type = "date" })
+                @Html.TextBoxFor(m => m.user, new { @style = "display: none;", Value = @Session["_user"] })
+                <b>Date</b> : @Html.TextBoxFor(m => m.tasks[0].task_date, new { @type = "date" })
             </div>
             <div id="todaystasks">
-
-                @*<div class="col-md-12">
+                <div class="col-md-12">
                     <div class="col-md-8">
                         <div class="col-xs-6">
                             Time
-                                 : @Html.TextBoxFor(m => m.taskLists[0].timeFrom, new { @type = "time" })
-                                 ─ @Html.TextBoxFor(m => m.taskLists[0].timeTo, new { @type = "time" })
+                                 : @Html.TextBoxFor(m => m.tasks[0].taskLists[0].timeFrom, new { @type = "time" })
+                                 ─ @Html.TextBoxFor(m => m.tasks[0].taskLists[0].timeTo, new { @type = "time" })
                         </div>
                         <div class="col-xs-6">
-                            Work Order : @Html.TextBoxFor(m => m.taskLists[0].woNo, new { @maxlength = "18"})
+                            Work Order : @Html.TextBoxFor(m => m.tasks[0].taskLists[0].woNo, new { @maxlength = "18" })
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="col-md-12">
                             Task : 
-                            @Html.TextBoxFor(m => m.taskLists[0].task, new { @placeholder = "description"})
+                            @Html.TextBoxFor(m => m.tasks[0].taskLists[0].task, new { @placeholder = "description" })
                         </div>
                     </div>
-                </div>*@
+                </div>
             </div>
             <div>
                 <button id="addTimeList" class="bgcred fontWhite" type="button"
@@ -135,10 +135,16 @@
                 url: $(this).attr("action"),
                 data: $('form :input').serializeArray(),
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                dataType: 'html',
+                dataType: 'json',
                 cache: false,
-                success: function (result) {
-                    alert(result)
+                success: function (response) {
+                    if (response.code == 1) {
+                        alert(response.message);
+                        $('#body-content').html("");
+                    }
+                    else if (response.code == 0) {
+                        alert(response.message);
+                    }
                 },
                 error: function () {
                     alert('an error has occured');

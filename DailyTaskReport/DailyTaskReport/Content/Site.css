@@ -1,4 +1,5 @@
 ﻿body {
+    background-color: #262626;
     background: url('../Images/bg.jpg') no-repeat;
     background-size: cover;
     background-repeat: no-repeat;
@@ -20,6 +21,9 @@ header {
     /*background: -o-linear-gradient(bottom right, red, yellow); /* For Opera 11.1 to 12.0 */
     /*background: -moz-linear-gradient(bottom right, red, yellow); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(200,0,0,0.4)); /* Standard syntax */
+}
+header:hover {
+    background: linear-gradient(to bottom, rgba(50,0,0,0.8), rgba(200,0,0,0.8)); /* Standard syntax */
 }
 header > ul,
 header > nav > ul {
@@ -48,9 +52,9 @@ header > nav > ul > li > a {
 header > ul > li > a:hover,
 header > nav > ul > li > a:hover {
     line-height: 46px;
-    border-bottom: 4px solid rgba(255,255,255, 0.5);
+    border-bottom: 4px solid rgba(255,255,255, 0.6);
     text-decoration: none;
-    background-color: rgba(255,50,50, 0.3);
+    background-color: rgba(255,50,50, 0.5);
     color: white;
 }
 body > div {
@@ -70,7 +74,8 @@ button:hover {
     background-color: #ca0f0f;
 }
 .defaultbdy {
-    background: url('../Images/mlhuillier-logo.svg') no-repeat fixed lightgrey; 
+    /*background: url('../Images/mlhuillier-logo.svg') no-repeat fixed lightgrey;*/
+    background: lightgrey;
     background-size: contain;
     background-position: center;
 }
@@ -81,7 +86,7 @@ button:hover {
     color: black;
 }
 .field-validation-error {
-    color: #c35454;
+    color: #ff5347;
 }
 
 

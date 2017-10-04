@@ -2,8 +2,8 @@
     #login-holder {
         transition-duration: 0.5s;
         box-shadow: rgba(0,0,0,0.4) 0px 0px 25px 5px;
-        background-color: rgba(56,5,4,1);
-        background: linear-gradient(to bottom, #273030, #7a1111, #7a2020, #273030);
+        background-color: rgba(36,0,0,0.6);
+        /*background: linear-gradient(to bottom, #573030, #7a1111, #7a1111, #7a2020, #573030);*/
         border-radius: 10px;
         position: relative;
         margin: 100px auto;
@@ -95,7 +95,7 @@
                     setTimeout(function () { $('form#frmLogin').html(result); toggleForm(); }, 300);
                 },
                 error: function () {
-                    alert('an error has occured');
+                    alert('An error has occured during login');
                     setTimeout(function () { $('#user').removeAttr('readonly'); toggleForm(); }, 300);
                 }
             });

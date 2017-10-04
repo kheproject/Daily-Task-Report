@@ -1,0 +1,35 @@
+﻿<script>
+    $(function () {
+        $.ajax({
+            async: true,
+            type: 'GET',
+            url: '/Home/Home',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            dataType: 'html',
+            cache: false,
+            success: function (result) {
+                $('header').html(result);
+                $('#login-holder').attr('style', 'height: 0px; box-shadow: rgba(0,0,0,0.4) 0px 0px 0px 0px;');
+                //setTimeout(function () {
+                //    $.ajax({
+                //        async: true,
+                //        type: 'GET',
+                //        url: '/Home/Index',
+                //        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                //        dataType: 'html',
+                //        cache: false,
+                //        success: function (result) {
+                //            $('#body-content').html(result);
+                //        },
+                //        error: function () {
+                //            alert("An unexpected error occured while getting home activities");
+                //        }
+                //    })
+                //}, 500);
+            },
+            error: function () {
+                alert('an error has occured');
+            }
+        })
+    })
+</script>

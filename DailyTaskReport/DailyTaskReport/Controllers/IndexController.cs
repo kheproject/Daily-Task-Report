@@ -36,8 +36,12 @@ namespace DailyTaskReport.Controllers
             {
                 try
                 {
-                    String role = this.Session["_Role"].ToString();
-                    return View("_Home" + role);
+                    String role = string.Empty;
+                    role = this.Session["_Role"].ToString();
+                    if (role != string.Empty )
+                        return View("_Home");
+                    else
+                        return RedirectToAction("Logout", "Index");
                 }
                 catch (Exception)
                 {
@@ -75,7 +79,7 @@ namespace DailyTaskReport.Controllers
                     this.Session["ConNo"] = usr.userInfo.ContactNo;
                     this.Session["Desig"] = usr.userInfo.Designation;
 
-                    return PartialView("_Home" + usr.userInfo.Role);
+                    return PartialView("_Home");
                 }
             }
             return PartialView("LoginFormContent");
