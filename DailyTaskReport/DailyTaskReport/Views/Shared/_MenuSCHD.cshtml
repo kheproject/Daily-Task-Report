@@ -30,15 +30,19 @@
                 $.ajax({
                     async: true,
                     type: 'GET',
-                    url: '/Task/getAddTask',
+                    url: '/Task/addTask',
                     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                     dataType: 'html',
                     cache: false,
                     success: function (result) {
                         isAddTaskClicked = true;
                         setTimeout(function () {
-                            $('#body-content').html(result);
-                            setTimeout(function () { toggleUIBlocker(); }, 300);
+                            if (result != "") {
+                                $('#body-content').html(result);
+                                setTimeout(function () { toggleUIBlocker(); }, 300);
+                            }
+                            else
+                                window.location("../");
                         }, 300);
                     },
                     error: function () {

@@ -26,7 +26,6 @@ namespace DailyTaskReport.Controllers
         {
             config = (IDictionary)(ConfigurationManager.GetSection("kp8dtrSection"));
             connection = config["server"].ToString();
-            //kplog = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         }
 
         [AllowAnonymous]
@@ -82,7 +81,7 @@ namespace DailyTaskReport.Controllers
                     return PartialView("_Home");
                 }
             }
-            return PartialView("LoginFormContent");
+            return PartialView("_Login");
         }
 
         private AccountResponse getUser(LoginCredentials login)

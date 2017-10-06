@@ -27,13 +27,13 @@ namespace DailyTaskReport.Controllers
             connection = config["server"].ToString();
         }
 
-        public ActionResult getAddTask()
+        public ActionResult addTask()
         {
             return PartialView();
         }
         
         [HttpPost]
-        public JsonResult AddTasks(user_tasks employee)
+        public JsonResult addTask(user_tasks employee)
         {
             TaskResponse response = new TaskResponse();
             if (ModelState.IsValid)

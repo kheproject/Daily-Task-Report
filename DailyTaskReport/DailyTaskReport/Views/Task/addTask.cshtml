@@ -1,0 +1,110 @@
+﻿
+<style>
+    .add-task-holder {
+        max-width: 1000px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+    .add-task-holder > div:first-child {
+        background-color: #ca0f0f;
+        display: inline-block;
+        font-size: 16px;
+        color: white;
+        padding: 10px 20px;
+    }
+    .add-task-content {
+        color: black;
+        background-color: rgba(255,198,198, 0.4);
+        padding: 15px;
+    }
+    /*.add-task-content > form {
+        padding: 20px;
+    }
+    .add-task-content > form > div#todaystasks {
+        
+        border-top-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        box-shadow: rgba(0,0,0,0.4) 0px 0px 15px 1px;
+    }*/
+    /*div#todaystasks > div {
+        margin: 0 auto;
+        padding: 10px 0;
+        
+    }*/
+    /*div#todaystasks > div > div {
+        padding: 0;
+    }
+    div#todaystasks > div > div > div {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        display: inline-block;
+    }
+    div#todaystasks > div > div > div > input[type=time] {
+        width: 100px;
+    }*/
+    /*div#todaystasks > div:before,
+    div#todaystasks > div:after {
+        display: table;
+        content: " ";
+    }
+    div#todaystasks > div:after {
+        clear: both;
+    }
+    
+    div#todaystasks > div:nth-child(2n) {
+        background-color: rgba(190,50,50,0.2);
+    }
+    .add-task-content > form > div:last-of-type {
+        border: none;
+        box-shadow: none;
+        text-align: right;
+        padding: 10px 0 0 0;
+    }*/
+</style>
+
+<div class="add-task-holder">
+    <div> Add Task </div>
+    @using (Html.BeginForm("addTasks", "Task", FormMethod.Post, new { @id = "frmAddTask", @class = "add-task-content" }))
+    {
+        Html.RenderPartial("_addTask");
+    }
+</div>
+
+<script>
+    $(function () {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) dd ='0'+ dd;
+        if (mm < 10) mm = '0' + mm;
+        var today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById('tasks_0__task_date').value = today;
+
+        $('#frmAddTask').on("submit", function (e) {
+            e.preventDefault();
+            $.ajax({
+                async: true,
+                type: 'POST',
+                url: $(this).attr("action"),
+                data: $('form :input').serializeArray(),
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                cache: false,
+                success: function (response) {
+                    if (response.code == 1) {
+                        alert(response.message);
+                        $('#body-content').html("");
+                    }
+                    else if (response.code == 0) {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert('an error has occured');
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,101 @@
+﻿<style>
+
+</style>
+
+@model DailyTaskReport.Models.user_tasks
+<div>
+    @Html.TextBoxFor(m => m.user, new { @style = "display: normal;", Value = @Session["_user"] })
+    <b>Date</b> @Html.TextBoxFor(m => m.tasks[0].task_date, new { @type = "date", @maxlength = 10, placeholder = "mm/dd/yyyy" })
+</div>
+@*<div id="todaystasks">
+    <div class="col-md-12">
+        <div class="col-md-8">
+            <div class="col-xs-6">
+                Time
+                : @Html.TextBoxFor(m => m.tasks[0].taskLists[0].timeFrom, new { @type = "time" })
+                ─ @Html.TextBoxFor(m => m.tasks[0].taskLists[0].timeTo, new { @type = "time" })
+            </div>
+            <div class="col-xs-6">
+                Work Order : @Html.TextBoxFor(m => m.tasks[0].taskLists[0].woNo, new { @maxlength = "18" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="col-md-12">
+                Task :
+                @Html.TextBoxFor(m => m.tasks[0].taskLists[0].task, new { @placeholder = "description" })
+            </div>
+        </div>
+    </div>
+</div>*@
+<div class="add-task-bottons">
+    <button id="addTimeLine" class="bgcred fontWhite" type="button"
+            style="margin-right: 10px;">
+        Add Time Line
+    </button>
+    <button class="bgcred fontWhite" type="submit">Submit</button>
+</div>
+
+<script>
+    $(function () {
+        var ListCount = 0;
+        $('#addTimeLine').on("click", function (e) {
+            //if ($('input#tasks_0__taskLists_' + ListCount + '__timeFrom').val() != ""
+            //   && $('input#tasks_0__taskLists_' + ListCount + '__timeTo').val() != ""
+            //   && $('input#tasks_0__taskLists_' + ListCount + '__task').val() != "") {
+            ListCount++;
+            var timeForm = '<div class="col-md-12"><div class="col-md-8"><div class="col-xs-6">'
+                         + 'Time : <input id="tasks_0__taskLists_' + ListCount + '__timeFrom" name="tasks_0__taskLists[' + ListCount + '].timeFrom" type="time" value="">'
+                         + '     ─ <input id="tasks_0__taskLists_' + ListCount + '__timeTo" name="tasks_0__taskLists[' + ListCount + '].timeTo" type="time" value="">'
+                         + '</div><div class="col-xs-6">'
+                         + 'Work Order : <input id="tasks_0__taskLists_' + ListCount + '__woNo" name="tasks_0__taskLists[' + ListCount + '].woNo" type="text" value="">'
+                         + '</div></div><div class="col-md-4"><div class="col-md-12">'
+                         + 'Task : <input id="tasks_0__taskLists_' + ListCount + '__task" name="tasks_0__taskLists[' + ListCount + '].task" type="text" value="" placeholder = "description">'
+                         + '</div></div></div>';
+            document.getElementById('todaystasks').insertAdjacentHTML('beforeend', timeForm);
+            //}
+            //else {
+            //    alert("Fill out the form first");
+            //}
+        });
+
+        $('input[type="date"]').keydown(function (e) {
+            console.log(this.id + " input " + (e.keyCode - 48))
+            var currentInput = $(this).val();
+            if (isBackSpace(e))
+                console.log('backspace');
+            else if ((!isNumber(e) && !isBackSpace(e) && !isArrowKeys(e) && !isTab(e) && !isDelete(e) && !isSelectAll(e))
+               || ((e.keyCode == 48 || e.keyCode == 96) && currentInput.length == 1 && currentInput[0] == '0')
+               || currentInput.length > 10)
+                e.preventDefault();
+            else if ((currentInput.length == 2 || currentInput.length == 5) && !isBackSpace(e))
+                $(this).val(currentInput + '/');
+        }).focusout(function (e) {
+            var bDateVal = $(this).val();
+            bdate = false;
+            if (bDateVal != "") {
+                if (bDateVal[2] != '/' || bDateVal[5] != '/') {
+                    $(this).val('');
+                    $(this).focus();
+                    inputInvalid('birthdate', 'msgBDateError', 'Invalid date format');
+                }
+                else if (bDateVal.length < 10 ||
+                    parseInt(bDateVal.slice(0, 2)) > 12 || //if month > 12
+                    parseInt(bDateVal.slice(3, 5)) < 01 || //if days < 01
+                    parseInt(bDateVal.slice(3, 5)) > 31    //if days > 31
+                    ) {
+                    inputInvalid('birthdate', 'msgBDateError', 'Invalid date format');
+                }
+                else if (parseInt((new Date().getFullYear()) -
+                            parseInt(bDateVal.slice(6))) < 18)
+                { inputInvalid('birthdate', 'msgBDateError', 'You must be over 17 years old'); }
+                else if (parseInt((new Date().getFullYear()) -
+                            parseInt(bDateVal.slice(6))) > 200)
+                { inputInvalid('birthdate', 'msgBDateError', 'Is this correct?'); }
+                else {
+                    inputValid('birthdate', 'msgBDateError');
+                    bdate = true;
+                }
+            }
+        });
+    })
+</script>
