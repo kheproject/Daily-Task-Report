@@ -1,17 +1,19 @@
-﻿<ul>
-    <li>
-        <a>Home</a>
-    </li>
-    <li>
-        <a>Employees</a>
-    </li>
-    <li>
-        <a id="AddTask">Add Task</a>
-    </li>
-    <li>
-        <a>Search</a>
-    </li>
-</ul>
+﻿<nav>
+    <ul>
+        <li>
+            <a onclick="promptMsg('Home page feature is not available')">Home</a>
+        </li>
+        <li>
+            <a onclick="promptMsg('Employee list feature is not available')">Employees</a>
+        </li>
+        <li>
+            <a onclick="addTaskForm()">Add Task</a>
+        </li>
+        <li>
+            <a onclick="promptMsg('Search feature is not available')">Search</a>
+        </li>
+    </ul>
+</nav>
 
 <nav>
     <ul>
@@ -20,41 +22,3 @@
         </li>
     </ul>
 </nav>
-
-<script>
-    $(function () {
-        var isAddTaskClicked = false;
-        $('#AddTask').click(function () {
-            if (!isAddTaskClicked) {
-                toggleUIBlocker();
-                $.ajax({
-                    async: true,
-                    type: 'GET',
-                    url: '/Task/addTask',
-                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                    dataType: 'html',
-                    cache: false,
-                    success: function (result) {
-                        isAddTaskClicked = true;
-                        setTimeout(function () {
-                            if (result != "") {
-                                $('#body-content').html(result);
-                                setTimeout(function () { toggleUIBlocker(); }, 300);
-                            }
-                            else
-                                window.location("../");
-                        }, 300);
-                    },
-                    error: function () {
-                        toggleUIBlocker();
-                        alert('an error has occured');
-                    }
-                })
-            }
-            else {
-                isAddTaskClicked = false;
-                $('#body-content').html("");
-            }
-        });
-    });
-</script>

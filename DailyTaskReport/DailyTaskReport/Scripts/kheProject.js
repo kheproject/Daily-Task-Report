@@ -51,3 +51,33 @@ function isCut(e) {
 function isLetterPress(e) { //for lowercase letters, isLetter is uppercase
     return e.keyCode >= 97 && e.keyCode <= 122 ? true : false;
 }
+
+function addTaskForm() {
+    if ($('#body-content').html() == "") {
+        toggleUIBlocker();
+        $.ajax({
+            async: true,
+            type: 'GET',
+            url: '/Task/addTask',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            dataType: 'html',
+            cache: false,
+            success: function (result) {
+                setTimeout(function () {
+                    if (result != "") {
+                        $('#body-content').html(result);
+                    }
+                    else
+                        window.location.href = "../";
+                }, 300);
+            },
+            error: function () {
+                toggleUIBlocker();
+                alert('an error has occured');
+            }
+        })
+    }
+    else {
+        $('#body-content').html("");
+    }
+}

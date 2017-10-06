@@ -10,6 +10,7 @@
             success: function (result) {
                 $('header').html(result);
                 $('#login-holder').attr('style', 'height: 0px; box-shadow: rgba(0,0,0,0.4) 0px 0px 0px 0px;');
+                setTimeout(function () { $('#body-content').html(""); }, 500);
                 //setTimeout(function () {
                 //    $.ajax({
                 //        async: true,
