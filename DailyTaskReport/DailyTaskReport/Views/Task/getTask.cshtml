@@ -1,0 +1,39 @@
+﻿@model DailyTaskReport.Models.user_tasks
+<style>
+    div#task-page {
+        line-height: 0.5;
+    }
+    div#task-page > div.title-separator {
+        height: 10px;
+        border-bottom: 2px solid white;
+        border-left: 2px solid white;
+    }
+    div#task-page > span {
+        margin-left: 15px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    div.task-content {
+        padding: 20px;
+        line-height: 1.5;
+        background: rgba(36,0,0,0.3);
+        margin-top: 15px;
+    }
+</style>
+<div id="task-page">
+    <span>Task</span>
+    <div class="title-separator"></div>
+    <div class="task-content">
+        Date : 
+        @{ foreach(var data in Model.tasks)
+            {
+                <div>@data.task_date.ToString("yyyy/MM/dd");</div>
+            }
+        }
+    </div>
+</div>
+<script>
+    $(function () {
+        toggleUIBlocker();
+    });
+</script>
