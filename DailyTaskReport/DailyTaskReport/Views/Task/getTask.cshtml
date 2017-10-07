@@ -1,4 +1,15 @@
 ﻿@model DailyTaskReport.Models.user_tasks
+<script>
+    if ("@Session["_user"]" == "") {
+        console.log("Session expired.");
+        promptMsg("Current session has expired. <br /> Please login again", true);
+    }
+    else {
+        $(function () {
+            toggleUIBlocker();
+        });
+    }
+</script>
 <style>
     div#task-page {
         line-height: 0.5;
@@ -14,43 +25,60 @@
         font-weight: bold;
     }
     div.task-content {
-        padding: 20px;
+        padding: 10px 0;
         line-height: 1.5;
         background: rgba(36,0,0,0.3);
         margin-top: 15px;
+        max-height: 500px;
+        max-width: 1000px;
+        min-width: 700px;
+        overflow-y: scroll;
+    }
+    div.task-content > div {
+        padding: 10px 20px;
     }
     div.date-content {
         background: rgba(36,0,0,0.9);
         padding: 10px;
         display: inline-block;
     }
+    div.data-content > div:nth-child(2n) {
+        background: rgba(36,0,0,0.5);
+    }
+    div.data-content > div > div {
+        padding: 10px;
+        display: inline-block;
+        width: 50%;
+        float: left;
+    }
 </style>
 <div id="task-page">
-    <span>Task</span>
+    <span>Task</span> ─ Let's see what you have in store...
     <div class="title-separator"></div>
     <div class="task-content">
-        @{ foreach(var data in Model.tasks)
+        @{  foreach (var data in Model.tasks)
             {
-                <div class="date-content">@data.task_date.ToString("D")</div>
-                <div style="border: 1px solid orange;">
-                    @foreach(var tasks in data.taskLists)
-                    {
-                    <div style="border: 1px solid white; padding: 10px; max-width: 500px; display: inline-block">
-                        <span>Time : </span> @tasks.timeFrom ─ @tasks.timeTo <br />
-                        <span>Work Order No. : </span> @tasks.woNo <br />
+                <div class="" style="margin: 0px;">
+                    <div class="date-content ">@data.task_date.ToString("D")</div>
+                    <div class="data-content " style="background-color: rgba(36,0,0,0.3);">
+                        @foreach (var tasks in data.taskLists)
+                        {
+                            <div class="container">
+                                <div>
+                                    <span>Time : </span> @tasks.timeFrom ─ @tasks.timeTo <br />
+                                    <span>Work Order No. : </span> @tasks.woNo
+                                </div>
+                                <div>
+                                    <span>Task : </span> <textarea style="width: 80%; resize: none;" readonly draggable="false">@tasks.task</textarea>
+                                </div>
+                            </div>
+                        }
                     </div>
-                    <div style="border: 1px solid white; padding: 10px; display: inline-block;">
-                        <span>Task : </span> @tasks.task
-                    </div>
-                    <br />
-                    }
                 </div>
             }
         }
     </div>
+    Add Task <br />
+    Edit Task
 </div>
-<script>
-    $(function () {
-        toggleUIBlocker();
-    });
-</script>
+

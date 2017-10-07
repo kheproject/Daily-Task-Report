@@ -44,7 +44,7 @@ namespace DailyTaskReport.Controllers
                         dateMonth = dateMonth.Length < 2 ? "0" + dateMonth : dateMonth;
 
                         cmd.CommandText = "SELECT * FROM kpDailyTask.Report" + dateMonth
-                                        + " WHERE user = @user ORDER BY date, timeFrom DESC;";
+                                        + " WHERE user = @user ORDER BY date DESC, timeFrom DESC;";
                         cmd.Parameters.AddWithValue("user", encdata.AESDecrypt(Session["_user"].ToString().Replace(' ', '+'), encStringKey));
                         MySqlDataReader rdr = cmd.ExecuteReader();
                         if (rdr.HasRows)
@@ -71,26 +71,34 @@ namespace DailyTaskReport.Controllers
                                         task_date = Convert.ToDateTime(currDate),
                                         taskLists = tasks
                                     });
+
                                     tasks = new List<task_list>();
-                                    currDate = string.Empty;
+                                    currDate = rdr["date"].ToString();
+                                    tasks.Add(new task_list
+                                    {
+                                        timeFrom = rdr["timeFrom"].ToString(),
+                                        timeTo = rdr["timeTo"].ToString(),
+                                        task = rdr["Task"].ToString(),
+                                        woNo = rdr["WOno"].ToString()
+                                    });
                                 }
                             }
 
                             //final daily add from last date result
-                            daily.Add(new daily_task
-                            {
-                                task_date = Convert.ToDateTime(currDate),
-                                taskLists = tasks
-                            });
+                                daily.Add(new daily_task
+                                {
+                                    task_date = Convert.ToDateTime(currDate),
+                                    taskLists = tasks
+                                });
 
                             data = new user_tasks { user = encdata.AESDecrypt(Session["_user"].ToString().Replace(' ', '+'), encStringKey), tasks = daily };
                         }
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Console.WriteLine("error: " + ex.ToString());
             }
             return PartialView(data);
         }

@@ -140,17 +140,17 @@ D:\Khe Project\KP8\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\Microso
 D:\Khe Project\KP8\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Debug\DailyTaskReport.csprojResolveAssemblyReference.cache
 D:\Khe Project\KP8\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Debug\DailyTaskReport.dll
 D:\Khe Project\KP8\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Debug\DailyTaskReport.pdb
-C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\roslyn\csc.exe
-C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\roslyn\VBCSCompiler.exe
+C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\roslyn\csc.exe
+C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\roslyn\Microsoft.CSharp.Core.targets
 C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\roslyn\Microsoft.VisualBasic.Core.targets
 C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\roslyn\System.Collections.Immutable.dll
-C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\roslyn\System.Reflection.Metadata.dll
 C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\roslyn\vbc.exe
-C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\roslyn\VBCSCompiler.exe
 C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\DailyTaskReport.dll.config
 C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\DailyTaskReport.dll
@@ -208,6 +208,6 @@ C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\Daily
 C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Debug\DailyTaskReport.csprojResolveAssemblyReference.cache
 C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Debug\DailyTaskReport.dll
 C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Debug\DailyTaskReport.pdb
+C:\Users\Administrator2\Documents\GitHub\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Debug\DailyTaskReport.csprojResolveAssemblyReference.cache
