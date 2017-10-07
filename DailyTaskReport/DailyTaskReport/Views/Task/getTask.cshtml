@@ -19,15 +19,32 @@
         background: rgba(36,0,0,0.3);
         margin-top: 15px;
     }
+    div.date-content {
+        background: rgba(36,0,0,0.9);
+        padding: 10px;
+        display: inline-block;
+    }
 </style>
 <div id="task-page">
     <span>Task</span>
     <div class="title-separator"></div>
     <div class="task-content">
-        Date : 
         @{ foreach(var data in Model.tasks)
             {
-                <div>@data.task_date.ToString("yyyy/MM/dd");</div>
+                <div class="date-content">@data.task_date.ToString("D")</div>
+                <div style="border: 1px solid orange;">
+                    @foreach(var tasks in data.taskLists)
+                    {
+                    <div style="border: 1px solid white; padding: 10px; max-width: 500px; display: inline-block">
+                        <span>Time : </span> @tasks.timeFrom ─ @tasks.timeTo <br />
+                        <span>Work Order No. : </span> @tasks.woNo <br />
+                    </div>
+                    <div style="border: 1px solid white; padding: 10px; display: inline-block;">
+                        <span>Task : </span> @tasks.task
+                    </div>
+                    <br />
+                    }
+                </div>
             }
         }
     </div>
