@@ -30,9 +30,10 @@
         background: rgba(36,0,0,0.3);
         margin-top: 15px;
         max-height: 500px;
-        max-width: 1000px;
-        min-width: 700px;
+        width: 900px;
         overflow-y: scroll;
+        display: block;
+        float: left;
     }
     div.task-content > div {
         padding: 10px 20px;
@@ -51,8 +52,32 @@
         width: 50%;
         float: left;
     }
+    div.task-options {
+        display:block;
+        float: left;
+        line-height: 1.5;
+        margin: 15px;
+    }
+    div.task-options > ul {
+        list-style: none;
+        margin : 0;
+        line-height: 40px;
+    }
+    div.task-options > ul > li > a {
+        transition-duration: 0.3s;
+        text-decoration: none;
+        display: block; 
+        padding: 0 10px;
+        cursor: pointer;
+        color: white;
+        border-left: 3px solid rgba(36,0,0,0.0);
+    }
+    div.task-options > ul > li > a:hover {
+        border-left: 3px solid rgba(255,250,250,0.9);
+        color: #fffde1;
+    }
 </style>
-<div id="task-page">
+<div id="task-page" class="container">
     <span>Task</span> ─ Let's see what you have in store...
     <div class="title-separator"></div>
     <div class="task-content">
@@ -78,7 +103,15 @@
             }
         }
     </div>
-    Add Task <br />
-    Edit Task
+    <div class="task-options" style="">
+        <ul>
+            <li>
+                <a class="" onclick="promptMsg('Add Task feature is not available')">Add Task</a>
+            </li>
+            <li>
+                <a class="" onclick="promptMsg('Edit Task feature is not available')">Edit Task</a>
+            </li>
+        </ul>
+    </div>
 </div>
 
