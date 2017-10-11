@@ -11,15 +11,5 @@
     Time : xx:xx ─ xx:xx <br />
     Work Order No. ISD-MTXxxxxxxxxxxx<br />
     
-    @{
-        foreach (var tasks in Model.taskDisplay)
-        {
-        <div>
-            Date : @tasks.dateTime <br />
-            Time : @tasks.timeFrom ─ @tasks.timeTo <br />
-            Work Order No. : @tasks.woNo <br />
-            Task : @tasks.task
-        </div>
-        } 
-    }
+    
 </div>

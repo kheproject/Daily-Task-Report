@@ -58,7 +58,7 @@ function promptSessionExpired() {
 }
 
 function addTaskForm() {
-    if ($('#body-content').html() == "") {
+    //if ($('#body-content').html() == "") {
         toggleUIBlocker();
         $.ajax({
             async: true,
@@ -82,10 +82,10 @@ function addTaskForm() {
                 alert('an error has occured');
             }
         })
-    }
-    else {
-        $('#body-content').html("");
-    }
+    //}
+    //else {
+    //    $('#body-content').html("");
+    //}
 }
 
 function getTaskView() {
