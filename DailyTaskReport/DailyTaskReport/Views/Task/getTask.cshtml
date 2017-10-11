@@ -30,7 +30,7 @@
         background: rgba(36,0,0,0.3);
         margin-top: 15px;
         max-height: 500px;
-        width: 900px;
+        width: 700px;
         overflow-y: scroll;
         display: block;
         float: left;
@@ -106,7 +106,7 @@
     <div class="task-options" style="">
         <ul>
             <li>
-                <a class="" onclick="addTaskForm()">Add Task</a>
+                <a class="" onclick="showContent()">Add Task</a>
             </li>
             <li>
                 <a class="" onclick="promptMsg('Edit Task feature is not available')">Edit Task</a>
@@ -114,3 +114,18 @@
         </ul>
     </div>
 </div>
+
+@*<div style="height: 500px; width: 500px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 1px solid red; background: white; z-index: 6;">
+
+</div>*@
+
+<script>
+    function blockContent(){
+        $('div#uiBlocker').removeClass('elementHide');
+        $('div#uiBlocker').addClass('elementShow');
+    }
+    function unblockContent() {
+        $('div#uiBlocker').removeClass('elementShow');
+        $('div#uiBlocker').addClass('elementHide');
+    }
+</script>
