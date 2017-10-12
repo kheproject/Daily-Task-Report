@@ -34,7 +34,6 @@
         height: 182px;
         border-bottom: 2px solid rgba(255,255,255,0);
     }
-    
     .input-group-addon {
         background: none;
     }
@@ -60,11 +59,31 @@
     :-ms-input-placeholder { /* Internet Explorer 10+ */
         text-transform: none;
     }
+    div.signUp {
+        transform: translateX(-50%);
+        text-align: center;
+        position: absolute;
+        width: 100%; 
+        bottom: 0px;
+        left: 50%;
+    }
+    div.signUp > a {
+        text-decoration: none;
+        cursor: pointer;
+        color: rgba(200,200,200,0.5);
+    }
+    div.signUp > a:hover {
+        color: white;
+        text-decoration: underline;
+    }
 </style>
 
 <div id="login-holder">
     <div>
         <img class="diamond horizontal-flipOn" src="../Images/_MLAjaxLoad.svg" draggable="false"/>
+        <div class="signUp">
+            @Html.ActionLink("Register Here!", "Index", "Register", null, new { @title = "No account?"})
+        </div>
     </div>
 
     @using (Html.BeginForm("LogIn", "Index", FormMethod.Post, new { @id = "frmLogin", @class = "frmShow" }))
