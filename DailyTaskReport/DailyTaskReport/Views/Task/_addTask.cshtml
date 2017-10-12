@@ -1,5 +1,4 @@
-﻿
-<script>
+﻿<script>
     if ("@Session["_user"]" == "") {
         console.log("Session expired.");
         promptMsg("Current session has expired. <br /> Please login again", true);
@@ -28,53 +27,83 @@
                 //}
             });
 
-            $('input[type="date"]').keydown(function (e) {
-                console.log(this.id + " input " + (e.keyCode - 48))
-                var currentInput = $(this).val();
-                if (isBackSpace(e))
-                    console.log('backspace');
-                else if ((!isNumber(e) && !isBackSpace(e) && !isArrowKeys(e) && !isTab(e) && !isDelete(e) && !isSelectAll(e))
-                   || ((e.keyCode == 48 || e.keyCode == 96) && currentInput.length == 1 && currentInput[0] == '0')
-                   || currentInput.length > 10)
-                    e.preventDefault();
-                else if ((currentInput.length == 2 || currentInput.length == 5) && !isBackSpace(e))
-                    $(this).val(currentInput + '/');
-            }).focusout(function (e) {
-                var bDateVal = $(this).val();
-                bdate = false;
-                if (bDateVal != "") {
-                    if (bDateVal[2] != '/' || bDateVal[5] != '/') {
-                        $(this).val('');
-                        $(this).focus();
-                        inputInvalid('birthdate', 'msgBDateError', 'Invalid date format');
-                    }
-                    else if (bDateVal.length < 10 ||
-                        parseInt(bDateVal.slice(0, 2)) > 12 || //if month > 12
-                        parseInt(bDateVal.slice(3, 5)) < 01 || //if days < 01
-                        parseInt(bDateVal.slice(3, 5)) > 31    //if days > 31
-                        ) {
-                        inputInvalid('birthdate', 'msgBDateError', 'Invalid date format');
-                    }
-                    else if (parseInt((new Date().getFullYear()) -
-                                parseInt(bDateVal.slice(6))) < 18)
-                    { inputInvalid('birthdate', 'msgBDateError', 'You must be over 17 years old'); }
-                    else if (parseInt((new Date().getFullYear()) -
-                                parseInt(bDateVal.slice(6))) > 200)
-                    { inputInvalid('birthdate', 'msgBDateError', 'Is this correct?'); }
-                    else {
-                        inputValid('birthdate', 'msgBDateError');
-                        bdate = true;
-                    }
-                }
-            });
+            //$('input[type="date"]').keydown(function (e) {
+            //    console.log(this.id + " input " + (e.keyCode - 48))
+            //    var currentInput = $(this).val();
+            //    if (isBackSpace(e))
+            //        console.log('backspace');
+            //    else if ((!isNumber(e) && !isBackSpace(e) && !isArrowKeys(e) && !isTab(e) && !isDelete(e) && !isSelectAll(e))
+            //       || ((e.keyCode == 48 || e.keyCode == 96) && currentInput.length == 1 && currentInput[0] == '0')
+            //       || currentInput.length > 10)
+            //        e.preventDefault();
+            //    else if ((currentInput.length == 2 || currentInput.length == 5) && !isBackSpace(e))
+            //        $(this).val(currentInput + '/');
+            //}).focusout(function (e) {
+            //    var bDateVal = $(this).val();
+            //    bdate = false;
+            //    if (bDateVal != "") {
+            //        if (bDateVal[2] != '/' || bDateVal[5] != '/') {
+            //            $(this).val('');
+            //            $(this).focus();
+            //            inputInvalid('birthdate', 'msgBDateError', 'Invalid date format');
+            //        }
+            //        else if (bDateVal.length < 10 ||
+            //            parseInt(bDateVal.slice(0, 2)) > 12 || //if month > 12
+            //            parseInt(bDateVal.slice(3, 5)) < 01 || //if days < 01
+            //            parseInt(bDateVal.slice(3, 5)) > 31    //if days > 31
+            //            ) {
+            //            inputInvalid('birthdate', 'msgBDateError', 'Invalid date format');
+            //        }
+            //        else if (parseInt((new Date().getFullYear()) -
+            //                    parseInt(bDateVal.slice(6))) < 18)
+            //        { inputInvalid('birthdate', 'msgBDateError', 'You must be over 17 years old'); }
+            //        else if (parseInt((new Date().getFullYear()) -
+            //                    parseInt(bDateVal.slice(6))) > 200)
+            //        { inputInvalid('birthdate', 'msgBDateError', 'Is this correct?'); }
+            //        else {
+            //            inputValid('birthdate', 'msgBDateError');
+            //            bdate = true;
+            //        }
+            //    }
+            //});
         })
     }
 </script>
 <style>
-
+    div#todaystasks > div {
+        margin: 0 auto;
+        padding: 0;
+    }
+    div#todaystasks > div > div {
+        padding: 0;
+    }
+    div#todaystasks > div > div > div {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        display: inline-block;
+    }
+    div#todaystasks > div > div > div > input[type=time] {
+        width: 100px;
+    }
+    div#todaystasks > div:before,
+    div#todaystasks > div:after {
+        display: table;
+        content: " ";
+    }
+    div#todaystasks > div:after {
+        clear: both;
+    }
+    
+    div#todaystasks > div:nth-child(2n) {
+        background-color: rgba(32,0,0,0.3);
+    }
+    .add-task-content > form > div:last-of-type {
+        border: none;
+        box-shadow: none;
+        text-align: right;
+        padding: 10px 0 0 0;
+    }
 </style>
-
-
 
 @model DailyTaskReport.Models.user_tasks
 <div>

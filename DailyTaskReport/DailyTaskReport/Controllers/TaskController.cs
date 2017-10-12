@@ -116,7 +116,7 @@ namespace DailyTaskReport.Controllers
             if (ModelState.IsValid)
             {
                 employee.user = encdata.AESDecrypt(employee.user.Replace(' ', '+'), encStringKey);
-                //response = addUserTasks(tasks);
+                response = addUserTasks(employee);
             }
             else
             {
@@ -125,7 +125,6 @@ namespace DailyTaskReport.Controllers
             }
             return new JsonResult { Data = response };
         }
-
 
         private String getServerMonth()
         {
@@ -155,54 +154,54 @@ namespace DailyTaskReport.Controllers
             }
             return date;
         }
-        //private TaskResponse addUserTasks(TaskLists tasks)
-        //{
-        //    TaskResponse response = new TaskResponse();
-        //    try 
-        //    {
-        //        string month = tasks.dateTime.Month < 10 ? "0" + tasks.dateTime.Month : tasks.dateTime.Month.ToString();
-        //        using (MySqlConnection con = new MySqlConnection(connection))
-        //        {
-        //            con.Open();
-        //            MySqlTransaction trans = con.BeginTransaction(IsolationLevel.ReadCommitted);
-        //            using (MySqlCommand cmd = con.CreateCommand())
-        //            {
-        //                string values = string.Empty;
-        //                for (int count = 0; count < tasks.taskLists.Count; count++)
-        //                {
-        //                    values += " ( @user, @date, @timeFrom" + count + ", @timeTo" + count + ", @woNO" + count + ", @tasks" + count + " ) ,";
-        //                    cmd.Parameters.AddWithValue("timeFrom" + count, tasks.taskLists[count].timeFrom);
-        //                    cmd.Parameters.AddWithValue("timeTo" + count, tasks.taskLists[count].timeTo);
-        //                    cmd.Parameters.AddWithValue("woNO" + count, tasks.taskLists[count].woNo);
-        //                    cmd.Parameters.AddWithValue("tasks" + count, tasks.taskLists[count].task);
-        //                }
 
-        //                cmd.CommandText = "INSERT INTO kpDailyTask.Report" + month + "(user, date, timeFrom, timeTo, WOno, Task)"
-        //                                + "VALUES" + values.Substring(0, values.Length - 1) + ";";
-        //                cmd.Parameters.AddWithValue("user", tasks.encUser);
-        //                cmd.Parameters.AddWithValue("date", tasks.dateTime);
+        private TaskResponse addUserTasks(user_tasks activities)
+        {
+            TaskResponse response = new TaskResponse();
+            try
+            {
+                string month = activities.tasks[0].task_date.Month < 10 ? "0" + activities.tasks[0].task_date.Month : activities.tasks[0].task_date.Month.ToString();
+                using (MySqlConnection con = new MySqlConnection(connection))
+                {
+                    con.Open();
+                    MySqlTransaction trans = con.BeginTransaction(IsolationLevel.ReadCommitted);
+                    using (MySqlCommand cmd = con.CreateCommand())
+                    {
+                        string values = string.Empty;
+                        for (int count = 0; count < activities.tasks[0].taskLists.Count; count++)
+                        {
+                            values += " ( @user, @date, @timeFrom" + count + ", @timeTo" + count + ", @woNO" + count + ", @tasks" + count + " ) ,";
+                            cmd.Parameters.AddWithValue("timeFrom" + count, activities.tasks[0].taskLists[count].timeFrom);
+                            cmd.Parameters.AddWithValue("timeTo" + count, activities.tasks[0].taskLists[count].timeTo);
+                            cmd.Parameters.AddWithValue("woNO" + count, activities.tasks[0].taskLists[count].woNo);
+                            cmd.Parameters.AddWithValue("tasks" + count, activities.tasks[0].taskLists[count].task);
+                        }
 
-        //                if (cmd.ExecuteNonQuery() > 0)
-        //                {
-        //                    trans.Commit();
-        //                    response.code = 1;
-        //                    response.message = "Successfully Added!.";
-        //                }
-        //                else
-        //                {
-        //                    response.code = 0;
-        //                    response.message = "Server error upon adding, please try again";
-        //                }   
-        //            }
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
+                        cmd.CommandText = "INSERT INTO kpDailyTask.Report" + month + "(user, date, timeFrom, timeTo, WOno, Task)"
+                                        + "VALUES" + values.Substring(0, values.Length - 1) + ";";
+                        cmd.Parameters.AddWithValue("user", activities.user);
+                        cmd.Parameters.AddWithValue("date", activities.tasks[0].task_date);
 
-        //        response.code = -1;
-        //        response.message = "Unexpected error occured, try again in a few minutes...";
-        //    }
-        //    return response;
-        //}
+                        if (cmd.ExecuteNonQuery() > 0)
+                        {
+                            trans.Commit();
+                            response.code = 1;
+                            response.message = "Successfully Added!.";
+                        }
+                        else
+                        {
+                            response.code = 0;
+                            response.message = "Server error upon adding, please try again";
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                response.code = -1;
+                response.message = "Unexpected error occured, try again in a few minutes...";
+            }
+            return response;
+        }
     }
 }

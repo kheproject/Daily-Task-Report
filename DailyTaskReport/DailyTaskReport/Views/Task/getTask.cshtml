@@ -13,6 +13,7 @@
 <style>
     div#task-page {
         line-height: 0.5;
+        width: 1000px;
     }
     div#task-page > div.title-separator {
         height: 10px;
@@ -30,7 +31,7 @@
         background: rgba(36,0,0,0.3);
         margin-top: 15px;
         max-height: 500px;
-        width: 700px;
+        width: 750px;
         overflow-y: scroll;
         display: block;
         float: left;
@@ -78,7 +79,7 @@
     }
 </style>
 <div id="task-page" class="container">
-    <span>Task</span> ─ Let's see what you have in store...
+    <span>Task</span> ─ Let's see what you have in store ...
     <div class="title-separator"></div>
     <div class="task-content">
         @{  foreach (var data in Model.tasks)
@@ -106,18 +107,20 @@
     <div class="task-options" style="">
         <ul>
             <li>
-                <a class="" onclick="showContent()">Add Task</a>
+                <a onclick="addTaskForm()">Add Task</a>
             </li>
             <li>
-                <a class="" onclick="promptMsg('Edit Task feature is not available')">Edit Task</a>
+                <a onclick="promptMsg('Edit Task feature is not available')">Edit Task</a>
+            </li>
+            <li>
+                <a onclick="promptMsg('Search Task feature is not available')">Search Task</a>
+            </li>
+            <li>
+                <a onclick="promptMsg('Delete Task feature is not available')">Delete Task</a>
             </li>
         </ul>
     </div>
 </div>
-
-@*<div style="height: 500px; width: 500px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 1px solid red; background: white; z-index: 6;">
-
-</div>*@
 
 <script>
     function blockContent(){

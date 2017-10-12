@@ -12,60 +12,15 @@
         color: white;
         padding: 10px 20px;
     }
-    .add-task-content {
-        color: black;
+    form#frmAddTask {
         background: rgba(36,0,0,0.3);
         padding: 15px;
     }
-    /*.add-task-content > form {
-        padding: 20px;
-    }
-    .add-task-content > form > div#todaystasks {
-        
-        border-top-right-radius: 5px;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-        box-shadow: rgba(0,0,0,0.4) 0px 0px 15px 1px;
-    }*/
-    /*div#todaystasks > div {
-        margin: 0 auto;
-        padding: 10px 0;
-        
-    }*/
-    /*div#todaystasks > div > div {
-        padding: 0;
-    }
-    div#todaystasks > div > div > div {
-        padding-top: 10px;
-        padding-bottom: 10px;
-        display: inline-block;
-    }
-    div#todaystasks > div > div > div > input[type=time] {
-        width: 100px;
-    }*/
-    /*div#todaystasks > div:before,
-    div#todaystasks > div:after {
-        display: table;
-        content: " ";
-    }
-    div#todaystasks > div:after {
-        clear: both;
-    }
-    
-    div#todaystasks > div:nth-child(2n) {
-        background-color: rgba(190,50,50,0.2);
-    }
-    .add-task-content > form > div:last-of-type {
-        border: none;
-        box-shadow: none;
-        text-align: right;
-        padding: 10px 0 0 0;
-    }*/
 </style>
 
 <div class="add-task-holder">
     <div> Add Task </div>
-    @using (Html.BeginForm("addTasks", "Task", FormMethod.Post, new { @id = "frmAddTask", @class = "add-task-content" }))
+    @using (Html.BeginForm("addTask", "Task", FormMethod.Post, new { @id = "frmAddTask" }))
     {
         Html.RenderPartial("_addTask");
     }
@@ -101,7 +56,8 @@
                         alert(response.message);
                     }
                 },
-                error: function () {
+                error: function (err) {
+                    console.log('Error upon submit...' + err);
                     alert('an error has occured');
                 }
             });

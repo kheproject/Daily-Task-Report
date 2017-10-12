@@ -45,8 +45,6 @@ function isCut(e) {
     return e.ctrlKey && e.keyCode == 88 ? true : false;
 }
 //------------------------------------------------/\
-
-
 //--for keypress----------------------------------\/
 function isLetterPress(e) { //for lowercase letters, isLetter is uppercase
     return e.keyCode >= 97 && e.keyCode <= 122 ? true : false;
