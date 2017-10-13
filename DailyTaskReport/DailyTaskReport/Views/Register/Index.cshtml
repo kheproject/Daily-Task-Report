@@ -1,2 +1,60 @@
-﻿Register
-<div></div>
+﻿<style>
+    div#register-page {
+        line-height: 0.5;
+        width: 700px;
+        margin: 0 auto;
+    }
+    div#register-page > div.title-separator {
+        height: 10px;
+        border-bottom: 2px solid white;
+        border-left: 2px solid white;
+    }    
+    div#register-page > span {
+        margin-left: 15px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    div.register-content {
+        border-radius: 10px;
+        padding: 15px 0;
+        line-height: 1.5;
+        background: rgba(6,0,0,0.6);
+        margin: 15px auto;
+        display: block;
+        width: 500px;
+    }
+    div.register-content > form > div.container > div:first-child {
+        padding-top: 7px;
+    }
+</style>
+@model DailyTaskReport.Models.AccountModel
+
+<div id="register-page">
+    <span>Register</span> ─ Fill up the form below ...
+    <div class="title-separator"></div>
+    <div class="register-content">
+        @using (Html.BeginForm("Register", "Register", FormMethod.Post, new { @id = "frmRegister", @class = "frmShow" }))
+        {
+            <div class="container">
+                <div class="col-sm-offset-1 col-sm-3">ID no.</div>
+                <div class="col-sm-7">
+                    @Html.TextBoxFor(m => m.idNo, new { @placeholder = "id no.", @class = "form-control form-controlFor", @maxlength = 8 })
+                    <div style="margin-bottom: 10px; height: 20px; text-align: center;">
+                        @Html.ValidationMessageFor(m => m.idNo)
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="col-sm-offset-1 col-sm-3">First Name</div>
+                <div class="col-sm-7">
+                    @Html.TextBoxFor(m => m.fName, new { @placeholder = "first name", @class = "form-control form-controlFor" })
+                    <div style="margin-bottom: 10px; height: 20px; text-align: center;">
+                        @Html.ValidationMessageFor(m => m.fName)
+                    </div>
+                </div>
+            </div>
+
+            <button class="bgcred fontWhite" type="submit">Submit</button>
+        }
+    </div>
+</div>
