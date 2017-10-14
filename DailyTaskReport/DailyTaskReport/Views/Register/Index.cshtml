@@ -21,10 +21,19 @@
         background: rgba(6,0,0,0.6);
         margin: 15px auto;
         display: block;
-        width: 500px;
+        width: 400px;
     }
     div.register-content > form > div.container > div:first-child {
         padding-top: 7px;
+    }
+    div.register-content > form > div.container > div.col-sm-8 > input {
+        text-align: center;
+        text-transform:capitalize;
+    }
+    div.register-content > form > div.container > div.col-sm-8 > div {
+        text-align: center;
+        margin-bottom: 7px;
+        min-height: 18px;
     }
 </style>
 @model DailyTaskReport.Models.AccountModel
@@ -36,25 +45,67 @@
         @using (Html.BeginForm("Register", "Register", FormMethod.Post, new { @id = "frmRegister", @class = "frmShow" }))
         {
             <div class="container">
-                <div class="col-sm-offset-1 col-sm-3">ID no.</div>
-                <div class="col-sm-7">
+                <div class="col-sm-4">ID no.</div>
+                <div class="col-sm-8">
                     @Html.TextBoxFor(m => m.idNo, new { @placeholder = "id no.", @class = "form-control form-controlFor", @maxlength = 8 })
-                    <div style="margin-bottom: 10px; height: 20px; text-align: center;">
+                    <div>
                         @Html.ValidationMessageFor(m => m.idNo)
                     </div>
                 </div>
             </div>
             <div class="container">
-                <div class="col-sm-offset-1 col-sm-3">First Name</div>
-                <div class="col-sm-7">
+                <div class="col-sm-4">First Name</div>
+                <div class="col-sm-8">
                     @Html.TextBoxFor(m => m.fName, new { @placeholder = "first name", @class = "form-control form-controlFor" })
-                    <div style="margin-bottom: 10px; height: 20px; text-align: center;">
+                    <div>
                         @Html.ValidationMessageFor(m => m.fName)
                     </div>
                 </div>
             </div>
-
-            <button class="bgcred fontWhite" type="submit">Submit</button>
+            <div class="container">
+                <div class="col-sm-4">Middle Name</div>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.mName, new { @placeholder = "middle name", @class = "form-control form-controlFor" })
+                    <div>
+                        @Html.ValidationMessageFor(m => m.mName)
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="col-sm-4">Last Name</div>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.lName, new { @placeholder = "last name", @class = "form-control form-controlFor" })
+                    <div>
+                        @Html.ValidationMessageFor(m => m.lName)
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="col-sm-4">Birthdate</div>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.birthdate, new { @placeholder = "birthdate", @class = "form-control form-controlFor", @type = "date"})
+                    <div>
+                        @Html.ValidationMessageFor(m => m.birthdate)
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="col-sm-4">Contact No.</div>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.ContactNo, new { @placeholder = "contact no.", @class = "form-control form-controlFor" })
+                    <div>
+                        @Html.ValidationMessageFor(m => m.ContactNo)
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="col-sm-12" style="text-align: right;">
+                    <div style="display: inline-block; padding: 0 10px; border-right: 1px solid white; margin-right: 10px;">
+                        @Html.ActionLink("Back to login page","Index", "Index", new { @style="text-decoration: none; color: lightgrey;"})
+                    </div>
+                    <button class="bgcred fontWhite" type="submit">Submit</button>
+                </div>
+            </div>
         }
     </div>
 </div>

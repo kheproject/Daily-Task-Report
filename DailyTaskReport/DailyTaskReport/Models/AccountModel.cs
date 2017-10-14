@@ -28,22 +28,22 @@ namespace DailyTaskReport.Models
 
         [Required]
         [Display(Name = "ID Number")]
-        [RegularExpression("[0-9]")]
+        [RegularExpression("[0-9]*", ErrorMessage = "accepts digits only")]
         public String idNo { get; set; }
 
         [Required]
         [Display(Name = "First Name")]
-        [RegularExpression("[a-zA-Z]")]
+        [RegularExpression("[a-zA-Z ]*")]
         public String fName { get; set; }
 
         [Required]
         [Display(Name = "Middle Name")]
-        [RegularExpression("[a-zA-Z]")]
+        [RegularExpression("[a-zA-Z ]*")]
         public String mName { get; set; }
 
         [Required]
         [Display(Name = "Last Name")]
-        [RegularExpression("[a-zA-Z]")]
+        [RegularExpression("[a-zA-Z ]*")]
         public String lName { get; set; }
 
         [Required]
@@ -54,6 +54,7 @@ namespace DailyTaskReport.Models
         public String Designation { get; set; }
 
         [Display(Name = "Contact No.")]
+        [RegularExpression("[0-9]*", ErrorMessage = "accepts digits only")]
         public String ContactNo { get; set; }
         
         [Display(Name = "Role")]
