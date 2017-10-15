@@ -1,0 +1,81 @@
+﻿@model DailyTaskReport.Models.AccountModel
+<div class="container">
+    <div class="col-sm-4">ID no.</div>
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.idNo, new { @placeholder = "id no.", @class = "form-control form-controlFor", @maxlength = 8 })
+        <div>
+            @Html.ValidationMessageFor(m => m.idNo)
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="col-sm-4">First Name</div>
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.fName, new { @placeholder = "first name", @class = "form-control form-controlFor" })
+        <div>
+            @Html.ValidationMessageFor(m => m.fName)
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="col-sm-4">Middle Name</div>
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.mName, new { @placeholder = "middle name", @class = "form-control form-controlFor" })
+        <div>
+            @Html.ValidationMessageFor(m => m.mName)
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="col-sm-4">Last Name</div>
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.lName, new { @placeholder = "last name", @class = "form-control form-controlFor" })
+        <div>
+            @Html.ValidationMessageFor(m => m.lName)
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="col-sm-4">Birthdate</div>
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.birthdate, new { @placeholder = "birthdate", @class = "form-control form-controlFor", @type = "date" })
+        <div>
+            @Html.ValidationMessageFor(m => m.birthdate)
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="col-sm-4">Contact No.</div>
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.ContactNo, new { @placeholder = "contact no.", @class = "form-control form-controlFor" })
+        <div>
+            @Html.ValidationMessageFor(m => m.ContactNo)
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="col-sm-4">User</div>
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.credentials.user, new { @placeholder = "user", @class = "form-control form-controlFor" })
+        <div>
+            @Html.ValidationMessageFor(m => m.credentials.user)
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="col-sm-4">Password</div>
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.credentials.password, new { @placeholder = "password", @class = "form-control form-controlFor" })
+        <div>
+            @Html.ValidationMessageFor(m => m.credentials.password)
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="col-sm-12" style="text-align: right;">
+        <div style="display: inline-block; padding: 0 10px; border-right: 1px solid white; margin-right: 10px;">
+            @Html.ActionLink("Back to login page", "Index", "Index", null, new { @class = "homeLink" })
+        </div>
+        <button class="bgcred fontWhite" type="submit">Submit</button>
+    </div>
+</div>

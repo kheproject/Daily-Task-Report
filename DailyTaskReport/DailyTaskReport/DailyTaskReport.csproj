@@ -235,6 +235,7 @@
     <Content Include="Views\Task\_addTask.cshtml" />
     <Content Include="Views\Task\getTask.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Views\Register\Register.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
