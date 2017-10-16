@@ -28,22 +28,26 @@ namespace DailyTaskReport.Models
 
         [Required]
         [Display(Name = "ID Number")]
+        [StringLength(8, MinimumLength = 8, ErrorMessage = "must consist of 8 digits")]
         [RegularExpression("[0-9]*", ErrorMessage = "accepts digits only")]
         public String idNo { get; set; }
 
         [Required]
+        [StringLength(40, MinimumLength = 2, ErrorMessage = "must consist at least 2 characters ")]
         [Display(Name = "First Name")]
-        [RegularExpression("[a-zA-Z ]*")]
+        [RegularExpression("[a-zA-Z ]*", ErrorMessage = "accepts letters only")]
         public String fName { get; set; }
 
         [Required]
+        [StringLength(40, MinimumLength = 2, ErrorMessage = "must consist at least 2 characters ")]
         [Display(Name = "Middle Name")]
-        [RegularExpression("[a-zA-Z ]*")]
+        [RegularExpression("[a-zA-Z ]*", ErrorMessage = "accepts letters only")]
         public String mName { get; set; }
 
         [Required]
+        [StringLength(40, MinimumLength = 2, ErrorMessage = "must consist at least 2 characters ")]
         [Display(Name = "Last Name")]
-        [RegularExpression("[a-zA-Z ]*")]
+        [RegularExpression("[a-zA-Z ]*", ErrorMessage = "accepts letters only")]
         public String lName { get; set; }
 
         [Required]
@@ -54,6 +58,7 @@ namespace DailyTaskReport.Models
         public String Designation { get; set; }
 
         [Display(Name = "Contact No.")]
+        [StringLength(11, MinimumLength = 11, ErrorMessage = "minimum of 11 digits only")]
         [RegularExpression("[0-9]*", ErrorMessage = "accepts digits only")]
         public String ContactNo { get; set; }
         

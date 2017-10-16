@@ -42,6 +42,9 @@
     .homeLink:hover {
         color: white;
     }
+    .credentialClass {
+        overflow: hidden;
+    }
 </style>
 
 
@@ -59,7 +62,6 @@
 <script>
     $('#frmRegister').on("submit", function (e) {
         e.preventDefault();
-        toggleForm();
 
         $.ajax({
             async: true,
@@ -70,11 +72,11 @@
             dataType: 'html',
             cache: false,
             success: function (result) {
-                setTimeout(function () { $('form#frmRegister').html(result); toggleForm(); }, 300);
+                setTimeout(function () { $('form#frmRegister').html(result); }, 300);
             },
             error: function () {
                 alert('An error has occured during login');
-                setTimeout(function () { toggleForm(); }, 300);
+                setTimeout(function () {  }, 300);
             }
         });
     });

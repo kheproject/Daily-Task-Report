@@ -53,24 +53,26 @@
         </div>
     </div>
 </div>
-<div class="container">
+
+<div class="container credentialClass" style="height: 0px;">
     <div class="col-sm-4">User</div>
     <div class="col-sm-8">
-        @Html.TextBoxFor(m => m.credentials.user, new { @placeholder = "user", @class = "form-control form-controlFor" })
+        @Html.TextBoxFor(m => m.credentials.user, new { @placeholder = "user", @class = "form-control form-controlFor", @readonly = true})
         <div>
             @Html.ValidationMessageFor(m => m.credentials.user)
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container credentialClass" style="height: 0px;">
     <div class="col-sm-4">Password</div>
     <div class="col-sm-8">
-        @Html.TextBoxFor(m => m.credentials.password, new { @placeholder = "password", @class = "form-control form-controlFor" })
+        @Html.TextBoxFor(m => m.credentials.password, new { @placeholder = "password", @class = "form-control form-controlFor", @type = "password" })
         <div>
             @Html.ValidationMessageFor(m => m.credentials.password)
         </div>
     </div>
 </div>
+
 <div class="container">
     <div class="col-sm-12" style="text-align: right;">
         <div style="display: inline-block; padding: 0 10px; border-right: 1px solid white; margin-right: 10px;">
@@ -79,3 +81,31 @@
         <button class="bgcred fontWhite" type="submit">Submit</button>
     </div>
 </div>
+
+<script>
+    $(function () {
+
+        if ($('#idNo').val().length == 8 && $('#lName').val().length > 1)
+            $('.credentialClass').attr('style', 'height: 63px');
+        else
+            $('.credentialClass').attr('style', 'height: 0px');
+
+        $('#idNo').focusout(function () {
+            if ($('#idNo').val().length == 8 && $('#lName').val().length > 1)
+                generateUser();
+            else
+                $('.credentialClass').attr('style', 'height: 0px');
+        });
+
+        $('#lName').focusout(function () {
+            if ($('#idNo').val().length == 8 && $('#lName').val().length > 1)
+                generateUser();
+            else
+                $('.credentialClass').attr('style', 'height: 0px');
+        });
+    });
+    function generateUser() {
+        $('.credentialClass').attr('style', 'height: 63px; transition-duration: 0.5s;');
+        $('#credentials_user').val($('#lName').val().substr(0, 4).toUpperCase() + $('#idNo').val())
+    }
+</script>
