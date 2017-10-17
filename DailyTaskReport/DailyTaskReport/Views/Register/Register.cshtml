@@ -2,7 +2,7 @@
 <div class="container">
     <div class="col-sm-4">ID no.</div>
     <div class="col-sm-8">
-        @Html.TextBoxFor(m => m.idNo, new { @placeholder = "id no.", @class = "form-control form-controlFor", @maxlength = 8 })
+        @Html.TextBoxFor(m => m.idNo, new { @placeholder = "id no.", @class = "form-control form-controlFor numberOnly", @maxlength = 8 })
         <div>
             @Html.ValidationMessageFor(m => m.idNo)
         </div>
@@ -84,7 +84,12 @@
 
 <script>
     $(function () {
-
+        console.log("Message : " + "@ViewBag.errorMsg");
+        if ("@ViewBag.errorMsg" != "") {
+            console.log("@ViewBag.errorMsg");
+            promptMsg("@ViewBag.errorMsg", false)
+        }
+        numberOnly();
         if ($('#idNo').val().length == 8 && $('#lName').val().length > 1)
             $('.credentialClass').attr('style', 'height: 63px');
         else
@@ -94,14 +99,14 @@
             if ($('#idNo').val().length == 8 && $('#lName').val().length > 1)
                 generateUser();
             else
-                $('.credentialClass').attr('style', 'height: 0px');
+                $('.credentialClass').attr('style', 'height: 0px; transition-duration: 0.5s;');
         });
 
         $('#lName').focusout(function () {
             if ($('#idNo').val().length == 8 && $('#lName').val().length > 1)
                 generateUser();
             else
-                $('.credentialClass').attr('style', 'height: 0px');
+                $('.credentialClass').attr('style', 'height: 0px; transition-duration: 0.5s;');
         });
     });
     function generateUser() {

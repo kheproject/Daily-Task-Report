@@ -12,8 +12,10 @@
         $('#ajxLoad').addClass('elementHide');
     }
     setTimeout(function () { document.getElementById("msgr").firstElementChild.innerHTML = ""; }, 100);
-    $('#msgr').removeClass('elementShow');
-    $('#msgr').addClass('elementHide');
+    if ($('#msgr').hasClass('elementShow')) {
+        $('#msgr').removeClass('elementShow');
+        $('#msgr').addClass('elementHide');
+    }
 }
 function promptMsg(str_msg, bool_backtologin) {
     showPrompt()

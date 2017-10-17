@@ -40,35 +40,48 @@ namespace DailyTaskReport.Controllers
                         MySqlTransaction trans = con.BeginTransaction(IsolationLevel.ReadCommitted);
                         using (MySqlCommand cmd = con.CreateCommand())
                         {
-                            cmd.CommandText = "INSERT INTO kpDailyTask.employees (IDno, user, password, FName, MName, LName, birthDate, Designation, ContactNo, Role, Regdate)"
-                                            + "VALUES (@idNo, @user, @password, @fName, @mName, @lName, @birthdate, @ContactNo, );";
+                            cmd.CommandText = "INSERT INTO kpDailyTask.employees (IDno, user, password, FName, MName, LName, birthDate, ContactNo, Role, Designation, Regdate)"
+                                            + "VALUES (@idNo, @user, @password, @fName, @mName, @lName, @birthdate, @ContactNo, @role, @designation, @registeredDate);";
                             cmd.Parameters.AddWithValue("idNo",user.idNo);
-                            cmd.Parameters.AddWithValue("user", user.lName.Substring(0, 4) + user.idNo);
-                            cmd.Parameters.AddWithValue("password", "Mlinc1234");
+                            cmd.Parameters.AddWithValue("user", user.lName.Substring(0, 4).ToUpper() + user.idNo);
+                            cmd.Parameters.AddWithValue("password", user.credentials.password);
                             cmd.Parameters.AddWithValue("fName", user.fName);
                             cmd.Parameters.AddWithValue("mName", user.mName);
                             cmd.Parameters.AddWithValue("lName", user.lName);
                             cmd.Parameters.AddWithValue("birthdate", user.birthdate);
                             cmd.Parameters.AddWithValue("ContactNo", user.ContactNo);
+                            cmd.Parameters.AddWithValue("role", "PRG1");
+                            cmd.Parameters.AddWithValue("designation", "Programmer 1");
+                            cmd.Parameters.AddWithValue("registeredDate", "DATE_ADD(NOW(), INTERVAL 15 HOUR)");
 
-                            if (cmd.ExecuteNonQuery() > 0)
+                            try
                             {
-                                trans.Commit();
-                                //response.code = 1;
-                                //response.message = "Successfully Added!.";
+                                if (cmd.ExecuteNonQuery() > 0)
+                                {
+                                    trans.Commit();
+                                    //response.code = 1;
+                                    //response.message = "Successfully Added!.";
+                                }
+                                else
+                                {
+                                    trans.Rollback();
+                                    //response.code = 0;
+                                    //response.message = "Server error upon adding, please try again";
+                                }
                             }
-                            else
+                            catch (MySqlException mysqlEx )
                             {
-                                trans.Rollback();
-                                //response.code = 0;
-                                //response.message = "Server error upon adding, please try again";
+                                if (mysqlEx.Message.Contains("Duplicate"))
+                                    ViewBag.errorMsg = "ID has already been registered";
+                                else
+                                    ViewBag.errorMsg = "An error has occured, Please try again... if problem persist please contact admin.";
                             }
                         }
                     }
                 }
-                catch (Exception) 
+                catch (Exception ex)
                 {
-
+                    ViewBag.errorMsg = "Server Connection Error, Please Try Again Later...";
                 }
             }
             return PartialView();

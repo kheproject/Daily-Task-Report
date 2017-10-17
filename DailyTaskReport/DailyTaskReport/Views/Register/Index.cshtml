@@ -2,7 +2,7 @@
     div#register-page {
         line-height: 0.5;
         width: 700px;
-        margin: 0 auto;
+        margin: -40px auto;
     }
     div#register-page > div.title-separator {
         height: 10px;
@@ -62,6 +62,7 @@
 <script>
     $('#frmRegister').on("submit", function (e) {
         e.preventDefault();
+        toggleUIBlocker();
 
         $.ajax({
             async: true,
@@ -72,11 +73,11 @@
             dataType: 'html',
             cache: false,
             success: function (result) {
-                setTimeout(function () { $('form#frmRegister').html(result); }, 300);
+                setTimeout(function () { $('form#frmRegister').html(result); toggleUIBlocker(); }, 300);
             },
             error: function () {
                 alert('An error has occured during login');
-                setTimeout(function () {  }, 300);
+                setTimeout(function () { toggleUIBlocker(); }, 300);
             }
         });
     });
