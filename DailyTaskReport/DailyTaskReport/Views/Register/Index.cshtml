@@ -73,7 +73,10 @@
             dataType: 'html',
             cache: false,
             success: function (result) {
-                setTimeout(function () { $('form#frmRegister').html(result); toggleUIBlocker(); }, 300);
+                setTimeout(function () {
+                    $('form#frmRegister').html(result);
+                    toggleUIBlocker();
+                }, 300);
             },
             error: function () {
                 alert('An error has occured during login');

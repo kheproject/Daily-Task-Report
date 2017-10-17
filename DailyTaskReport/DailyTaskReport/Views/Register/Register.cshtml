@@ -84,10 +84,8 @@
 
 <script>
     $(function () {
-        console.log("Message : " + "@ViewBag.errorMsg");
         if ("@ViewBag.errorMsg" != "") {
-            console.log("@ViewBag.errorMsg");
-            promptMsg("@ViewBag.errorMsg", false)
+            promptMsg("@ViewBag.errorMsg", false);
         }
         numberOnly();
         if ($('#idNo').val().length == 8 && $('#lName').val().length > 1)
