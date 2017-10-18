@@ -52,16 +52,15 @@ function isLetterPress(e) { //for lowercase letters, isLetter is uppercase
 
 function numberOnly() {
     $('.numberOnly').keydown(function (e) {
-        if (!isNumber(e) && !isBackSpace(e) && !isEnter(e) && !isTab(e) && !isArrowKeys(e)) {
+        if (!isNumber(e) && !isBackSpace(e) && !isEnter(e) && !isTab(e) && !isArrowKeys(e))
             e.preventDefault();
-        }
     });
 }
 function namesOnly() {
     $('.namesOnly').keydown(function (e) {
-        if (!isLetter(e) && !isBackSpace(e) && !isEnter(e) && !isTab(e) && !isArrowKeys(e)) {
+        if (!isLetter(e) && !isBackSpace(e) && !isEnter(e) && !isTab(e) && !isArrowKeys(e) && !isSpace(e)
+            || ($(this).val().split('').reverse().join('').indexOf(' ') == 0 && isSpace(e)))
             e.preventDefault();
-        }
     });
 }
 

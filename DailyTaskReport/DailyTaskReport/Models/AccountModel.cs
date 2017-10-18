@@ -58,7 +58,7 @@ namespace DailyTaskReport.Models
         public String Designation { get; set; }
 
         [Display(Name = "Contact No.")]
-        [StringLength(11, MinimumLength = 11, ErrorMessage = "minimum of 11 digits only")]
+        [StringLength(12, MinimumLength = 11, ErrorMessage = "minimum of 11 digits only")]
         [RegularExpression("[0-9]*", ErrorMessage = "accepts digits only")]
         public String ContactNo { get; set; }
         
