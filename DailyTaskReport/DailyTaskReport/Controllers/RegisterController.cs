@@ -28,6 +28,7 @@ namespace DailyTaskReport.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(AccountModel user)
         {
             if (ModelState.IsValid)
@@ -41,7 +42,8 @@ namespace DailyTaskReport.Controllers
                         using (MySqlCommand cmd = con.CreateCommand())
                         {
                             cmd.CommandText = "INSERT INTO kpDailyTask.employees (IDno, user, password, FName, MName, LName, birthDate, ContactNo, Role, Designation, Regdate)"
-                                            + "VALUES (@idNo, @user, @password, @fName, @mName, @lName, @birthdate, @ContactNo, @role, @designation, @registeredDate);";
+                                            + "VALUES (@idNo, @user, @password, @fName, @mName, @lName, @birthdate, @ContactNo," 
+                                            + "\"PRG1\", \"Programmer 1\", DATE_ADD(NOW(), INTERVAL 15 HOUR));";
                             cmd.Parameters.AddWithValue("idNo", user.idNo);
                             cmd.Parameters.AddWithValue("user", user.lName.Substring(0, 4).ToUpper() + user.idNo);
                             cmd.Parameters.AddWithValue("password", user.credentials.password);
@@ -50,23 +52,18 @@ namespace DailyTaskReport.Controllers
                             cmd.Parameters.AddWithValue("lName", user.lName);
                             cmd.Parameters.AddWithValue("birthdate", user.birthdate);
                             cmd.Parameters.AddWithValue("ContactNo", user.ContactNo);
-                            cmd.Parameters.AddWithValue("role", "PRG1");
-                            cmd.Parameters.AddWithValue("designation", "Programmer 1");
-                            cmd.Parameters.AddWithValue("registeredDate", "DATE_ADD(NOW(), INTERVAL 15 HOUR)");
 
                             try
                             {
                                 if (cmd.ExecuteNonQuery() > 0)
                                 {
                                     trans.Commit();
-                                    //response.code = 1;
-                                    //response.message = "Successfully Added!.";
+                                    ViewBag.successMsg = "Registered Successfully!";
                                 }
                                 else
                                 {
                                     trans.Rollback();
-                                    //response.code = 0;
-                                    //response.message = "Server error upon adding, please try again";
+                                    ViewBag.errorMsg = "Server error upon registering, please try again";
                                 }
                             }
                             catch (MySqlException mysqlEx)
@@ -74,7 +71,7 @@ namespace DailyTaskReport.Controllers
                                 if (mysqlEx.Message.Contains("Duplicate"))
                                     ViewBag.errorMsg = "ID has already been registered";
                                 else
-                                    ViewBag.errorMsg = "An error has occured, Please try again... if problem persist please contact admin.";
+                                    ViewBag.errorMsg = "An error has occured, Please try again. if problem persist please contact admin.";
                             }
                         }
                     }
