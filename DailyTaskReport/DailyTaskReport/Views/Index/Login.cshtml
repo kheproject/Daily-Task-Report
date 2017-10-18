@@ -71,7 +71,7 @@
     <div>
         <img class="diamond horizontal-flipOn" src="../Images/_MLAjaxLoad.svg" draggable="false"/>
         <div class="signUp">
-            @Html.ActionLink("Register Here!", "Index", "Register", null, new { @title = "No account?"})
+            @Html.ActionLink("Register Here!", "Index", "Register", null, new { @title = "No account?", @onclick = "toggleUIBlocker()" })
         </div>
     </div>
 

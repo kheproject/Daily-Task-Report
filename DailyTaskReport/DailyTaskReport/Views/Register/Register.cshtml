@@ -57,7 +57,7 @@
 <div class="container credentialClass" style="height: 0px;">
     <div class="col-sm-4">User</div>
     <div class="col-sm-8">
-        @Html.TextBoxFor(m => m.credentials.user, new { @placeholder = "user", @class = "form-control form-controlFor", @readonly = true})
+        @Html.TextBoxFor(m => m.credentials.user, new { @placeholder = "user", @class = "form-control form-controlFor", @readonly = true, @tabindex = -1 })
         <div>
             @Html.ValidationMessageFor(m => m.credentials.user)
         </div>
@@ -86,7 +86,10 @@
     $(function () {
 
         if ($('.input-validation-error:first'))
+        {
             $('.input-validation-error:first').focus();
+            $('#credentials_password').val("");
+        }
 
         if ("@ViewBag.errorMsg" != "") {
             promptMsg("@ViewBag.errorMsg", false);

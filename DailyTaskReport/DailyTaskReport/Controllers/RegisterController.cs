@@ -42,7 +42,7 @@ namespace DailyTaskReport.Controllers
                         {
                             cmd.CommandText = "INSERT INTO kpDailyTask.employees (IDno, user, password, FName, MName, LName, birthDate, ContactNo, Role, Designation, Regdate)"
                                             + "VALUES (@idNo, @user, @password, @fName, @mName, @lName, @birthdate, @ContactNo, @role, @designation, @registeredDate);";
-                            cmd.Parameters.AddWithValue("idNo",user.idNo);
+                            cmd.Parameters.AddWithValue("idNo", user.idNo);
                             cmd.Parameters.AddWithValue("user", user.lName.Substring(0, 4).ToUpper() + user.idNo);
                             cmd.Parameters.AddWithValue("password", user.credentials.password);
                             cmd.Parameters.AddWithValue("fName", user.fName);
@@ -69,7 +69,7 @@ namespace DailyTaskReport.Controllers
                                     //response.message = "Server error upon adding, please try again";
                                 }
                             }
-                            catch (MySqlException mysqlEx )
+                            catch (MySqlException mysqlEx)
                             {
                                 if (mysqlEx.Message.Contains("Duplicate"))
                                     ViewBag.errorMsg = "ID has already been registered";
