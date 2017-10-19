@@ -33,6 +33,21 @@ namespace DailyTaskReport.Controllers
         {
             if (ModelState.IsValid)
             {
+                String[] userName = new String[] { user.fName, user.mName, user.lName };
+                for (int count = 0; count < userName.Length ; count++)
+                {
+                    String formattedName = string.Empty;
+                    String[] nameLists = userName[count].Split(' ');
+                    if (nameLists.Length > 0)
+                    {
+                        foreach (var _name in nameLists)
+                        {
+                            formattedName += (_name[0].ToString().ToUpper() + _name.Substring(1).ToLower() + ' ');
+                        }
+                        userName[count] = formattedName.Remove(formattedName.Length - 1);
+                    }
+                }
+
                 try
                 {
                     using (MySqlConnection con = new MySqlConnection(connection))

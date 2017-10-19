@@ -51,6 +51,7 @@ namespace DailyTaskReport.Models
         public String lName { get; set; }
 
         [Required]
+        [MinimumAge(18, ErrorMessage = "must be 18 years old or up")]
         [Display(Name = "Birth date")]
         public DateTime birthdate { get; set; }
 
@@ -80,5 +81,28 @@ namespace DailyTaskReport.Models
         [Required]
         [Display(Name = "password")]
         public String password { get; set; }
+    }
+    
+    public class MinimumAgeAttribute : ValidationAttribute
+    {
+        int _minimumAge;
+
+        public MinimumAgeAttribute(int minimumAge)
+        {
+            _minimumAge = minimumAge;
+        }
+
+        public override bool IsValid(object value)
+        {
+            DateTime date;
+            try
+            {
+                if (DateTime.TryParse(value.ToString(), out date))
+                    return date.AddYears(_minimumAge) < DateTime.Now;
+            }
+            catch (Exception) {  }
+
+            return false;
+        }
     }
 }

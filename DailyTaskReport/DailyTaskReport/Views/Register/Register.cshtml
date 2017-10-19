@@ -39,7 +39,7 @@
 <div class="container">
     <div class="col-sm-4">Birthdate</div>
     <div class="col-sm-8">
-        @Html.TextBoxFor(m => m.birthdate, new { @placeholder = "birthdate", @class = "form-control form-controlFor", @type = "date" })
+        @Html.TextBoxFor(m => m.birthdate, new { @placeholder = "YYYY-MM-DD", @class = "form-control form-controlFor", @type = "date" })
         <div>
             @Html.ValidationMessageFor(m => m.birthdate)
         </div>
