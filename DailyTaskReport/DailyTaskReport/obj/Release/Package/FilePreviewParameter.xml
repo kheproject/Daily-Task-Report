@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="IIS Web Application Name" description="" value="Default Web Site/Global/DailyTaskReport" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\TULA16096675\\Desktop\\GitHub\ Repo\\Daily-Task-Report\\DailyTaskReport\\DailyTaskReport\\obj\\Release\\Package\\PackageTmp$" />
-    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\TULA16096675\\Desktop\\GitHub\ Repo\\Daily-Task-Report\\DailyTaskReport\\DailyTaskReport\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\Khe\ Project\\KP8\\Daily-Task-Report\\DailyTaskReport\\DailyTaskReport\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\Khe\ Project\\KP8\\Daily-Task-Report\\DailyTaskReport\\DailyTaskReport\\obj\\Release\\Package\\PackageTmp$" />
   </parameter>
   <parameter name="Add write permission to App_Data Folder" description="Add write permission to App_Data folder" value="Default Web Site/Global/DailyTaskReport/App_Data" tags="Hidden">
-    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\TULA16096675\\Desktop\\GitHub\ Repo\\Daily-Task-Report\\DailyTaskReport\\DailyTaskReport\\obj\\Release\\Package\\PackageTmp\\App_Data$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\Khe\ Project\\KP8\\Daily-Task-Report\\DailyTaskReport\\DailyTaskReport\\obj\\Release\\Package\\PackageTmp\\App_Data$" />
   </parameter>
   <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-DailyTaskReport-20170926111459.mdf;Initial Catalog=aspnet-DailyTaskReport-20170926111459;Integrated Security=True" tags="">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\TULA16096675\\Desktop\\GitHub\ Repo\\Daily-Task-Report\\DailyTaskReport\\DailyTaskReport\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Khe\ Project\\KP8\\Daily-Task-Report\\DailyTaskReport\\DailyTaskReport\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
   </parameter>
 </parameters>

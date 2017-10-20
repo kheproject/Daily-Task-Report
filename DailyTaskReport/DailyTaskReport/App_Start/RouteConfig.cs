@@ -18,7 +18,7 @@ namespace DailyTaskReport
                 url: "",
                 defaults: new { controller = "Index", action = "Index", id = UrlParameter.Optional }
             );
-
+            
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

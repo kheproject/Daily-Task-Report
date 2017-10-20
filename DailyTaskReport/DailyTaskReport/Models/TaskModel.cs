@@ -36,6 +36,7 @@ namespace DailyTaskReport.Models
         public String timeFrom { get; set; }
         [Required]
         public String timeTo { get; set; }
+        [StringLength(18, MinimumLength = 18, ErrorMessage = "invalid work order no.")]
         public String woNo { get; set; }
         [Required]
         public String task { get; set; }
