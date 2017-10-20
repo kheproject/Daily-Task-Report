@@ -238,7 +238,9 @@
     <Content Include="Views\Register\Register.cshtml" />
     <Content Include="Views\Shared\_MenuPRG1.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

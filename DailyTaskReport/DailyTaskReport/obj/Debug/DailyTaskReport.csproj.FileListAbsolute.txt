@@ -210,5 +210,4 @@ C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\Dail
 C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Debug\DailyTaskReport.dll
 C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Debug\DailyTaskReport.pdb
-C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\DailyTaskReport.dll.CodeAnalysisLog.xml
-C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\bin\DailyTaskReport.dll.lastcodeanalysissucceeded
+C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Debug\DailyTaskReport.csprojResolveAssemblyReference.cache

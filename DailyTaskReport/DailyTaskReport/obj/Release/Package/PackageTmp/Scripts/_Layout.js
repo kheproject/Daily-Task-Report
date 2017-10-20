@@ -17,7 +17,7 @@ function promptMsg(str_msg, bool_backtologin) {
     document.getElementById("msgr").firstElementChild.innerHTML = str_msg;
     $('#btnMsgr').unbind("click");
     if (typeof bool_backtologin == 'boolean' && bool_backtologin)
-        $('#btnMsgr').click(function () { window.location.href = "../"; })
+        $('#btnMsgr').click(function () { window.location.href = '../DailyTaskReport'; })
     else
         $('#btnMsgr').click(function () {
             toggleUIBlocker();
