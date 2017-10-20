@@ -1,0 +1,21 @@
+﻿<nav>
+    <ul>
+        <li>
+            <a onclick="promptMsg('Home page feature is not available')">Home</a>
+        </li>
+        <li>
+            <a onclick="getTaskView()">Task</a>
+        </li>
+        <li>
+            <a onclick="promptMsg('Profile feature is not available')">Profile</a>
+        </li>
+    </ul>
+</nav>
+
+<nav>
+    <ul>
+        <li>
+            @Html.ActionLink("Logout", "LogOut", "Index", "", new { @style = "" })
+        </li>
+    </ul>
+</nav>

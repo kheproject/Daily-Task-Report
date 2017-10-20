@@ -31,6 +31,7 @@ namespace DailyTaskReport.Models
     }
     public class task_list
     {
+        public String taskID { get; set; }
         [Required]
         public String timeFrom { get; set; }
         [Required]

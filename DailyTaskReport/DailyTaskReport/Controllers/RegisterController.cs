@@ -33,6 +33,8 @@ namespace DailyTaskReport.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Formatting user name inputs to capitalize
+                //──────────────────────────────────────────────────────────────────────────────────────────
                 String[] userName = new String[] { user.fName, user.mName, user.lName };
                 for (int count = 0; count < userName.Length ; count++)
                 {
@@ -41,13 +43,12 @@ namespace DailyTaskReport.Controllers
                     if (nameLists.Length > 0)
                     {
                         foreach (var _name in nameLists)
-                        {
                             formattedName += (_name[0].ToString().ToUpper() + _name.Substring(1).ToLower() + ' ');
-                        }
                         userName[count] = formattedName.Remove(formattedName.Length - 1);
                     }
                 }
-
+                user.fName = userName[0]; user.mName = userName[1]; user.lName = userName[2];
+                //────────────────────────────────────────────────────────────────────────────────────────────
                 try
                 {
                     using (MySqlConnection con = new MySqlConnection(connection))
@@ -91,7 +92,7 @@ namespace DailyTaskReport.Controllers
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     ViewBag.errorMsg = "Server Connection Error, Please Try Again Later...";
                 }

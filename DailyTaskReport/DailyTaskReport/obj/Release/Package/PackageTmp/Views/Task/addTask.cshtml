@@ -1,0 +1,66 @@
+﻿
+<style>
+    .add-task-holder {
+        max-width: 1000px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+    .add-task-holder > div:first-child {
+        background-color: #ca0f0f;
+        display: inline-block;
+        font-size: 16px;
+        color: white;
+        padding: 10px 20px;
+    }
+    form#frmAddTask {
+        background: rgba(36,0,0,0.3);
+        padding: 15px;
+    }
+</style>
+
+<div class="add-task-holder">
+    <div> Add Task </div>
+    @using (Html.BeginForm("addTask", "Task", FormMethod.Post, new { @id = "frmAddTask" }))
+    {
+        Html.RenderPartial("_addTask");
+    }
+</div>
+
+<script>
+    $(function () {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) dd ='0'+ dd;
+        if (mm < 10) mm = '0' + mm;
+        var today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById('tasks_0__task_date').value = today;
+
+        $('#frmAddTask').on("submit", function (e) {
+            e.preventDefault();
+            $.ajax({
+                async: true,
+                type: 'POST',
+                url: $(this).attr("action"),
+                data: $('form :input').serializeArray(),
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                cache: false,
+                success: function (response) {
+                    if (response.code == 1) {
+                        alert(response.message);
+                        $('#body-content').html("");
+                    }
+                    else if (response.code == 0) {
+                        alert(response.message);
+                    }
+                },
+                error: function (err) {
+                    console.log('Error upon submit...' + err);
+                    alert('an error has occured');
+                }
+            });
+        });
+    });
+</script>

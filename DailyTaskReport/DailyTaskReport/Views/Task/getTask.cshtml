@@ -38,6 +38,7 @@
     }
     div.task-content > div {
         padding: 10px 20px;
+        margin: 0px;
     }
     div.date-content {
         background: rgba(36,0,0,0.9);
@@ -84,7 +85,7 @@
     <div class="task-content">
         @{  foreach (var data in Model.tasks)
             {
-                <div class="" style="margin: 0px;">
+                <div>
                     <div class="date-content ">@data.task_date.ToString("D")</div>
                     <div class="data-content " style="background-color: rgba(36,0,0,0.3);">
                         @foreach (var tasks in data.taskLists)
@@ -96,6 +97,13 @@
                                 </div>
                                 <div>
                                     <span>Task : </span> <textarea style="width: 80%; resize: none;" readonly draggable="false">@tasks.task</textarea>
+                                </div>
+                                <div style="display: none;">
+                                    @using (Html.BeginForm("removeTask", "Task", FormMethod.Post, new { }))
+                                    {
+                                        @Html.TextBoxFor(m => tasks.taskID, new { @style="display: none;" });
+                                        <button class="fontWhite bgcred" type="button" onclick="promptMsg('remove task feature is not yet available')">remove task</button>
+                                    }
                                 </div>
                             </div>
                         }

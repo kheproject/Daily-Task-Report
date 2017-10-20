@@ -51,7 +51,7 @@
     <span>Register</span> ─ Fill up the form below ...
     <div class="title-separator"></div>
     <div class="register-content">
-        @using (Html.BeginForm("Register", "Register", FormMethod.Post, new { @id = "frmRegister", @class = "frmShow" }))
+        @using (Html.BeginForm("Register", "Register", FormMethod.Post, new { @id = "frmRegister" }))
         {
             Html.RenderPartial("Register");
         }

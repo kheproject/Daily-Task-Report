@@ -1,0 +1,21 @@
+﻿
+@model DailyTaskReport.Models.LoginCredentials
+@Html.AntiForgeryToken()
+<div style="min-height: 60px;">
+    <div class="input-group" style="width: 100%;">
+        <div class="input-group-addon form-group"><span class="glyphicon glyphicon-user icon-a"></span></div>
+        @Html.TextBoxFor(m => m.user, new { @class = "form-control form-controlFor", @placeholder = "user", @autofocus = "autofocus", @style = "text-transform:uppercase;", @spellcheck = false, @maxlength = 12 })
+    </div>
+    @Html.ValidationMessageFor(m => m.user)
+</div>
+<div style="min-height: 60px;">
+    <div class="input-group" style="width: 100%;">
+        <div class="input-group-addon form-group"><span class="glyphicon glyphicon-lock icon-a"></span></div>
+        @Html.PasswordFor(m => m.password, new { @class = "form-control form-controlFor", @placeholder = "password", @style = "padding-right: 30px;" })
+    </div>
+    @Html.ValidationMessageFor(m => m.password)
+</div>
+<div class="field-validation-error" style="line-height: 30px; display: inline-block;">
+    @ViewBag.errorMsg
+</div>
+<button class="bgcred fontWhite" style="float: right;" type="submit">Login</button>

@@ -58,6 +58,7 @@ namespace DailyTaskReport.Controllers
                                 {
                                     tasks.Add(new task_list
                                     {
+                                        taskID = rdr["taskID"].ToString(),
                                         timeFrom = rdr["timeFrom"].ToString(),
                                         timeTo = rdr["timeTo"].ToString(),
                                         task = rdr["Task"].ToString(),
@@ -76,6 +77,7 @@ namespace DailyTaskReport.Controllers
                                     currDate = rdr["date"].ToString();
                                     tasks.Add(new task_list
                                     {
+                                        taskID = rdr["taskID"].ToString(),
                                         timeFrom = rdr["timeFrom"].ToString(),
                                         timeTo = rdr["timeTo"].ToString(),
                                         task = rdr["Task"].ToString(),
@@ -85,11 +87,11 @@ namespace DailyTaskReport.Controllers
                             }
 
                             //final daily add from last date result
-                                daily.Add(new daily_task
-                                {
-                                    task_date = Convert.ToDateTime(currDate),
-                                    taskLists = tasks
-                                });
+                            daily.Add(new daily_task
+                            {
+                                task_date = Convert.ToDateTime(currDate),
+                                taskLists = tasks
+                            });
 
                             data = new user_tasks { user = encdata.AESDecrypt(Session["_user"].ToString().Replace(' ', '+'), encStringKey), tasks = daily };
                         }
@@ -105,10 +107,9 @@ namespace DailyTaskReport.Controllers
 
         public ActionResult addTask()
         {
-
             return PartialView();
         }
-        
+                
         [HttpPost]
         public JsonResult addTask(user_tasks employee)
         {
@@ -124,6 +125,12 @@ namespace DailyTaskReport.Controllers
                 response.message = "Please don't leave 'Time' or 'Task' field empty";
             }
             return new JsonResult { Data = response };
+        }
+
+        [HttpPost]
+        public JsonResult removeTask()
+        {
+            return new JsonResult { };
         }
 
         private String getServerMonth()

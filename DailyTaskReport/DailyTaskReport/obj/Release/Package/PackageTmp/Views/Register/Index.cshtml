@@ -1,0 +1,86 @@
+﻿<style>
+    div#register-page {
+        line-height: 0.5;
+        width: 700px;
+        margin: -40px auto;
+    }
+    div#register-page > div.title-separator {
+        height: 10px;
+        border-bottom: 2px solid white;
+        border-left: 2px solid white;
+    }    
+    div#register-page > span {
+        margin-left: 15px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    div.register-content {
+        border-radius: 10px;
+        padding: 15px 0;
+        line-height: 1.5;
+        background: rgba(6,0,0,0.6);
+        margin: 15px auto;
+        display: block;
+        width: 400px;
+    }
+    div.register-content > form > div.container > div:first-child {
+        padding-top: 7px;
+    }
+    div.register-content > form > div.container > div.col-sm-8 > input {
+        text-align: center;
+        text-transform:capitalize;
+    }
+    div.register-content > form > div.container > div.col-sm-8 > div {
+        text-align: center;
+        margin-bottom: 7px;
+        min-height: 21px;
+    }
+    .homeLink {
+        text-decoration: none;
+        color: lightgrey;
+    }
+    .homeLink:hover {
+        color: white;
+    }
+    .credentialClass {
+        overflow: hidden;
+    }
+</style>
+
+<div id="register-page">
+    <span>Register</span> ─ Fill up the form below ...
+    <div class="title-separator"></div>
+    <div class="register-content">
+        @using (Html.BeginForm("Register", "Register", FormMethod.Post, new { @id = "frmRegister" }))
+        {
+            Html.RenderPartial("Register");
+        }
+    </div>
+</div>
+
+<script>
+    $('#frmRegister').on("submit", function (e) {
+        e.preventDefault();
+        toggleUIBlocker();
+
+        $.ajax({
+            async: true,
+            type: 'POST',
+            url: $(this).attr("action"),
+            data: $('form :input').serializeArray(),
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            dataType: 'html',
+            cache: false,
+            success: function (result) {
+                setTimeout(function () {
+                    $('form#frmRegister').html(result);
+                    toggleUIBlocker();
+                }, 300);
+            },
+            error: function () {
+                alert('An error has occured during login');
+                setTimeout(function () { toggleUIBlocker(); }, 300);
+            }
+        });
+    });
+</script>

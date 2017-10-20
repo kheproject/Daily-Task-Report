@@ -1,0 +1,142 @@
+﻿@model DailyTaskReport.Models.user_tasks
+<script>
+    if ("@Session["_user"]" == "") {
+        console.log("Session expired.");
+        promptMsg("Current session has expired. <br /> Please login again", true);
+    }
+    else {
+        $(function () {
+            toggleUIBlocker();
+        });
+    }
+</script>
+<style>
+    div#task-page {
+        line-height: 0.5;
+        width: 1000px;
+    }
+    div#task-page > div.title-separator {
+        height: 10px;
+        border-bottom: 2px solid white;
+        border-left: 2px solid white;
+    }
+    div#task-page > span {
+        margin-left: 15px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    div.task-content {
+        padding: 10px 0;
+        line-height: 1.5;
+        background: rgba(36,0,0,0.3);
+        margin-top: 15px;
+        max-height: 500px;
+        width: 750px;
+        overflow-y: scroll;
+        display: block;
+        float: left;
+    }
+    div.task-content > div {
+        padding: 10px 20px;
+        margin: 0px;
+    }
+    div.date-content {
+        background: rgba(36,0,0,0.9);
+        padding: 10px;
+        display: inline-block;
+    }
+    div.data-content > div:nth-child(2n) {
+        background: rgba(36,0,0,0.5);
+    }
+    div.data-content > div > div {
+        padding: 10px;
+        display: inline-block;
+        width: 50%;
+        float: left;
+    }
+    div.task-options {
+        display:block;
+        float: left;
+        line-height: 1.5;
+        margin: 15px;
+    }
+    div.task-options > ul {
+        list-style: none;
+        margin : 0;
+        line-height: 40px;
+    }
+    div.task-options > ul > li > a {
+        transition-duration: 0.3s;
+        text-decoration: none;
+        display: block; 
+        padding: 0 10px;
+        cursor: pointer;
+        color: white;
+        border-left: 3px solid rgba(36,0,0,0.0);
+    }
+    div.task-options > ul > li > a:hover {
+        border-left: 3px solid rgba(255,250,250,0.9);
+        color: #fffde1;
+    }
+</style>
+<div id="task-page" class="container">
+    <span>Task</span> ─ Let's see what you have in store ...
+    <div class="title-separator"></div>
+    <div class="task-content">
+        @{  foreach (var data in Model.tasks)
+            {
+                <div>
+                    <div class="date-content ">@data.task_date.ToString("D")</div>
+                    <div class="data-content " style="background-color: rgba(36,0,0,0.3);">
+                        @foreach (var tasks in data.taskLists)
+                        {
+                            <div class="container">
+                                <div>
+                                    <span>Time : </span> @tasks.timeFrom ─ @tasks.timeTo <br />
+                                    <span>Work Order No. : </span> @tasks.woNo
+                                </div>
+                                <div>
+                                    <span>Task : </span> <textarea style="width: 80%; resize: none;" readonly draggable="false">@tasks.task</textarea>
+                                </div>
+                                <div style="display: none;">
+                                    @using (Html.BeginForm("removeTask", "Task", FormMethod.Post, new { }))
+                                    {
+                                        @Html.TextBoxFor(m => tasks.taskID, new { @style="display: none;" });
+                                        <button class="fontWhite bgcred" type="button" onclick="promptMsg('remove task feature is not yet available')">remove task</button>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div class="task-options" style="">
+        <ul>
+            <li>
+                <a onclick="addTaskForm()">Add Task</a>
+            </li>
+            <li>
+                <a onclick="promptMsg('Edit Task feature is not available')">Edit Task</a>
+            </li>
+            <li>
+                <a onclick="promptMsg('Search Task feature is not available')">Search Task</a>
+            </li>
+            <li>
+                <a onclick="promptMsg('Delete Task feature is not available')">Delete Task</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    function blockContent(){
+        $('div#uiBlocker').removeClass('elementHide');
+        $('div#uiBlocker').addClass('elementShow');
+    }
+    function unblockContent() {
+        $('div#uiBlocker').removeClass('elementShow');
+        $('div#uiBlocker').addClass('elementHide');
+    }
+</script>

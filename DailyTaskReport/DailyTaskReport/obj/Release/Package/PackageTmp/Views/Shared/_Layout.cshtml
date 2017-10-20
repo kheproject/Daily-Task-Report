@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="@Url.Content("~/Images/favicon.ico")" />
+    <title>@ViewBag.Title Daily Task Report</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/kheProject.js"></script>
+</head>
+<body class="fontWhite">
+    <header class=""></header>
+    <div id="body-content">
+        @RenderBody()
+    </div>
+    <div id="uiBlocker" class="elementHide">
+        <div id="ajxLoad" class="elementHide">
+            <img id="MLLogo-Diamond" src="~/Images/_MLAjaxLoad.svg" draggable="false" />
+            <img id="MLLogo-Ajax-Circle" src="~/Images/_CircleAjaxLoad.svg" draggable="false" />
+            <div id="ajxMsg">
+                Please wait...
+            </div>
+        </div>
+        <div id="msgr" class="elementHide">
+            <span></span><br />
+            <button id="btnMsgr"class="bgcred fontWhite">OK</button>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,84 @@
+﻿<style>
+    #login-holder {
+        transition-duration: 0.5s;
+        box-shadow: rgba(0,0,0,0.4) 0px 0px 25px 5px;
+        background: rgba(36,0,0,0.7);
+        border-radius: 10px;
+        position: relative;
+        margin: 100px auto;
+        overflow: hidden;
+        max-width: 450px;
+        height: 184px;
+    }
+    #login-holder > div {
+        position: absolute;
+        top: -25px;
+    }
+    #login-holder > span {
+        font-family: 'Eras ITC';
+        margin-left: 240px;
+        font-size: 26px;
+    }
+    #frmLogin {
+        transition-duration: 0.3s;
+        padding: 15px;
+        display: inline-block;
+        margin-left: 190px;
+        overflow: hidden;
+    }
+    .frmHide {
+        height: 70px;
+        border-bottom: 2px solid white;
+    }
+    .frmShow {
+        height: 182px;
+        border-bottom: 2px solid rgba(255,255,255,0);
+    }
+    .input-group-addon {
+        background: none;
+    }
+    .input-group .form-control {
+        background: none;
+        color: white;
+    }
+    .form-control.form-controlFor:focus::-webkit-input-placeholder,
+    .form-control.form-controlFor:active::-webkit-input-placeholder {
+      text-indent: -100%;
+      transition: 0.5s ease-in-out;
+      opacity: 1;
+    }
+
+    div.signUp {
+        transform: translateX(-50%);
+        text-align: center;
+        position: absolute;
+        width: 100%; 
+        bottom: 0px;
+        left: 50%;
+    }
+    div.signUp > a {
+        text-decoration: none;
+        cursor: pointer;
+        color: rgba(200,200,200,0.5);
+    }
+    div.signUp > a:hover {
+        color: white;
+        text-decoration: underline;
+    }
+</style>
+
+<div id="login-holder">
+    <div>
+        <img class="diamond horizontal-flipOn" src="../Images/_MLAjaxLoad.svg" draggable="false"/>
+        <div class="signUp">
+            @Html.ActionLink("Register Here!", "Index", "Register", null, new { @title = "No account?", @onclick = "toggleUIBlocker()" })
+        </div>
+    </div>
+
+    @using (Html.BeginForm("LogIn", "Index", FormMethod.Post, new { @id = "frmLogin", @class = "frmShow" }))
+    {
+        Html.RenderPartial("_Login");
+    }
+    <span>Logging in...</span>
+</div>
+<script src="~/Scripts/Login.js"></script>
