@@ -79,7 +79,7 @@ function addTaskForm() {
         $.ajax({
             async: true,
             type: 'GET',
-            url: window.location.href + '/Task/addTask',
+            url: landing_page + '/Task/addTask',
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             dataType: 'html',
             cache: false,
@@ -110,7 +110,7 @@ function getTaskView() {
         $.ajax({
             async: true,
             type: 'GET',
-            url: window.location.href + '/Task/getTask',
+            url: 'Task/getTask',
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             dataType: 'html',
             cache: false,

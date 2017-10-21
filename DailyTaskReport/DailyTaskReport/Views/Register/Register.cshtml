@@ -1,8 +1,8 @@
 ﻿@model DailyTaskReport.Models.AccountModel
 @Html.AntiForgeryToken()
 <div class="container">
-    <div class="col-sm-4">ID no.</div>
-    <div class="col-sm-8">
+    <div class="col-sm-5">ID no.</div>
+    <div class="col-sm-7">
         @Html.TextBoxFor(m => m.idNo, new { @placeholder = "id no.", @class = "form-control form-controlFor numberOnly", @maxlength = 8 })
         <div>
             @Html.ValidationMessageFor(m => m.idNo)
@@ -10,8 +10,8 @@
     </div>
 </div>
 <div class="container">
-    <div class="col-sm-4">First Name</div>
-    <div class="col-sm-8">
+    <div class="col-sm-5">First Name</div>
+    <div class="col-sm-7">
         @Html.TextBoxFor(m => m.fName, new { @placeholder = "first name", @class = "form-control form-controlFor namesOnly" })
         <div>
             @Html.ValidationMessageFor(m => m.fName)
@@ -19,8 +19,8 @@
     </div>
 </div>
 <div class="container">
-    <div class="col-sm-4">Middle Name</div>
-    <div class="col-sm-8">
+    <div class="col-sm-5">Middle Name</div>
+    <div class="col-sm-7">
         @Html.TextBoxFor(m => m.mName, new { @placeholder = "middle name", @class = "form-control form-controlFor namesOnly" })
         <div>
             @Html.ValidationMessageFor(m => m.mName)
@@ -28,8 +28,8 @@
     </div>
 </div>
 <div class="container">
-    <div class="col-sm-4">Last Name</div>
-    <div class="col-sm-8">
+    <div class="col-sm-5">Last Name</div>
+    <div class="col-sm-7">
         @Html.TextBoxFor(m => m.lName, new { @placeholder = "last name", @class = "form-control form-controlFor namesOnly" })
         <div>
             @Html.ValidationMessageFor(m => m.lName)
@@ -37,8 +37,8 @@
     </div>
 </div>
 <div class="container">
-    <div class="col-sm-4">Birthdate</div>
-    <div class="col-sm-8">
+    <div class="col-sm-5">Birthdate</div>
+    <div class="col-sm-7">
         @Html.TextBoxFor(m => m.birthdate, new { @placeholder = "YYYY-MM-DD", @class = "form-control form-controlFor", @type = "date" })
         <div>
             @Html.ValidationMessageFor(m => m.birthdate)
@@ -46,8 +46,8 @@
     </div>
 </div>
 <div class="container">
-    <div class="col-sm-4">Contact No.</div>
-    <div class="col-sm-8">
+    <div class="col-sm-5">Contact No.</div>
+    <div class="col-sm-7">
         @Html.TextBoxFor(m => m.ContactNo, new { @placeholder = "contact no.", @class = "form-control form-controlFor numberOnly", @maxlength = 12 })
         <div>
             @Html.ValidationMessageFor(m => m.ContactNo)
@@ -56,8 +56,8 @@
 </div>
 
 <div class="container credentialClass" style="height: 0px;">
-    <div class="col-sm-4">User</div>
-    <div class="col-sm-8">
+    <div class="col-sm-5">User</div>
+    <div class="col-sm-7">
         @Html.TextBoxFor(m => m.credentials.user, new { @placeholder = "user", @class = "form-control form-controlFor", @readonly = true, @tabindex = -1 })
         <div>
             @Html.ValidationMessageFor(m => m.credentials.user)
@@ -65,11 +65,20 @@
     </div>
 </div>
 <div class="container credentialClass" style="height: 0px;">
-    <div class="col-sm-4">Password</div>
-    <div class="col-sm-8">
+    <div class="col-sm-5">Password</div>
+    <div class="col-sm-7">
         @Html.TextBoxFor(m => m.credentials.password, new { @placeholder = "password", @class = "form-control form-controlFor", @type = "password" })
         <div>
             @Html.ValidationMessageFor(m => m.credentials.password)
+        </div>
+    </div>
+</div>
+<div class="container credentialClass" style="height: 0px;">
+    <div class="col-sm-5">Confirm Password</div>
+    <div class="col-sm-7">
+        @Html.TextBoxFor(m => m.credentials.confirm_password, new { @placeholder = "confirm password", @class = "form-control form-controlFor", @type = "password" })
+        <div>
+            @Html.ValidationMessageFor(m => m.credentials.confirm_password)
         </div>
     </div>
 </div>
@@ -92,10 +101,12 @@
         else if ("@ViewBag.errorMsg" != "") {
             promptMsg("@ViewBag.errorMsg", false);
             $('#credentials_password').val("");
+            $('#credentials_confirm_password').val("");
         }
         else if ($('.input-validation-error:first')) {
             $('.input-validation-error:first').focus();
             $('#credentials_password').val("");
+            $('#credentials_confirm_password').val("");
         }
         
         numberOnly();
@@ -115,6 +126,7 @@
             else {
                 $('.credentialClass').attr('style', 'height: 0px; transition-duration: 0.5s;');
                 $('#credentials_password').val('');
+                $('#credentials_confirm_password').val("");
             }
         });
 
@@ -124,6 +136,7 @@
             else {
                 $('.credentialClass').attr('style', 'height: 0px; transition-duration: 0.5s;');
                 $('#credentials_password').val('');
+                $('#credentials_confirm_password').val("");
             }
         });
     });

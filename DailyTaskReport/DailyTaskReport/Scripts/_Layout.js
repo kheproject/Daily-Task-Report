@@ -1,4 +1,15 @@
-﻿function toggleUIBlocker(bool_ShowHide) {
+﻿$(function () {
+    assignLandingPage(window.location.host + $('#landingPageLink').attr('href'));
+});
+
+var landing_page;
+
+function assignLandingPage(landingPage) {
+    landing_page = landingPage;
+    console.log(landing_page);
+}
+
+function toggleUIBlocker(bool_ShowHide) {
     if ($('#uiBlocker').hasClass('elementShow') || (typeof bool_ShowHide == 'boolean' && !bool_ShowHide)) {
         $('#uiBlocker').removeClass('elementShow');
         $('#uiBlocker').addClass('elementHide');

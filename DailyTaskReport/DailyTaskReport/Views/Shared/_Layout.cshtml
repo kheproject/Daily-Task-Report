@@ -11,7 +11,7 @@
     <script src="~/Scripts/kheProject.js"></script>
 </head>
 <body class="fontWhite">
-    <header class=""></header>
+    <header></header>
     <div id="body-content">
         @RenderBody()
     </div>
@@ -28,6 +28,8 @@
             <button id="btnMsgr"class="bgcred fontWhite">OK</button>
         </div>
     </div>
+    
+    @Html.ActionLink("Back to landing page", "Index", "Index", null, new { @id="landingPageLink", @style = "display: none;" })
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

@@ -62,21 +62,21 @@ button {
     border-radius: 5px;
     outline: none;
 }
-    ::-webkit-input-placeholder { /* WebKit browsers */
-        text-transform: none;
-    }
-    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-        text-transform: none;
-    }
-    ::-moz-placeholder { /* Mozilla Firefox 19+ */
-        text-transform: none;
-    }
-    :-ms-input-placeholder { /* Internet Explorer 10+ */
-        text-transform: none;
-    }
-    input[type=date] {
-        text-transform: none !important;
-    }
+::-webkit-input-placeholder { /* WebKit browsers */
+    text-transform: none;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    text-transform: none;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    text-transform: none;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    text-transform: none;
+}
+input[type=date] {
+    text-transform: none !important;
+}
 button:hover {
     background-color: red;
 }
@@ -97,6 +97,9 @@ button:hover {
 }
 .field-validation-error {
     color: #ff5347;
+}
+.input-validation-error {
+    border: 1px solid red;
 }
 
 

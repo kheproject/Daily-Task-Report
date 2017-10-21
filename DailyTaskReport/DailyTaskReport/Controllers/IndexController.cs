@@ -54,7 +54,7 @@ namespace DailyTaskReport.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult LogIn(LoginCredentials login)
+        public ActionResult LogIn(LoginModel login)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +84,7 @@ namespace DailyTaskReport.Controllers
             return PartialView("_Login");
         }
 
-        private AccountResponse getUser(LoginCredentials login)
+        private AccountResponse getUser(LoginModel login)
         {
             AccountResponse user = new AccountResponse();
             try

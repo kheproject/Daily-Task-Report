@@ -180,7 +180,7 @@ namespace DailyTaskReport.Controllers
                             values += " ( @user, @date, @timeFrom" + count + ", @timeTo" + count + ", @woNO" + count + ", @tasks" + count + " ) ,";
                             cmd.Parameters.AddWithValue("timeFrom" + count, activities.tasks[0].taskLists[count].timeFrom);
                             cmd.Parameters.AddWithValue("timeTo" + count, activities.tasks[0].taskLists[count].timeTo);
-                            cmd.Parameters.AddWithValue("woNO" + count, activities.tasks[0].taskLists[count].woNo);
+                            cmd.Parameters.AddWithValue("woNO" + count, activities.tasks[0].taskLists[count].woNo.ToUpper());
                             cmd.Parameters.AddWithValue("tasks" + count, activities.tasks[0].taskLists[count].task);
                         }
 
