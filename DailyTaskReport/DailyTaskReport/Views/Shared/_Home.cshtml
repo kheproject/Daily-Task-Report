@@ -30,6 +30,8 @@
             },
             error: function () {
                 alert('an error has occured');
+                console.log('triggered');
+                window.location.replace('../' + $("#landingPageLink").attr('href'));
             }
         })
     })

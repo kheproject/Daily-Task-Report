@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sitemanifest>
-  <IisApp path="C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Release\Package\PackageTmp" />
-  <setAcl path="C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
-  <setAcl path="C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
-  <setAcl path="C:\Users\TULA16096675\Desktop\GitHub Repo\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Release\Package\PackageTmp\App_Data" setAclResourceType="Directory" setAclAccess="Write" />
+  <IisApp path="D:\Khe Project\KP8\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Release\Package\PackageTmp" />
+  <setAcl path="D:\Khe Project\KP8\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="D:\Khe Project\KP8\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+  <setAcl path="D:\Khe Project\KP8\Daily-Task-Report\DailyTaskReport\DailyTaskReport\obj\Release\Package\PackageTmp\App_Data" setAclResourceType="Directory" setAclAccess="Write" />
 </sitemanifest>

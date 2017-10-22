@@ -67,7 +67,6 @@ function namesOnly() {
     });
 }
 
-
 function promptSessionExpired() {
     console.log("Session expired.");
     promptMsg("Current session has expired. <br /> Redirect to login page", true);
@@ -127,6 +126,8 @@ function getTaskView() {
             error: function () {
                 toggleUIBlocker();
                 alert('an error has occured');
+                $("#landingPageLink").trigger('click');
+                console.log('')
             }
         })
     }
