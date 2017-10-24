@@ -59,6 +59,7 @@
 </div>
 
 <script>
+    var submitRetries = 0;
     $('#frmRegister').on("submit", function (e) {
         e.preventDefault();
         toggleUIBlocker();
@@ -77,9 +78,12 @@
                     toggleUIBlocker();
                 }, 300);
             },
-            error: function () {
-                alert('An error has occured during login');
-                setTimeout(function () { toggleUIBlocker(); }, 300);
+            error: function (xhr, status, errorThrown) {
+                var errMsg = 'Opps, an error has occured upon submiting. <br /> Please try again.'
+                if (submitRetries > 3)
+                    errMsg = 'Please check your network connection and try again. <br /> If problem persist please contact admin.';
+                promptMsg(errMsg);
+                console_log('Registering on submit error ─ status : ' + status + ', errorThrown : ' + errorThrown);
             }
         });
     });

@@ -3,7 +3,7 @@
         $.ajax({
             async: true,
             type: 'GET',
-            url: window.location.href + '/Home/Home',
+            url: 'Home/Home',
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             dataType: 'html',
             cache: false,
@@ -28,10 +28,9 @@
                 //    })
                 //}, 500);
             },
-            error: function () {
-                alert('an error has occured');
-                console.log('triggered');
-                window.location.replace('../' + $("#landingPageLink").attr('href'));
+            error: function (xhr, status, errorThrown) {
+                promptMsg('Opps, an error has occured... <br /> Let\'s refresh the page', true);
+                console_log('_Home error ─ status : "' + status + '", errorThrown : "' + errorThrown + '"');
             }
         })
     })

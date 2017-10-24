@@ -73,65 +73,53 @@ function promptSessionExpired() {
 }
 
 function addTaskForm() {
-    //if ($('#body-content').html() == "") {
-        toggleUIBlocker();
-        $.ajax({
-            async: true,
-            type: 'GET',
-            url: landing_page + '/Task/addTask',
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            dataType: 'html',
-            cache: false,
-            success: function (result) {
-                setTimeout(function () {
-                    if (result != "") {
-                        $('#body-content').html(result);
-                    }
-                    else {
-                        promptSessionExpired();
-                    }
-                }, 300);
-            },
-            error: function () {
-                toggleUIBlocker();
-                alert('an error has occured');
-            }
-        })
-    //}
-    //else {
-    //    $('#body-content').html("");
-    //}
+    toggleUIBlocker();
+    console_log('called addTaskForm');
+    $.ajax({
+        async: true,
+        type: 'GET',
+        url: landing_page + 'Task/addTask',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        dataType: 'html',
+        cache: false,
+        success: function (result) {
+            setTimeout(function () {
+                if (result != "") {
+                    $('#body-content').html(result);
+                }
+                else {
+                    promptSessionExpired();
+                }
+            }, 300);
+        },
+        error: function (xhr, status, errorThrown) {
+            promptMsg('An error has occured on opening Adding Task page')
+            console_log('addTaskForm error ─ status : ' + status + ', errorThrown : ' + errorThrown);
+        }
+    })
 }
 
 function getTaskView() {
-    if ($('#body-content').html() == "") {
-        toggleUIBlocker();
-        $.ajax({
-            async: true,
-            type: 'GET',
-            url: 'Task/getTask',
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            dataType: 'html',
-            cache: false,
-            success: function (result) {
-                setTimeout(function () {
-                    if (result != "") {
-                        $('#body-content').html(result);
-                    }
-                    else {
-                        promptSessionExpired();
-                    }
-                }, 300);
-            },
-            error: function () {
-                toggleUIBlocker();
-                alert('an error has occured');
-                $("#landingPageLink").trigger('click');
-                console.log('')
-            }
-        })
-    }
-    else {
-        $('#body-content').html("");
-    }
+    toggleUIBlocker();
+    console_log('called getTaskView');
+    $.ajax({
+        async: true,
+        type: 'GET',
+        url: landing_page + 'Task/getTask',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        dataType: 'html',
+        cache: false,
+        success: function (result) {
+            setTimeout(function () {
+                if (result != "")
+                    $('#body-content').html(result);
+                else
+                    promptSessionExpired();
+            }, 300);
+        },
+        error: function (xhr, status, errorThrown) {
+            promptMsg('An error has occured on opening Task page')
+            console_log('getTaskView error ─ status : ' + status + ', errorThrown : ' + errorThrown);
+        }
+    });
 }

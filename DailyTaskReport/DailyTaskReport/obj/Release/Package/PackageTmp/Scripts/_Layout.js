@@ -1,8 +1,14 @@
 ﻿$(function () {
-    assignLandingPage(window.location.host + $('#landingPageLink').attr('href'));
+    assignLandingPage(window.location.protocol + '//' + window.location.host + $('#landingPageLink').attr('href'));
 });
 
 var landing_page;
+var developer_console_log_on = true;
+
+function console_log(msg) {
+    if (developer_console_log_on)
+        console.log(msg);
+}
 
 function assignLandingPage(landingPage) {
     landing_page = landingPage;
@@ -28,7 +34,10 @@ function promptMsg(str_msg, bool_backtologin) {
     document.getElementById("msgr").firstElementChild.innerHTML = str_msg;
     $('#btnMsgr').unbind("click");
     if (typeof bool_backtologin == 'boolean' && bool_backtologin)
-        $('#btnMsgr').click(function () { window.location.replace = landing_page; })
+        $('#btnMsgr').click(function () {
+            console.log('redirecting to : ' + landing_page);
+            window.location.href = landing_page;
+        })
     else
         $('#btnMsgr').click(function () {
             toggleUIBlocker();
