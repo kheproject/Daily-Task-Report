@@ -177,10 +177,13 @@ namespace DailyTaskReport.Controllers
                         string values = string.Empty;
                         for (int count = 0; count < activities.tasks[0].taskLists.Count; count++)
                         {
+                            //converts work order number to uppercase
+                            activities.tasks[0].taskLists[count].woNo = activities.tasks[0].taskLists[count].woNo == null ? activities.tasks[0].taskLists[count].woNo : activities.tasks[0].taskLists[count].woNo.ToUpper();
+
                             values += " ( @user, @date, @timeFrom" + count + ", @timeTo" + count + ", @woNO" + count + ", @tasks" + count + " ) ,";
                             cmd.Parameters.AddWithValue("timeFrom" + count, activities.tasks[0].taskLists[count].timeFrom);
                             cmd.Parameters.AddWithValue("timeTo" + count, activities.tasks[0].taskLists[count].timeTo);
-                            cmd.Parameters.AddWithValue("woNO" + count, activities.tasks[0].taskLists[count].woNo.ToUpper());
+                            cmd.Parameters.AddWithValue("woNO" + count, activities.tasks[0].taskLists[count].woNo);
                             cmd.Parameters.AddWithValue("tasks" + count, activities.tasks[0].taskLists[count].task);
                         }
 
@@ -193,7 +196,7 @@ namespace DailyTaskReport.Controllers
                         {
                             trans.Commit();
                             response.code = 1;
-                            response.message = "Successfully Added!.";
+                            response.message = "Successfully Added!";
                         }
                         else
                         {

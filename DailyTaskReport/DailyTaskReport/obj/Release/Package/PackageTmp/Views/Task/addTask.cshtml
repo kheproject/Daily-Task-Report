@@ -39,6 +39,7 @@
 
         $('#frmAddTask').on("submit", function (e) {
             e.preventDefault();
+            toggleUIBlocker();
             $.ajax({
                 async: true,
                 type: 'POST',
@@ -49,16 +50,23 @@
                 cache: false,
                 success: function (response) {
                     if (response.code == 1) {
-                        alert(response.message);
+                        promptMsg(response.message, false);
                         $('#body-content').html("");
                     }
-                    else if (response.code == 0) {
-                        alert(response.message);
-                    }
+                    else if (response.code == 0)
+                        promptMsg(response.message, false);
+                    else if (response.code == -1)
+                        promptMsg(response.message, false);
+                    else
+                        promptMsg("unidentified response from server. <br /> Please contact admin", false);
                 },
-                error: function (err) {
-                    console.log('Error upon submit...' + err);
-                    alert('an error has occured');
+                error: function (xhr, status, errorThrown) {
+                    toggleUIBlocker();
+                    console_log('AddTask on submit error ─ status : ' + status + ', errorThrown : ' + errorThrown);
+                    if (errorThrown == "SyntaxError: Unexpected end of JSON input")
+                        promptSessionExpired();
+                    else
+                        promptMsg("An error has occured. <br /> Please check your network connection...", false);
                 }
             });
         });

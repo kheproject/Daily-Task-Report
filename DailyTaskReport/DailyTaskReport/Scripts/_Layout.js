@@ -36,7 +36,7 @@ function promptMsg(str_msg, bool_backtologin) {
     if (typeof bool_backtologin == 'boolean' && bool_backtologin)
         $('#btnMsgr').click(function () {
             console.log('redirecting to : ' + landing_page);
-            window.location.href = landing_page;
+            setTimeout(function () { window.location.href = landing_page; }, 500);
         })
     else
         $('#btnMsgr').click(function () {
