@@ -62,12 +62,7 @@
                         promptMsg("unidentified response from server. <br /> Please contact admin", false);
                 },
                 error: function (xhr, status, errorThrown) {
-                    toggleUIBlocker();
-                    console_log('AddTask on submit error ─ status : ' + status + ', errorThrown : ' + errorThrown);
-                    if (errorThrown == "SyntaxError: Unexpected end of JSON input")
-                        promptSessionExpired();
-                    else
-                        promptMsg("An error has occured. <br /> Please check your network connection...", false);
+                    ajaxErrorHandler("frmAddTask on submit", status, errorThrown);
                 }
             });
         });

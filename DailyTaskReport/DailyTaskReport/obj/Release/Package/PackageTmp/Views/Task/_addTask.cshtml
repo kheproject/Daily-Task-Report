@@ -6,28 +6,36 @@
     else {
         toggleUIBlocker();
         $(function () {
+            workOrderFormatOnly();
             var ListCount = 0;
-            $('#addTimeLine').on("click", function (e) {
+            $('#btnAddTimeLine').on("click", function (e) {
                 //if ($('input#tasks_0__taskLists_' + ListCount + '__timeFrom').val() != ""
                 //   && $('input#tasks_0__taskLists_' + ListCount + '__timeTo').val() != ""
                 //   && $('input#tasks_0__taskLists_' + ListCount + '__task').val() != "") {
                 ListCount++;
-                var timeForm = '<div class="container"><div class="col-xs-6 container"><div class="col-xs-12 container"><div class="col-xs-3">'
+                var timeForm = '<div class="container addTLHide ' + 'addTL' + ListCount + '" ><div class="col-xs-6 container"><div class="col-xs-12 container"><div class="col-xs-3">'
                              + 'Time'
                              + '</div><div class="col-xs-9">'
-                             + '<input data-val="true" data-val-required="The timeFrom field is required." id="tasks_' + '0' + '__taskLists_' + ListCount + '__timeFrom" name="tasks[' + '0' + '].taskLists[' + ListCount + '].timeFrom" style="width: 40%;" type="time">'
+                             + '<input data-val="true" data-val-required="The timeFrom field is required." id="tasks_' + '0' + '__taskLists_' + ListCount + '__timeFrom" name="tasks[' + '0' + '].taskLists[' + ListCount + '].timeFrom" style="width: 40%; padding: 4px;" type="time">'
                              + ' ─ '
-                             + '<input data-val="true" data-val-required="The timeTo field is required." id="tasks_' + '0' + '__taskLists_' + ListCount + '__timeTo" name="tasks[' + '0' + '].taskLists[' + ListCount + '].timeTo" style="width: 40%;" type="time">'
+                             + '<input data-val="true" data-val-required="The timeTo field is required." id="tasks_' + '0' + '__taskLists_' + ListCount + '__timeTo" name="tasks[' + '0' + '].taskLists[' + ListCount + '].timeTo" style="width: 40%; padding: 4px;" type="time">'
                              + '</div></div><div class="col-xs-12 container"><div class="col-xs-3">'
                              + 'Work Order'
                              + '</div><div class="col-xs-9">'
-                             + '<input data-val="true" data-val-length="invalid work order no." data-val-length-max="18" data-val-length-min="18" id="tasks_' + '0' + '__taskLists_' + ListCount + '__woNo" maxlength="18" name="tasks[' + '0' + '].taskLists[' + ListCount + '].woNo" placeholder="work order no." style="text-transform: uppercase; width: 86%; text-align: center;" type="text">'
+                             + '<input data-val="true" data-val-length="invalid work order no." data-val-length-max="18" data-val-length-min="18" id="tasks_' + '0' + '__taskLists_' + ListCount + '__woNo" class="workOrderFormatOnly" maxlength="18" name="tasks[' + '0' + '].taskLists[' + ListCount + '].woNo" placeholder="work order no." style="text-transform: uppercase; width: 86%; text-align: center; padding: 4px;" type="text">'
                              + '</div></div></div><div class="col-xs-6 container"><div class="container"><div class="col-xs-2">'
                              + 'Task'
                              + '</div><div class="col-xs-10">'
-                             + '<textarea cols="20" data-val="true" data-val-required="The task field is required." id="tasks_' + '0' + '__taskLists_' + ListCount + '__task" name="tasks[' + '0' + '].taskLists[' + ListCount + '].task" placeholder="description" rows="2" style="width: 100%; height: 100%; padding: 10px; resize: none;"></textarea>'
+                             + '<textarea cols="20" data-val="true" data-val-required="The task field is required." id="tasks_' + '0' + '__taskLists_' + ListCount + '__task" name="tasks[' + '0' + '].taskLists[' + ListCount + '].task" placeholder="description" rows="2" style="width: 100%; height: 75px; padding: 4px; resize: none;"></textarea>'
                              + '</div></div></div></div>'
                 document.getElementById('todaystasks').insertAdjacentHTML('beforeend', timeForm);
+                setTimeout(function () {
+                    $('.addTL' + ListCount).removeClass('addTLHide');
+                    $('.addTL' + ListCount).addClass('addTLShow');
+                    setTimeout(function () {
+                        $('html,body').animate({ scrollTop: document.body.scrollHeight }, "fast");
+                    }, 100)
+                }, 10);
                 //}
                 //else {
                 //    alert("Fill out the form first");
@@ -80,8 +88,12 @@
         padding: 0;
     }
     div#todaystasks > div {
-        margin: 10px 0;
-        padding: 0;
+        background: rgba(36,0,0,0.2);
+        transition-duration: 0.5s;
+        overflow: hidden;
+    }
+    div#todaystasks > div:nth-child(2n) {
+        background: rgba(36,0,0,0.5);
     }
     div#todaystasks > div > div {
         margin: 0 auto;
@@ -97,18 +109,24 @@
     div#todaystasks > div > div > div > div.col-xs-3 {
         padding-top: 10px 
     }
-    .add-task-content > form > div:last-of-type {
-        border: none;
-        box-shadow: none;
+    .add-task-bottons {
         text-align: right;
-        padding: 10px 0 0 0;
+        padding: 10px;
+    }
+    .addTLShow {
+        height: 104px;
+        padding: 10px;
+    }
+    .addTLHide {
+        height: 0px;
+        padding: 0px;
     }
 </style>
 
 @model DailyTaskReport.Models.user_tasks
 <div class="container" style="padding: 0px;">
     @Html.TextBoxFor(m => m.user, new { @style = "display: none;", Value = @Session["_user"] })
-    <div class="col-xs-6" style="padding: 0px;">
+    <div class="col-xs-6" style="padding: 10px;">
         <div>
             <div class="col-xs-3" style="padding: 0px;">
                 <b>Date</b>
@@ -120,16 +138,16 @@
     </div>
 </div>
 <div id="todaystasks" class="container">
-    <div class="container">
+    <div class="container addTLShow">
         <div class="col-xs-6 container">
             <div class="col-xs-12 container">
                 <div class="col-xs-3">
                     Time
                 </div>
                 <div class="col-xs-9">
-                    @Html.TextBoxFor(m => m.tasks[0].taskLists[0].timeFrom, new { @type = "time", @style = "width: 40%;" })
+                    @Html.TextBoxFor(m => m.tasks[0].taskLists[0].timeFrom, new { @type = "time", @style = "width: 40%; padding: 4px;" })
                     ─
-                    @Html.TextBoxFor(m => m.tasks[0].taskLists[0].timeTo, new { @type = "time", @style = "width: 40%;" })
+                    @Html.TextBoxFor(m => m.tasks[0].taskLists[0].timeTo, new { @type = "time", @style = "width: 40%; padding: 4px;" })
                 </div>
             </div>
 
@@ -138,7 +156,7 @@
                     Work Order
                 </div>
                 <div class="col-xs-9">
-                    @Html.TextBoxFor(m => m.tasks[0].taskLists[0].woNo, new { @maxlength = "18", @placeholder = "work order no.", @style = "text-transform: uppercase; width: 86%; text-align: center;" })
+                    @Html.TextBoxFor(m => m.tasks[0].taskLists[0].woNo, new { @class = "workOrderFormatOnly", @maxlength = "18", @placeholder = "work order no.", @style = "text-transform: uppercase; width: 86%; padding: 4px; text-align: center;" })
                 </div>
             </div>
         </div>
@@ -148,14 +166,14 @@
                     Task
                 </div>
                 <div class="col-xs-10">
-                    @Html.TextAreaFor(m => m.tasks[0].taskLists[0].task, new { @placeholder = "description", @style = "width: 100%; height: 100%; padding: 10px; resize: none;" })
+                    @Html.TextAreaFor(m => m.tasks[0].taskLists[0].task, new { @placeholder = "description", @style = "width: 100%; height: 75px; padding: 5px; resize: none;" })
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div class="add-task-bottons">
-    <button id="addTimeLine" class="bgcred fontWhite" type="button"
+    <button id="btnAddTimeLine" class="bgcred fontWhite" type="button"
             style="margin-right: 10px;">
         Add Time Line
     </button>

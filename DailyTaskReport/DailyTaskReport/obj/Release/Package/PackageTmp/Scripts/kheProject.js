@@ -1,6 +1,7 @@
 ﻿//--for Keyup/down focusin/out--------------------\/
 function isDash(e) {
-    return e.keyCode == 45 ? true : false;
+    //return e.keyCode == 45 ? true : false;
+    return e.keyCode == 189 ? true : e.keyCode == 109 ? true : false;
 }
 function isArrowKeys(e) {
     return e.keyCode >= 33 && e.keyCode <= 40 ? true : false;
@@ -66,7 +67,12 @@ function namesOnly() {
             e.preventDefault();
     });
 }
-
+function workOrderFormatOnly() {
+    $('.workOrderFormatOnly').keydown(function (e) {
+        if ((!isLetter(e) && !isBackSpace(e) && !isEnter(e) && !isTab(e) && !isArrowKeys(e) && !isDelete(e) && !isDash(e) && !isNumber(e)) || isSpace(e))
+            e.preventDefault();
+    });
+}
 function promptSessionExpired() {
     console.log("Session expired.");
     promptMsg("Current session has expired. <br /> Redirect to login page", true);
@@ -93,8 +99,7 @@ function addTaskForm() {
             }, 300);
         },
         error: function (xhr, status, errorThrown) {
-            promptMsg('An error has occured on opening Adding Task page')
-            console_log('addTaskForm error ─ status : ' + status + ', errorThrown : ' + errorThrown);
+            ajaxErrorHandler('addTaskForm', status, errorThrown);
         }
     })
 }
@@ -118,8 +123,19 @@ function getTaskView() {
             }, 300);
         },
         error: function (xhr, status, errorThrown) {
-            promptMsg('An error has occured on opening Task page')
-            console_log('getTaskView error ─ status : ' + status + ', errorThrown : ' + errorThrown);
+            ajaxErrorHandler('getTaskView', status, errorThrown);
         }
     });
+}
+
+function ajaxErrorHandler(functionName, status, errorThrown) {
+    var msg;
+    if (errorThrown == "SyntaxError: Unexpected end of JSON input")
+        promptSessionExpired();
+    else if (status == "error" && errorThrown == "")
+        msg = 'Unable to connect to server...';
+    else
+        msg = 'An error has occured upon opening ' + functionName;
+    promptMsg(msg);
+    console_log(functionName + ' error ─ status : ' + status + ', errorThrown : ' + errorThrown);
 }
