@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-DailyTaskReport-20170926111459.mdf;Initial Catalog=aspnet-DailyTaskReport-20170926111459;Integrated Security=True" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="D:\\Khe\ Project\\KP8\\Daily-Task-Report\\DailyTaskReport\\DailyTaskReport\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\TULA16096675\\Desktop\\GitHub\ Repo\\Daily-Task-Report\\DailyTaskReport\\DailyTaskReport\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
   </parameter>
 </parameters>

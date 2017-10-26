@@ -12,21 +12,27 @@
                 //   && $('input#tasks_0__taskLists_' + ListCount + '__timeTo').val() != ""
                 //   && $('input#tasks_0__taskLists_' + ListCount + '__task').val() != "") {
                 ListCount++;
-                var timeForm = '<div class="col-md-12"><div class="col-md-8"><div class="col-xs-6">'
-                             + 'Time : <input id="tasks_0__taskLists_' + ListCount + '__timeFrom" name="tasks[0].taskLists[' + ListCount + '].timeFrom" type="time" value="">'
-                             + '     ─ <input id="tasks_0__taskLists_' + ListCount + '__timeTo" name="tasks[0].taskLists[' + ListCount + '].timeTo" type="time" value="">'
-                             + '</div><div class="col-xs-6">'
-                             + 'Work Order : <input id="tasks_0__taskLists_' + ListCount + '__woNo" name="tasks[0].taskLists[' + ListCount + '].woNo" type="text" value="">'
-                             + '</div></div><div class="col-md-4"><div class="col-md-12">'
-                             + 'Task : <input id="tasks_0__taskLists_' + ListCount + '__task" name="tasks[0].taskLists[' + ListCount + '].task" type="text" value="" placeholder = "description">'
-                             + '</div></div></div>';
+                var timeForm = '<div class="container"><div class="col-xs-6 container"><div class="col-xs-12 container"><div class="col-xs-3">'
+                             + 'Time'
+                             + '</div><div class="col-xs-9">'
+                             + '<input data-val="true" data-val-required="The timeFrom field is required." id="tasks_' + '0' + '__taskLists_' + ListCount + '__timeFrom" name="tasks[' + '0' + '].taskLists[' + ListCount + '].timeFrom" style="width: 40%;" type="time">'
+                             + ' ─ '
+                             + '<input data-val="true" data-val-required="The timeTo field is required." id="tasks_' + '0' + '__taskLists_' + ListCount + '__timeTo" name="tasks[' + '0' + '].taskLists[' + ListCount + '].timeTo" style="width: 40%;" type="time">'
+                             + '</div></div><div class="col-xs-12 container"><div class="col-xs-3">'
+                             + 'Work Order'
+                             + '</div><div class="col-xs-9">'
+                             + '<input data-val="true" data-val-length="invalid work order no." data-val-length-max="18" data-val-length-min="18" id="tasks_' + '0' + '__taskLists_' + ListCount + '__woNo" maxlength="18" name="tasks[' + '0' + '].taskLists[' + ListCount + '].woNo" placeholder="work order no." style="text-transform: uppercase; width: 86%; text-align: center;" type="text">'
+                             + '</div></div></div><div class="col-xs-6 container"><div class="container"><div class="col-xs-2">'
+                             + 'Task'
+                             + '</div><div class="col-xs-10">'
+                             + '<textarea cols="20" data-val="true" data-val-required="The task field is required." id="tasks_' + '0' + '__taskLists_' + ListCount + '__task" name="tasks[' + '0' + '].taskLists[' + ListCount + '].task" placeholder="description" rows="2" style="width: 100%; height: 100%; padding: 10px; resize: none;"></textarea>'
+                             + '</div></div></div></div>'
                 document.getElementById('todaystasks').insertAdjacentHTML('beforeend', timeForm);
                 //}
                 //else {
                 //    alert("Fill out the form first");
                 //}
             });
-
             //$('input[type="date"]').keydown(function (e) {
             //    console.log(this.id + " input " + (e.keyCode - 48))
             //    var currentInput = $(this).val();
@@ -70,40 +76,26 @@
     }
 </script>
 <style>
+    div#todaystasks {
+        padding: 0;
+    }
     div#todaystasks > div {
-        margin: 0 auto;
+        margin: 10px 0;
         padding: 0;
     }
     div#todaystasks > div > div {
+        margin: 0 auto;
+    }
+    div#todaystasks > div > div,
+    div#todaystasks > div > div > div {
         padding: 0;
     }
-    div#todaystasks > div > div > div {
-        padding-top: 10px;
-        padding-bottom: 10px;
-        display: inline-block;
+    div#todaystasks > div > div > div > div {
+        padding: 5px 0;
     }
-    div#todaystasks > div > div:before,
-    div#todaystasks > div > div:after {
-        display: table;
-        content: " ";
-    }
-    div#todaystasks > div > div:after {
-        clear: both;
-    }
-    div#todaystasks > div > div > div > input[type=time] {
-        width: 100px;
-    }
-    div#todaystasks > div:before,
-    div#todaystasks > div:after {
-        display: table;
-        content: " ";
-    }
-    div#todaystasks > div:after {
-        clear: both;
-    }
-    
-    div#todaystasks > div:nth-child(2n) {
-        background-color: rgba(32,0,0,0.3);
+    div#todaystasks > div > div > div > div.col-xs-2,
+    div#todaystasks > div > div > div > div.col-xs-3 {
+        padding-top: 10px 
     }
     .add-task-content > form > div:last-of-type {
         border: none;
@@ -114,28 +106,50 @@
 </style>
 
 @model DailyTaskReport.Models.user_tasks
-<div>
+<div class="container" style="padding: 0px;">
     @Html.TextBoxFor(m => m.user, new { @style = "display: none;", Value = @Session["_user"] })
-    <b>Date</b> @Html.TextBoxFor(m => m.tasks[0].task_date, new { @type = "date", @maxlength = 10, placeholder = "mm/dd/yyyy" })
-</div>
-<div id="todaystasks">
-    <div class="col-md-12" style="border: 1px solid green;">
-        <div class="col-md-8" style="border: 1px solid white;">
-            <div class="col-xs-6" style="border: 1px solid green;">
-                Time
-                : @Html.TextBoxFor(m => m.tasks[0].taskLists[0].timeFrom, new { @type = "time" })
-                ─ @Html.TextBoxFor(m => m.tasks[0].taskLists[0].timeTo, new { @type = "time" })
+    <div class="col-xs-6" style="padding: 0px;">
+        <div>
+            <div class="col-xs-3" style="padding: 0px;">
+                <b>Date</b>
             </div>
-            <div class="col-xs-6" style="border: 1px solid green;">
-                Work Order : @Html.TextBoxFor(m => m.tasks[0].taskLists[0].woNo, new { @maxlength = "18" })
+            <div class="col-xs-9" style="padding: 0px;">
+                @Html.TextBoxFor(m => m.tasks[0].task_date, new { @type = "date", @maxlength = 10, placeholder = "mm/dd/yyyy" })
             </div>
         </div>
-        <div class="col-md-4" style="border: 1px solid blue;">
-            <div class="col-xs-3">
-                Task :
+    </div>
+</div>
+<div id="todaystasks" class="container">
+    <div class="container">
+        <div class="col-xs-6 container">
+            <div class="col-xs-12 container">
+                <div class="col-xs-3">
+                    Time
+                </div>
+                <div class="col-xs-9">
+                    @Html.TextBoxFor(m => m.tasks[0].taskLists[0].timeFrom, new { @type = "time", @style = "width: 40%;" })
+                    ─
+                    @Html.TextBoxFor(m => m.tasks[0].taskLists[0].timeTo, new { @type = "time", @style = "width: 40%;" })
+                </div>
             </div>
-            <div class="col-xs-9" style="border: 1px solid orange;">
-                @Html.TextBoxFor(m => m.tasks[0].taskLists[0].task, new { @placeholder = "description", @style="width: 100%;" })
+
+            <div class="col-xs-12 container">
+                <div class="col-xs-3">
+                    Work Order
+                </div>
+                <div class="col-xs-9">
+                    @Html.TextBoxFor(m => m.tasks[0].taskLists[0].woNo, new { @maxlength = "18", @placeholder = "work order no.", @style = "text-transform: uppercase; width: 86%; text-align: center;" })
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 container">
+            <div class="container">
+                <div class="col-xs-2">
+                    Task
+                </div>
+                <div class="col-xs-10">
+                    @Html.TextAreaFor(m => m.tasks[0].taskLists[0].task, new { @placeholder = "description", @style = "width: 100%; height: 100%; padding: 10px; resize: none;" })
+                </div>
             </div>
         </div>
     </div>
