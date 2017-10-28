@@ -128,14 +128,18 @@ function getTaskView() {
     });
 }
 
-function ajaxErrorHandler(functionName, status, errorThrown) {
-    var msg;
+function ajaxErrorHandler(functionAction, status, errorThrown) {
+
+    console_log(functionAction + ' error ─ status : ' + status + ', errorThrown : ' + errorThrown);
     if (errorThrown == "SyntaxError: Unexpected end of JSON input")
         promptSessionExpired();
-    else if (status == "error" && errorThrown == "")
-        msg = 'Unable to connect to server...';
-    else
-        msg = 'An error has occured upon opening ' + functionName;
-    promptMsg(msg);
-    console_log(functionName + ' error ─ status : ' + status + ', errorThrown : ' + errorThrown);
+    else {
+        var msg;
+        if (status == "error" && errorThrown == "")
+            msg = 'Unable to connect to server...';
+        else
+            msg = 'An error has occured upon ' + functionAction;
+        console_log('Diagnosis : ' + msg);
+        promptMsg(msg);
+    }
 }

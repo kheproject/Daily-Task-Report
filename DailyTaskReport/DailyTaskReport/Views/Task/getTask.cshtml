@@ -113,7 +113,8 @@
                                     <span>Work Order No. : </span> @tasks.woNo
                                 </div>
                                 <div>
-                                    <span>Task : </span> <textarea style="width: 80%; resize: none;" readonly draggable="false">@tasks.task</textarea>
+                                    <span>Task : </span>
+                                    <textarea style="width: 80%; resize: none;" readonly draggable="false">@tasks.task</textarea>
                                 </div>
                                 <div style="display: none;">
                                     @using (Html.BeginForm("removeTask", "Task", FormMethod.Post, new { }))
@@ -126,6 +127,11 @@
                         }
                     </div>
                 </div>
+            }
+
+            if (ViewBag.message != null)
+            {
+                <div style="text-align: center;">@ViewBag.message</div>
             }
         }
     </div>

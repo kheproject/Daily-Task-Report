@@ -50,7 +50,7 @@ namespace DailyTaskReport.Controllers
                         if (rdr.HasRows)
                         {
                             String currDate = string.Empty;
-                            while(rdr.Read())
+                            while (rdr.Read())
                             {
                                 if (currDate == string.Empty)
                                     currDate = rdr["date"].ToString();
@@ -95,6 +95,10 @@ namespace DailyTaskReport.Controllers
 
                             data = new user_tasks { user = encdata.AESDecrypt(Session["_user"].ToString().Replace(' ', '+'), encStringKey), tasks = daily };
                         }
+                        else
+                        {
+                            ViewBag.message = "No tasks retrieved...";
+                        }
                     }
                 }
             }
@@ -116,8 +120,16 @@ namespace DailyTaskReport.Controllers
             TaskResponse response = new TaskResponse();
             if (ModelState.IsValid)
             {
-                employee.user = encdata.AESDecrypt(employee.user.Replace(' ', '+'), encStringKey);
-                response = addUserTasks(employee);
+                try
+                {
+                    employee.user = encdata.AESDecrypt(employee.user.Replace(' ', '+'), encStringKey);
+                    response = addUserTasks(employee);
+                }
+                catch (Exception)
+                {
+                    response.code = -1;
+                    response.message = "Unable to determine user, please refresh the page...";
+                }
             }
             else
             {

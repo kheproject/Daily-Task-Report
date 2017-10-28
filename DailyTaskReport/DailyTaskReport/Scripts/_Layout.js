@@ -12,7 +12,7 @@ function console_log(msg) {
 
 function assignLandingPage(landingPage) {
     landing_page = landingPage;
-    console.log(landing_page);
+    console.log('Landing page : ' + landing_page);
 }
 
 function toggleUIBlocker(bool_ShowHide) {
@@ -29,11 +29,13 @@ function toggleUIBlocker(bool_ShowHide) {
         $('#ajxLoad').removeClass('elementHide');
     }
 }
-function promptMsg(str_msg, bool_backtologin) {
-    showPrompt()
+function promptMsg(str_msg, bool_backtologin, custom_function) {
+    showPrompt();
     document.getElementById("msgr").firstElementChild.innerHTML = str_msg;
     $('#btnMsgr').unbind("click");
-    if (typeof bool_backtologin == 'boolean' && bool_backtologin)
+    if (typeof custom_function == 'function')
+        $('#btnMsgr').click(custom_function);
+    else if (typeof bool_backtologin == 'boolean' && bool_backtologin)
         $('#btnMsgr').click(function () {
             console.log('redirecting to : ' + landing_page);
             setTimeout(function () { window.location.href = landing_page; }, 500);
