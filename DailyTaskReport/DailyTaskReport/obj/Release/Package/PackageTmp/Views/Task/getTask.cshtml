@@ -6,14 +6,13 @@
     }
     else {
         $(function () {
-            toggleUIBlocker();
+            toggleUIBlocker(false);
         });
     }
 </script>
 <style>
     div#task-page {
         line-height: 0.5;
-        width: 1000px;
     }
     div#task-page > div.title-separator {
         height: 10px;
@@ -31,7 +30,7 @@
         background: rgba(36,0,0,0.3);
         margin: 15px auto 0 auto;
         max-height: 500px;
-        width: 700px;
+        max-width: 700px;
         overflow-y: scroll;
         display: block;
     }
@@ -44,14 +43,23 @@
         padding: 10px;
         display: inline-block;
     }
+    div.data-content > div {
+        padding: 0;
+        background: rgba(36,0,0,0.2);
+    }
     div.data-content > div:nth-child(2n) {
         background: rgba(36,0,0,0.5);
     }
     div.data-content > div > div {
-        padding: 10px;
+        padding: 10px 0;
         display: inline-block;
-        width: 50%;
         float: left;
+    }
+    div.data-content > div > div > div {
+        padding: 0 -15px;
+    }
+    div.data-content > div > div > div > div {
+        padding: 0
     }
     div.task-options {
         margin: 15px auto 0 auto;
@@ -104,28 +112,47 @@
             {
                 <div>
                     <div class="date-content ">@data.task_date.ToString("D")</div>
-                    <div class="data-content " style="background-color: rgba(36,0,0,0.3);">
+                    <div class="data-content">
                         @foreach (var tasks in data.taskLists)
                         {
-                            <div class="container">
-                                <div>
-                                    <span>Time : </span> @tasks.timeFrom ─ @tasks.timeTo <br />
-                                    <span>Work Order No. : </span> @tasks.woNo
+                            <div class="container col-md-12">
+                                <div class="col-xs-6">
+                                    <div class="container col-xs-12">
+                                        <div class="col-xs-5">
+                                            Time
+                                        </div>
+                                        <div class="col-xs-7">
+                                            @tasks.timeFrom ─ @tasks.timeTo
+                                        </div>
+                                    </div>
+                                    <div class="container col-xs-12">
+                                        <div class="col-xs-5">Work Order No.</div>
+                                        <div class="col-xs-7">@tasks.woNo</div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span>Task : </span> <textarea style="width: 80%; resize: none;" readonly draggable="false">@tasks.task</textarea>
+                                <div class="col-xs-6">
+                                    <div class="col-xs-3">
+                                        Task
+                                    </div>
+                                    <div class="col-xs-9" style="padding-left: 0;">
+                                        <textarea style="width: 100%; resize: none;" readonly draggable="false">@tasks.task</textarea>
+                                    </div>
                                 </div>
-                                <div style="display: none;">
-                                    @using (Html.BeginForm("removeTask", "Task", FormMethod.Post, new { }))
-                                    {
-                                        @Html.TextBoxFor(m => tasks.taskID, new { @style="display: none;" });
-                                        <button class="fontWhite bgcred" type="button" onclick="promptMsg('remove task feature is not yet available')">remove task</button>
-                                    }
-                                </div>
+                                @using (Html.BeginForm("removeTask", "Task", FormMethod.Post, new { @style = "display: none;" }))
+                                {
+                                    @Html.TextBoxFor(m => data.task_date)
+                                    @Html.TextBoxFor(m => tasks.taskID, new { @style="display: none;" });
+                                    <button class="fontWhite bgcred" type="button" onclick="promptMsg('remove task feature is not yet available')">remove task</button>
+                                }
                             </div>
                         }
                     </div>
                 </div>
+            }
+
+            if (ViewBag.message != null)
+            {
+                <div style="text-align: center;">@ViewBag.message</div>
             }
         }
     </div>

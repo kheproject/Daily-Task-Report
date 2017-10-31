@@ -67,6 +67,12 @@ function namesOnly() {
             e.preventDefault();
     });
 }
+function userOnly() {
+    $('.userOnly').keydown(function (e) {
+        if (!isLetter(e) && !isNumber(e) && !isBackSpace(e) && !isEnter(e) && !isTab(e) && !isArrowKeys(e) && !isDelete(e))
+            e.preventDefault();
+    });
+}
 function workOrderFormatOnly() {
     $('.workOrderFormatOnly').keydown(function (e) {
         if ((!isLetter(e) && !isBackSpace(e) && !isEnter(e) && !isTab(e) && !isArrowKeys(e) && !isDelete(e) && !isDash(e) && !isNumber(e)) || isSpace(e))
@@ -105,7 +111,7 @@ function addTaskForm() {
 }
 
 function getTaskView() {
-    toggleUIBlocker();
+    toggleUIBlocker(true);
     console_log('called getTaskView');
     $.ajax({
         async: true,
@@ -129,7 +135,6 @@ function getTaskView() {
 }
 
 function ajaxErrorHandler(functionAction, status, errorThrown) {
-
     console_log(functionAction + ' error ─ status : ' + status + ', errorThrown : ' + errorThrown);
     if (errorThrown == "SyntaxError: Unexpected end of JSON input")
         promptSessionExpired();

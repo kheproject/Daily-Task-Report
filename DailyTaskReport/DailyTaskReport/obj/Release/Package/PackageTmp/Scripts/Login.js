@@ -1,5 +1,6 @@
 ﻿$(function () {
     $('#frmLogin').on("submit", function (e) {
+        console_log("logging in...");
         e.preventDefault();
         toggleForm();
         $('#user').attr('readonly', 'true');
@@ -15,8 +16,8 @@
             success: function (result) {
                 setTimeout(function () { $('form#frmLogin').html(result); toggleForm(); }, 300);
             },
-            error: function () {
-                alert('An error has occured during login');
+            error: function (xhr, status, errorThrown) {
+                ajaxErrorHandler('logging in', status, errorThrown);
                 setTimeout(function () { $('#user').removeAttr('readonly'); toggleForm(); }, 300);
             }
         });

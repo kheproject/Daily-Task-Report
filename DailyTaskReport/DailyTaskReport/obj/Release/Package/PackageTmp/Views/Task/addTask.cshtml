@@ -39,6 +39,7 @@
         document.getElementById('tasks_0__task_date').value = today;
 
         $('#frmAddTask').on("submit", function (e) {
+            console_log('adding task(s)...');
             e.preventDefault();
             toggleUIBlocker();
             $.ajax({
@@ -51,15 +52,14 @@
                 cache: false,
                 success: function (response) {
                     if (response.code == 1) {
-                        promptMsg(response.message, false);
-                        $('#body-content').html("");
+                        promptMsg(response.message, false, function () { return getTaskView() });
                     }
                     else if (response.code == 0)
                         promptMsg(response.message, false);
                     else if (response.code == -1)
-                        promptMsg(response.message, false);
+                        promptMsg(response.message, true);
                     else
-                        promptMsg("unidentified response from server. <br /> Please contact admin", false);
+                        promptMsg("unidentified response from server. <br /> Please contact admin", true);
                 },
                 error: function (xhr, status, errorThrown) {
                     ajaxErrorHandler("frmAddTask on submit", status, errorThrown);

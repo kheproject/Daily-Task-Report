@@ -122,7 +122,7 @@ namespace DailyTaskReport.Controllers
             {
                 try
                 {
-                    employee.user = encdata.AESDecrypt(employee.user.Replace(' ', '+'), encStringKey);
+                    employee.user = encdata.AESDecrypt(employee.user.Replace(' ', '+'), encStringKey).ToUpper();
                     response = addUserTasks(employee);
                 }
                 catch (Exception)
@@ -190,7 +190,7 @@ namespace DailyTaskReport.Controllers
                         for (int count = 0; count < activities.tasks[0].taskLists.Count; count++)
                         {
                             //converts work order number to uppercase
-                            activities.tasks[0].taskLists[count].woNo = activities.tasks[0].taskLists[count].woNo == null ? activities.tasks[0].taskLists[count].woNo : activities.tasks[0].taskLists[count].woNo.ToUpper();
+                            activities.tasks[0].taskLists[count].woNo = activities.tasks[0].taskLists[count].woNo == null ? "N/A" : activities.tasks[0].taskLists[count].woNo.ToUpper();
 
                             values += " ( @user, @date, @timeFrom" + count + ", @timeTo" + count + ", @woNO" + count + ", @tasks" + count + " ) ,";
                             cmd.Parameters.AddWithValue("timeFrom" + count, activities.tasks[0].taskLists[count].timeFrom);

@@ -35,19 +35,19 @@ namespace DailyTaskReport.Models
         [Required(ErrorMessage = "required")]
         [StringLength(40, MinimumLength = 2, ErrorMessage = "must consist at least 2 characters ")]
         [Display(Name = "First Name")]
-        [RegularExpression("[a-zA-Z ]*", ErrorMessage = "accepts letters only")]
+        [RegularExpression("[a-zA-ZÑñ ]*", ErrorMessage = "accepts letters only")]
         public String fName { get; set; }
 
         [Required(ErrorMessage = "required")]
         [StringLength(40, MinimumLength = 2, ErrorMessage = "must consist at least 2 characters ")]
         [Display(Name = "Middle Name")]
-        [RegularExpression("[a-zA-Z ]*", ErrorMessage = "accepts letters only")]
+        [RegularExpression("[a-zA-ZÑñ ]*", ErrorMessage = "accepts letters only")]
         public String mName { get; set; }
 
         [Required(ErrorMessage = "required")]
         [StringLength(40, MinimumLength = 2, ErrorMessage = "must consist at least 2 characters ")]
         [Display(Name = "Last Name")]
-        [RegularExpression("[a-zA-Z ]*", ErrorMessage = "accepts letters only")]
+        [RegularExpression("[a-zA-ZÑñ ]*", ErrorMessage = "accepts letters only")]
         public String lName { get; set; }
 
         [Required(ErrorMessage = "required")]
@@ -75,7 +75,7 @@ namespace DailyTaskReport.Models
         [Required(ErrorMessage = "required")]
         [Display(Name = "user")]
         [StringLength(12, ErrorMessage = "must consist of 12 characters")]
-        [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "accepts alphanumeric only")]
+        [RegularExpression("^[a-zA-ZÑñ0-9]*$", ErrorMessage = "accepts alphanumeric only")]
         public String user { get; set; }
 
         [Required(ErrorMessage = "required")]
@@ -116,7 +116,7 @@ namespace DailyTaskReport.Models
         [Required(ErrorMessage = "required")]
         [Display(Name = "user")]
         [StringLength(12, ErrorMessage = "must consist of 12 characters")]
-        [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "accepts alphanumeric only")]
+        [RegularExpression("^[a-zA-ZÑñ0-9]*$", ErrorMessage = "accepts alphanumeric only")]
         public String user { get; set; }
 
         [Required(ErrorMessage = "required")]
