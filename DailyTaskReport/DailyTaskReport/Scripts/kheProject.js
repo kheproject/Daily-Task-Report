@@ -110,13 +110,14 @@ function addTaskForm() {
     })
 }
 
-function getTaskView() {
+function getTaskView(_user) {
     toggleUIBlocker(true);
     console_log('called getTaskView');
     $.ajax({
         async: true,
         type: 'GET',
         url: landing_page + 'Task/getTask',
+        data : '_user=' + _user,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         dataType: 'html',
         cache: false,

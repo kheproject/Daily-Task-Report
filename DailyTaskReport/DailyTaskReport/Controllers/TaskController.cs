@@ -27,7 +27,7 @@ namespace DailyTaskReport.Controllers
             connection = config["server"].ToString();
         }
 
-        public ActionResult getTask()
+        public ActionResult getTask(String _user)
         {
             user_tasks data = new user_tasks();
             List<daily_task> daily = new List<daily_task>();
@@ -45,7 +45,7 @@ namespace DailyTaskReport.Controllers
 
                         cmd.CommandText = "SELECT * FROM kpDailyTask.Report" + dateMonth
                                         + " WHERE user = @user ORDER BY date DESC, timeFrom DESC;";
-                        cmd.Parameters.AddWithValue("user", encdata.AESDecrypt(Session["_user"].ToString().Replace(' ', '+'), encStringKey));
+                        cmd.Parameters.AddWithValue("user", encdata.AESDecrypt(_user.Replace(' ', '+'), encStringKey));
                         MySqlDataReader rdr = cmd.ExecuteReader();
                         if (rdr.HasRows)
                         {

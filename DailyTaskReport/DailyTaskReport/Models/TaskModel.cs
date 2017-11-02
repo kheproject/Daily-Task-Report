@@ -76,19 +76,4 @@ namespace DailyTaskReport.Models
         public Int32 code { get; set; }
         public String message { get; set; }
     }
-
-    public class TaskDisplayResponse
-    {
-        public IEnumerable<TaskLists> taskDisplay { get; set; }
-    }
-
-    public class taskDBStructure
-    {
-        public String user { get; set; }
-        public String date { get; set; }
-        public String timeFrom { get; set; }
-        public String timeTo { get; set; }
-        public String woNo { get; set; }
-        public String task { get; set; }
-    }
 }
