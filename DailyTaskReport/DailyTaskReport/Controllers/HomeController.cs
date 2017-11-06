@@ -17,7 +17,7 @@ namespace DailyTaskReport.Controllers
         IDictionary config;
         private String connection = string.Empty;
         private AESEncryption encdata = new AESEncryption();
-        private String encStringKey = "B905BD7BFBD902DCB115B327F9018CEA";
+        //private String encStringKey = "B905BD7BFBD902DCB115B327F9018CEA";
 
         public HomeController() 
         {

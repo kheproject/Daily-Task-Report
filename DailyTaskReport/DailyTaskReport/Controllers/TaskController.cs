@@ -29,10 +29,15 @@ namespace DailyTaskReport.Controllers
 
         public ActionResult getTask(String _user)
         {
+            return PartialView(new getCalendarList());
+        }
+
+        public ActionResult _getTask(String _user)
+        {
             user_tasks data = new user_tasks();
             List<daily_task> daily = new List<daily_task>();
             List<task_list> tasks = new List<task_list>();
-            
+
             try
             {
                 using (MySqlConnection con = new MySqlConnection(connection))

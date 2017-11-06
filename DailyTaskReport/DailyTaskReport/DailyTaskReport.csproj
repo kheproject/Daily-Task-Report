@@ -182,6 +182,7 @@
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\TaskModel.cs" />
+    <Compile Include="Models\WithValueModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StartupAuth.cs" />
   </ItemGroup>
@@ -237,6 +238,7 @@
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Register\Register.cshtml" />
     <Content Include="Views\Shared\_MenuPRG1.cshtml" />
+    <Content Include="Views\Task\_getTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

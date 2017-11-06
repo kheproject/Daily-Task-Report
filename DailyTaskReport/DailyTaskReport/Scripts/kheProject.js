@@ -110,14 +110,38 @@ function addTaskForm() {
     })
 }
 
-function getTaskView(_user) {
+function getTaskView() {
     toggleUIBlocker(true);
     console_log('called getTaskView');
     $.ajax({
         async: true,
         type: 'GET',
         url: landing_page + 'Task/getTask',
-        data : '_user=' + _user,
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        dataType: 'html',
+        cache: false,
+        success: function (result) {
+            setTimeout(function () {
+                if (result != "")
+                    $('#body-content').html(result);
+                else
+                    promptSessionExpired();
+            }, 300);
+        },
+        error: function (xhr, status, errorThrown) {
+            ajaxErrorHandler('getTaskView', status, errorThrown);
+        }
+    });
+}
+
+function _getTaskView(_user) {
+    toggleUIBlocker(true);
+    console_log('called getTaskView');
+    $.ajax({
+        async: true,
+        type: 'GET',
+        url: landing_page + 'Task/getTask',
+        data: '_user=' + _user,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         dataType: 'html',
         cache: false,
