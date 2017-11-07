@@ -54,6 +54,8 @@ function promptMsg(str_msg, bool_backtologin, custom_function) {
     else if (typeof bool_backtologin === 'boolean' && bool_backtologin)
         $('#btnMsgr').click(function () {
             console_log('redirecting to : ' + landing_page);
+            $('#msgr').removeClass('elementShow');
+            $('#msgr').addClass('elementHide');
             setTimeout(function () { window.location.href = landing_page; }, 500);
         });
     else

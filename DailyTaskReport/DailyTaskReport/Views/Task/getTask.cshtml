@@ -61,7 +61,7 @@
     }
     div.task-options {
         margin: 15px auto 0 auto;
-        width: 426px;
+        width: 430px;
     }
     div.task-options > ul {
         list-style: none;
@@ -107,15 +107,20 @@
             </li>
         </ul>
     </div>
-    @model DailyTaskReport.Models.getCalendarList
+    @model DailyTaskReport.Models.TaskSearch
     <div style="max-width: 700px; margin: auto;">
-        Display Tasks for @Html.DropDownListFor(m => m.Months, Model.Months, "--Month--")
+        Display Tasks for 
+        @Html.DropDownListFor(m => m.Month, Model.MonthLists, "--Month--")
+        @Html.TextBoxFor(m => m.Year, new { @class = "numberOnly", @maxlength = 4 })
     </div>
     <div class="task-content">
     </div>
 </div>
 
 <script>
+    $(function () {
+        numberOnly();
+    })
     function blockContent(){
         $('div#uiBlocker').removeClass('elementHide');
         $('div#uiBlocker').addClass('elementShow');

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace DailyTaskReport.Models
 {
@@ -75,5 +76,34 @@ namespace DailyTaskReport.Models
     {
         public Int32 code { get; set; }
         public String message { get; set; }
+    }
+
+    public class TaskSearch
+    {
+        public TaskSearch()
+        {
+            MonthLists = new List<SelectListItem>
+                       { new SelectListItem { Value = "01", Text = "January"},
+                         new SelectListItem { Value = "02", Text = "February"},
+                         new SelectListItem { Value = "03", Text = "March"},
+                         new SelectListItem { Value = "04", Text = "April"},
+                         new SelectListItem { Value = "05", Text = "May"},
+                         new SelectListItem { Value = "06", Text = "June"},
+                         new SelectListItem { Value = "07", Text = "July"},
+                         new SelectListItem { Value = "08", Text = "August"},
+                         new SelectListItem { Value = "09", Text = "September"},
+                         new SelectListItem { Value = "10", Text = "October"},
+                         new SelectListItem { Value = "11", Text = "November"},
+                         new SelectListItem { Value = "12", Text = "December"}
+                       };
+        }
+        public List<SelectListItem> MonthLists { get; set; }
+
+        [Required]
+        public String Month { get; set; }
+        [Required]
+        public Int32 Year { get; set; }
+        [Required]
+        public String encUser { get; set; }
     }
 }

@@ -29,7 +29,7 @@ namespace DailyTaskReport.Controllers
 
         public ActionResult getTask(String _user)
         {
-            return PartialView(new getCalendarList());
+            return PartialView(new TaskSearch());
         }
 
         public ActionResult _getTask(String _user)
