@@ -27,12 +27,15 @@ namespace DailyTaskReport.Controllers
             connection = config["server"].ToString();
         }
 
-        public ActionResult getTask(String _user)
+        public ActionResult getTask()
         {
-            return PartialView(new TaskSearch());
+            DateTime sDate = getServerDate();
+            return PartialView(new TaskSearch() { Month = sDate.Month < 10 ? "0" + sDate.Month : sDate.Month.ToString(),
+                                                  Year = sDate.Year
+                                                });
         }
 
-        public ActionResult _getTask(String _user)
+        public ActionResult searchTask(TaskSearch taskSearch)
         {
             user_tasks data = new user_tasks();
             List<daily_task> daily = new List<daily_task>();
@@ -45,12 +48,9 @@ namespace DailyTaskReport.Controllers
                     con.Open();
                     using (MySqlCommand cmd = con.CreateCommand())
                     {
-                        String dateMonth = getServerMonth();
-                        dateMonth = dateMonth.Length < 2 ? "0" + dateMonth : dateMonth;
-
-                        cmd.CommandText = "SELECT * FROM kpDailyTask.Report" + dateMonth
+                        cmd.CommandText = "SELECT * FROM kpDailyTask.Report" + taskSearch.Month
                                         + " WHERE user = @user ORDER BY date DESC, timeFrom DESC;";
-                        cmd.Parameters.AddWithValue("user", encdata.AESDecrypt(_user.Replace(' ', '+'), encStringKey));
+                        cmd.Parameters.AddWithValue("user", encdata.AESDecrypt(taskSearch.encUser.Replace(' ', '+'), encStringKey));
                         MySqlDataReader rdr = cmd.ExecuteReader();
                         if (rdr.HasRows)
                         {
@@ -150,9 +150,9 @@ namespace DailyTaskReport.Controllers
             return new JsonResult { };
         }
 
-        private String getServerMonth()
+        private DateTime getServerDate()
         {
-            String date = string.Empty;
+            DateTime date = new DateTime();
             try
             {
                 using (MySqlConnection con = new MySqlConnection(connection))
@@ -160,21 +160,21 @@ namespace DailyTaskReport.Controllers
                     con.Open();
                     using (MySqlCommand cmd = con.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT MONTH(DATE_ADD(NOW(), INTERVAL 15 HOUR )) AS \"current_date\";";
+                        cmd.CommandText = "SELECT DATE_ADD(NOW(), INTERVAL 16 HOUR ) AS \"current_date\";";
                         MySqlDataReader rdr = cmd.ExecuteReader();
 
                         if (rdr.HasRows)
                         {
                             rdr.Read();
-                            date = rdr["current_date"].ToString();
+                            date = Convert.ToDateTime(rdr["current_date"].ToString());
                             rdr.Close();
                         }
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                date = "error";
+                throw ex;
             }
             return date;
         }

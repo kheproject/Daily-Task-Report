@@ -26,7 +26,7 @@
     div.task-content {
         padding: 10px 0;
         background: rgba(36,0,0,0.3);
-        margin: 15px auto 0 auto;
+        margin: 5px auto 0 auto;
         max-height: 500px;
         max-width: 700px;
         overflow-y: scroll;
@@ -107,20 +107,22 @@
             </li>
         </ul>
     </div>
+    
     @model DailyTaskReport.Models.TaskSearch
-    <div style="max-width: 700px; margin: auto;">
-        Display Tasks for 
-        @Html.DropDownListFor(m => m.Month, Model.MonthLists, "--Month--")
-        @Html.TextBoxFor(m => m.Year, new { @class = "numberOnly", @maxlength = 4 })
-    </div>
+    @using (Html.BeginForm("searchTask", "Task", FormMethod.Get, new { @id = "frmTaskSearch", @style = "max-width: 700px; margin: 15px auto 0 auto;" }))
+    {
+        <span>Display Tasks for</span>
+        @Html.TextBoxFor(m => m.encUser, new { @style = "display: none;", Value = Session["_user"] })
+        @Html.DropDownListFor(m => m.Month, Model.MonthLists, "--Month--", new { @style = "padding: 3px; text-align: center;" })
+        @Html.TextBoxFor(m => m.Year, new { @class = "numberOnly", @style = "padding: 2px; text-align: center; width: 50px;", @maxlength = 4 })
+        <button class="bgcred fontWhite" type="submit">Search</button>
+    }
     <div class="task-content">
     </div>
 </div>
 
 <script>
-    $(function () {
-        numberOnly();
-    })
+    $(function () { numberOnly(); });
     function blockContent(){
         $('div#uiBlocker').removeClass('elementHide');
         $('div#uiBlocker').addClass('elementShow');
