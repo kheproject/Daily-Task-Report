@@ -117,12 +117,16 @@
         @Html.TextBoxFor(m => m.Year, new { @class = "numberOnly", @style = "padding: 2px; text-align: center; width: 50px;", @maxlength = 4 })
         <button class="bgcred fontWhite" type="submit">Search</button>
     }
-    <div class="task-content">
+    <div id="user-tasks-lists" class="task-content">
     </div>
 </div>
 
 <script>
-    $(function () { numberOnly(); });
+    $(function () {
+        numberOnly();
+        getListOftheMonth();
+    });
+
     function blockContent(){
         $('div#uiBlocker').removeClass('elementHide');
         $('div#uiBlocker').addClass('elementShow');
@@ -130,5 +134,22 @@
     function unblockContent() {
         $('div#uiBlocker').removeClass('elementShow');
         $('div#uiBlocker').addClass('elementHide');
+    }
+    function getListOftheMonth() {
+        $.ajax({
+            async: true,
+            type: 'GET',
+            url: $('#frmTaskSearch').attr("action"),
+            data: $('form#frmTaskSearch :input').serializeArray(),
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            dataType: 'html',
+            cache: false,
+            success: function (result) {
+                $('#user-tasks-lists').html(result);
+            },
+            error: function (xhr, status, errorThrown) {
+                ajaxErrorHandler('logging in', status, errorThrown);
+            }
+        });
     }
 </script>
