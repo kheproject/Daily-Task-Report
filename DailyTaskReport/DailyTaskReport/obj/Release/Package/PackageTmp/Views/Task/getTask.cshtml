@@ -1,5 +1,4 @@
-﻿@model DailyTaskReport.Models.user_tasks
-<script>
+﻿<script>
     if ("@Session["_user"]" == "") {
         console.log("Session expired.");
         promptMsg("Current session has expired. <br /> Please login again", true);
@@ -11,24 +10,23 @@
     }
 </script>
 <style>
-    div#task-page {
-        line-height: 0.5;
-    }
-    div#task-page > div.title-separator {
+    div.task-page-header > div.title-separator {
         height: 10px;
         border-bottom: 2px solid white;
         border-left: 2px solid white;
     }
-    div#task-page > span {
+    div.task-page-header > span {
         margin-left: 15px;
         font-size: 20px;
         font-weight: bold;
     }
+    div.task-page-header {
+        line-height: 0.5;
+    }
     div.task-content {
         padding: 10px 0;
-        line-height: 1.5;
         background: rgba(36,0,0,0.3);
-        margin: 15px auto 0 auto;
+        margin: 5px auto 0 auto;
         max-height: 500px;
         max-width: 700px;
         overflow-y: scroll;
@@ -63,7 +61,7 @@
     }
     div.task-options {
         margin: 15px auto 0 auto;
-        width: 426px;
+        width: 430px;
     }
     div.task-options > ul {
         list-style: none;
@@ -89,8 +87,10 @@
     }
 </style>
 <div id="task-page" class="container">
-    <span>Task</span> ─ Let's see what you have in store ...
-    <div class="title-separator"></div>
+    <div class="task-page-header">
+        <span>Task</span> ─ Let's see what you have in store ...
+        <div class="title-separator"></div>
+    </div>
     <div class="task-options container">
         <ul class="container">
             <li>
@@ -100,65 +100,35 @@
                 <a onclick="promptMsg('Edit Task feature is not available')">Edit Task</a>
             </li>
             <li>
-                <a onclick="promptMsg('Search Task feature is not available')">Search Task</a>
-            </li>
-            <li>
                 <a onclick="promptMsg('Delete Task feature is not available')">Delete Task</a>
             </li>
         </ul>
     </div>
-    <div class="task-content">
-        @{  foreach (var data in Model.tasks)
-            {
-                <div>
-                    <div class="date-content ">@data.task_date.ToString("D")</div>
-                    <div class="data-content">
-                        @foreach (var tasks in data.taskLists)
-                        {
-                            <div class="container col-md-12">
-                                <div class="col-xs-6">
-                                    <div class="container col-xs-12">
-                                        <div class="col-xs-5">
-                                            Time
-                                        </div>
-                                        <div class="col-xs-7">
-                                            @tasks.timeFrom ─ @tasks.timeTo
-                                        </div>
-                                    </div>
-                                    <div class="container col-xs-12">
-                                        <div class="col-xs-5">Work Order No.</div>
-                                        <div class="col-xs-7">@tasks.woNo</div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="col-xs-3">
-                                        Task
-                                    </div>
-                                    <div class="col-xs-9" style="padding-left: 0;">
-                                        <textarea style="width: 100%; resize: none;" readonly draggable="false">@tasks.task</textarea>
-                                    </div>
-                                </div>
-                                @using (Html.BeginForm("removeTask", "Task", FormMethod.Post, new { @style = "display: none;" }))
-                                {
-                                    @Html.TextBoxFor(m => data.task_date)
-                                    @Html.TextBoxFor(m => tasks.taskID, new { @style="display: none;" });
-                                    <button class="fontWhite bgcred" type="button" onclick="promptMsg('remove task feature is not yet available')">remove task</button>
-                                }
-                            </div>
-                        }
-                    </div>
-                </div>
-            }
-
-            if (ViewBag.message != null)
-            {
-                <div style="text-align: center;">@ViewBag.message</div>
-            }
-        }
+    
+    @model DailyTaskReport.Models.TaskSearch
+    @using (Html.BeginForm("searchTask", "Task", FormMethod.Get, new { @id = "frmTaskSearch", @style = "max-width: 700px; margin: 15px auto 0 auto;" }))
+    {
+        <span>Display Tasks for</span>
+        @Html.TextBoxFor(m => m.encUser, new { @style = "display: none;", Value = Session["_user"] })
+        @Html.DropDownListFor(m => m.Month, Model.MonthLists, "--Month--", new { @style = "padding: 3px; text-align: center;" })
+        @Html.TextBoxFor(m => m.Year, new { @class = "numberOnly", @style = "padding: 2px; text-align: center; width: 50px;", @maxlength = 4 })
+        <button class="bgcred fontWhite" type="submit">Search</button>
+    }
+    <div id="user-tasks-lists" class="task-content">
     </div>
 </div>
 
 <script>
+    $(function () {
+        numberOnly();
+        getListOftheMonth();
+        $("#frmTaskSearch").on('submit', function (e) {
+            e.preventDefault();
+            console_log("task searching : " + $("#Month option:selected").text() + " " + $("#Year").val());
+            getListOftheMonth();
+        });
+    });
+
     function blockContent(){
         $('div#uiBlocker').removeClass('elementHide');
         $('div#uiBlocker').addClass('elementShow');
@@ -166,5 +136,22 @@
     function unblockContent() {
         $('div#uiBlocker').removeClass('elementShow');
         $('div#uiBlocker').addClass('elementHide');
+    }
+    function getListOftheMonth() {
+        $.ajax({
+            async: true,
+            type: 'GET',
+            url: $('#frmTaskSearch').attr("action"),
+            data: $('form#frmTaskSearch :input').serializeArray(),
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            dataType: 'html',
+            cache: false,
+            success: function (result) {
+                $('#user-tasks-lists').html(result);
+            },
+            error: function (xhr, status, errorThrown) {
+                ajaxErrorHandler('retrieving tasks lists', status, errorThrown);
+            }
+        });
     }
 </script>

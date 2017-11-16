@@ -1,5 +1,5 @@
 ﻿$(function () {
-    console_log('Action tracker enabled...');
+    console_log('Console logging enabled...');
     assignLandingPage(window.location.protocol + '//' + window.location.host + $('#landingPageLink').attr('href'));
 });
 
@@ -17,13 +17,13 @@ function assignLandingPage(landingPage) {
 }
 
 function toggleUIBlocker(bool_ShowHide) {
-    if (typeof bool_ShowHide == 'boolean' && bool_ShowHide) {
+    if (typeof bool_ShowHide === 'boolean' && bool_ShowHide) {
         $('#uiBlocker').removeClass('elementHide');
         $('#uiBlocker').addClass('elementShow');
         $('#ajxLoad').addClass('elementShow');
         $('#ajxLoad').removeClass('elementHide');
     }
-    else if ($('#uiBlocker').hasClass('elementShow') || (typeof bool_ShowHide == 'boolean' && !bool_ShowHide)) {
+    else if ($('#uiBlocker').hasClass('elementShow') || typeof bool_ShowHide === 'boolean' && !bool_ShowHide) {
         $('#uiBlocker').removeClass('elementShow');
         $('#uiBlocker').addClass('elementHide');
         $('#ajxLoad').removeClass('elementShow');
@@ -41,9 +41,9 @@ function promptMsg(str_msg, bool_backtologin, custom_function) {
     showPrompt();
     document.getElementById("msgr").firstElementChild.innerHTML = str_msg;
     $('#btnMsgr').unbind("click");
-    if (typeof custom_function == 'function')
+    if (typeof custom_function === 'function')
         $('#btnMsgr').click(function () {
-            console_log('custom function triggered')
+            console_log('custom function triggered');
             custom_function();
             setTimeout(function () { document.getElementById("msgr").firstElementChild.innerHTML = ""; }, 100);
             if ($('#msgr').hasClass('elementShow')) {
@@ -51,21 +51,23 @@ function promptMsg(str_msg, bool_backtologin, custom_function) {
                 $('#msgr').addClass('elementHide');
             }
         });
-    else if (typeof bool_backtologin == 'boolean' && bool_backtologin)
+    else if (typeof bool_backtologin === 'boolean' && bool_backtologin)
         $('#btnMsgr').click(function () {
             console_log('redirecting to : ' + landing_page);
+            $('#msgr').removeClass('elementShow');
+            $('#msgr').addClass('elementHide');
             setTimeout(function () { window.location.href = landing_page; }, 500);
-        })
+        });
     else
         $('#btnMsgr').click(function () {
-            console_log('close prompt message')
+            console_log('close prompt message');
             toggleUIBlocker();
             setTimeout(function () { document.getElementById("msgr").firstElementChild.innerHTML = ""; }, 100);
             if ($('#msgr').hasClass('elementShow')) {
                 $('#msgr').removeClass('elementShow');
                 $('#msgr').addClass('elementHide');
             }
-        })
+        });
     $('#btnMsgr').focus();
 }
 

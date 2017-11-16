@@ -49,8 +49,9 @@ namespace DailyTaskReport.Controllers
                     using (MySqlCommand cmd = con.CreateCommand())
                     {
                         cmd.CommandText = "SELECT * FROM kpDailyTask.Report" + taskSearch.Month
-                                        + " WHERE user = @user ORDER BY date DESC, timeFrom DESC;";
+                                        + " WHERE user = @user AND YEAR(DATE) = @year ORDER BY date DESC, timeFrom DESC;";
                         cmd.Parameters.AddWithValue("user", encdata.AESDecrypt(taskSearch.encUser.Replace(' ', '+'), encStringKey));
+                        cmd.Parameters.AddWithValue("year", taskSearch.Year);
                         MySqlDataReader rdr = cmd.ExecuteReader();
                         if (rdr.HasRows)
                         {
@@ -111,7 +112,7 @@ namespace DailyTaskReport.Controllers
             {
                 Console.WriteLine("error: " + ex.ToString());
             }
-            return PartialView(data);
+            return PartialView("_getTask", data);
         }
 
         public ActionResult addTask()

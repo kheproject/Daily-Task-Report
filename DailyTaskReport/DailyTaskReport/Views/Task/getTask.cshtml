@@ -100,9 +100,6 @@
                 <a onclick="promptMsg('Edit Task feature is not available')">Edit Task</a>
             </li>
             <li>
-                <a onclick="promptMsg('Search Task feature is not available')">Search Task</a>
-            </li>
-            <li>
                 <a onclick="promptMsg('Delete Task feature is not available')">Delete Task</a>
             </li>
         </ul>
@@ -125,6 +122,11 @@
     $(function () {
         numberOnly();
         getListOftheMonth();
+        $("#frmTaskSearch").on('submit', function (e) {
+            e.preventDefault();
+            console_log("task searching : " + $("#Month option:selected").text() + " " + $("#Year").val());
+            getListOftheMonth();
+        });
     });
 
     function blockContent(){
@@ -148,7 +150,7 @@
                 $('#user-tasks-lists').html(result);
             },
             error: function (xhr, status, errorThrown) {
-                ajaxErrorHandler('logging in', status, errorThrown);
+                ajaxErrorHandler('retrieving tasks lists', status, errorThrown);
             }
         });
     }
