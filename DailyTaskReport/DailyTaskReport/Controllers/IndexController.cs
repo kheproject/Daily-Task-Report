@@ -94,7 +94,7 @@ namespace DailyTaskReport.Controllers
                     con.Open();
                     using (MySqlCommand cmd = con.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT * FROM kpDailyTask.employees WHERE user = @user AND password = @pwrd;";
+                        cmd.CommandText = "SELECT * FROM mtdtr.employees WHERE user = @user AND password = @pwrd;";
                         cmd.Parameters.AddWithValue("user", login.user);
                         cmd.Parameters.AddWithValue("pwrd", login.password);
 

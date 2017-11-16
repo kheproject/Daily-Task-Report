@@ -57,7 +57,7 @@ namespace DailyTaskReport.Controllers
                         MySqlTransaction trans = con.BeginTransaction(IsolationLevel.ReadCommitted);
                         using (MySqlCommand cmd = con.CreateCommand())
                         {
-                            cmd.CommandText = "INSERT INTO kpDailyTask.employees (IDno, user, password, FName, MName, LName, birthDate, ContactNo, Role, Designation, Regdate)"
+                            cmd.CommandText = "INSERT INTO mtdtr.employees (IDno, user, password, FName, MName, LName, birthDate, ContactNo, Role, Designation, Regdate)"
                                             + "VALUES (@idNo, @user, @password, @fName, @mName, @lName, @birthdate, @ContactNo," 
                                             + "\"PRG1\", \"Programmer 1\", DATE_ADD(NOW(), INTERVAL 15 HOUR));";
                             cmd.Parameters.AddWithValue("idNo", user.idNo);
