@@ -138,6 +138,7 @@
         $('div#uiBlocker').addClass('elementHide');
     }
     function getListOftheMonth() {
+        toggleUIBlocker();
         $.ajax({
             async: true,
             type: 'GET',
@@ -147,7 +148,16 @@
             dataType: 'html',
             cache: false,
             success: function (result) {
-                $('#user-tasks-lists').html(result);
+                setTimeout(function () {
+                    if (result !== "") {
+                        $('#user-tasks-lists').html(result);
+
+                    }
+                    else {
+                        promptSessionExpired();
+                    }
+                    toggleUIBlocker();
+                }, 500);
             },
             error: function (xhr, status, errorThrown) {
                 ajaxErrorHandler('retrieving tasks lists', status, errorThrown);

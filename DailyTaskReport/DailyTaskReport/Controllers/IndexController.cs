@@ -94,9 +94,15 @@ namespace DailyTaskReport.Controllers
                     con.Open();
                     using (MySqlCommand cmd = con.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT * FROM mtdtr.employees WHERE user = @user AND password = @pwrd;";
-                        cmd.Parameters.AddWithValue("user", login.user);
-                        cmd.Parameters.AddWithValue("pwrd", login.password);
+                        //cmd.CommandText = "SELECT * FROM mtdtr.employees WHERE user = @user AND password = @pwrd;";
+                        //cmd.Parameters.AddWithValue("user", login.user);
+                        //cmd.Parameters.AddWithValue("pwrd", login.password);
+
+                        cmd.CommandText = "CALL mtdtr.authenticate(@login_user, @login_password)";
+                        //cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        //cmd.CommandText = "mtdtr.authenticate(@login_user, @login_password)";
+                        cmd.Parameters.AddWithValue("login_user", login.user);
+                        cmd.Parameters.AddWithValue("login_password", login.password);
 
                         MySqlDataReader rdr = cmd.ExecuteReader();
                         if (rdr.HasRows)
