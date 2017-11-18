@@ -48,7 +48,8 @@ namespace DailyTaskReport.Controllers
                     con.Open();
                     using (MySqlCommand cmd = con.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT * FROM kpDailyTask.Report" + taskSearch.Month
+                        cmd.CommandText = "SELECT *, TIME_FORMAT(timeFrom, \"%h:%i %p\") AS timeFrom_formatted, "
+                                        + " TIME_FORMAT(timeTo, \"%h:%i %p\") AS timeTo_formatted FROM kpDailyTask.Report" + taskSearch.Month
                                         + " WHERE user = @user AND YEAR(DATE) = @year ORDER BY date DESC, timeFrom DESC;";
                         cmd.Parameters.AddWithValue("user", encdata.AESDecrypt(taskSearch.encUser.Replace(' ', '+'), encStringKey));
                         cmd.Parameters.AddWithValue("year", taskSearch.Year);
@@ -65,8 +66,8 @@ namespace DailyTaskReport.Controllers
                                     tasks.Add(new task_list
                                     {
                                         taskID = rdr["taskID"].ToString(),
-                                        timeFrom = rdr["timeFrom"].ToString(),
-                                        timeTo = rdr["timeTo"].ToString(),
+                                        timeFrom = rdr["timeFrom_formatted"].ToString(),
+                                        timeTo = rdr["timeTo_formatted"].ToString(),
                                         task = rdr["Task"].ToString(),
                                         woNo = rdr["WOno"].ToString()
                                     });
@@ -84,8 +85,8 @@ namespace DailyTaskReport.Controllers
                                     tasks.Add(new task_list
                                     {
                                         taskID = rdr["taskID"].ToString(),
-                                        timeFrom = rdr["timeFrom"].ToString(),
-                                        timeTo = rdr["timeTo"].ToString(),
+                                        timeFrom = rdr["timeFrom_formatted"].ToString(),
+                                        timeTo = rdr["timeTo_formatted"].ToString(),
                                         task = rdr["Task"].ToString(),
                                         woNo = rdr["WOno"].ToString()
                                     });

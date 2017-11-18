@@ -29,11 +29,14 @@
                                 <textarea style="width: 100%; resize: none;" readonly draggable="false">@tasks.task</textarea>
                             </div>
                         </div>
-                        @using (Html.BeginForm("removeTask", "Task", FormMethod.Post, new { @style = "display: none;" }))
+                        @using (Html.BeginForm("removeTask", "Task", FormMethod.Post, new { @style = "display: normal;" }))
                         {
-                            @Html.TextBoxFor(m => data.task_date)
-                            @Html.TextBoxFor(m => tasks.taskID, new { @style = "display: none;" });
-                            <button class="fontWhite bgcred" type="button" onclick="promptMsg('remove task feature is not yet available')">remove task</button>
+                            @Html.TextBoxFor(m => data.task_date);
+                            @Html.TextBoxFor(m => tasks.taskID, new { @style = "display: normal;" });
+                            <button style="background: none;"
+                                    type="button" onclick="promptMsg('delete task feature is not yet available')">
+                                <img src="~/Images/trash-bin.svg" height="28"/>
+                            </button>
                         }
                     </div>
                 }
