@@ -41,6 +41,8 @@ namespace DailyTaskReport.Models
         public String woNo { get; set; }
         [Required]
         public String task { get; set; }
+        [Required]
+        public Boolean confirmed { get; set; }
     }
 
     public class TaskLists
@@ -98,7 +100,6 @@ namespace DailyTaskReport.Models
                        };
         }
         public List<SelectListItem> MonthLists { get; set; }
-
         [Required]
         public String Month { get; set; }
         [Required]

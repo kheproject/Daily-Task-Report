@@ -4,10 +4,10 @@
 });
 
 var landing_page;
-var developer_console_log_on = true;
+var developer_console_log = false;
 
 function console_log(msg) {
-    if (developer_console_log_on)
+    if (developer_console_log)
         console.log(msg);
 }
 

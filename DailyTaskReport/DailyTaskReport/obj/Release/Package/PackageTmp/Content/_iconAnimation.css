@@ -1,0 +1,30 @@
+﻿.can-cover {
+    transition-duration: 0.2s;
+}
+.can-cover-open {
+    -webkit-transform: rotateZ(40deg);
+    -khtml-transform: rotateZ(40deg);
+    -moz-transform: rotateZ(40deg);
+    -ms-transform: rotateZ(40deg);
+    -o-transform: rotateZ(40deg);
+    transform: rotateZ(40deg);
+    margin-left: 5px;
+}
+.can-bin {
+    margin-top: 1px;
+    margin-left: 1px;
+}
+.lock-locked {
+    margin-top: 13px;
+    position: absolute;
+    left: -2px;
+}
+.lock-locked:hover {
+    animation: shake 0.5s;
+}
+
+@-moz-keyframes shake    { 0% { left: -2px; } 8% { left : -6px; } 24% { left : 2px; } 50% { left:-5px; } 70% { left: 0px; } 90% { left: -2px; } 100% { left: -2px; } }
+@-webkit-keyframes shake { 0% { left: -2px; } 8% { left : -6px; } 24% { left : 2px; } 50% { left:-5px; } 70% { left: 0px; } 90% { left: -2px; } 100% { left: -2px; } }
+@-ms-keyframes shake     { 0% { left: -2px; } 8% { left : -6px; } 24% { left : 2px; } 50% { left:-5px; } 70% { left: 0px; } 90% { left: -2px; } 100% { left: -2px; } }
+@-o-keyframes shake      { 0% { left: -2px; } 8% { left : -6px; } 24% { left : 2px; } 50% { left:-5px; } 70% { left: 0px; } 90% { left: -2px; } 100% { left: -2px; } }
+@keyframes shake         { 0% { left: -2px; } 8% { left : -6px; } 24% { left : 2px; } 50% { left:-5px; } 70% { left: 0px; } 90% { left: -2px; } 100% { left: -2px; } }

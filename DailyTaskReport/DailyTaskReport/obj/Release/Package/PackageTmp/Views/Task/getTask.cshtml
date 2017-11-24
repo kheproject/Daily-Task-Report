@@ -28,7 +28,7 @@
         background: rgba(36,0,0,0.3);
         margin: 5px auto 0 auto;
         max-height: 500px;
-        max-width: 700px;
+        width: 800px;
         overflow-y: scroll;
         display: block;
     }
@@ -85,8 +85,18 @@
         border-bottom: 3px solid rgba(255,250,250,0.9);
         color: #fffde1;
     }
+    .delete-task-option {
+        transition-duration: 0.5s;
+        overflow: hidden;
+    }
+    .delete-task-option-enabled {
+        width: 30px;
+    }
+    .delete-task-option-disabled {
+        width: 0px;
+    }
 </style>
-<div id="task-page" class="container">
+<div id="task-page">
     <div class="task-page-header">
         <span>Task</span> ─ Let's see what you have in store ...
         <div class="title-separator"></div>
@@ -100,7 +110,7 @@
                 <a onclick="promptMsg('Edit Task feature is not available')">Edit Task</a>
             </li>
             <li>
-                <a onclick="promptMsg('Delete Task feature is not available')">Delete Task</a>
+                <a onclick="enableDeleteOption()">Delete Task</a>
             </li>
         </ul>
     </div>
@@ -151,17 +161,21 @@
                 setTimeout(function () {
                     if (result !== "") {
                         $('#user-tasks-lists').html(result);
-
+                        toggleUIBlocker();
                     }
                     else {
                         promptSessionExpired();
                     }
-                    toggleUIBlocker();
+                    
                 }, 500);
             },
             error: function (xhr, status, errorThrown) {
                 ajaxErrorHandler('retrieving tasks lists', status, errorThrown);
             }
         });
+    }
+    function enableDeleteOption() {
+        $('.delete-task-option').removeClass('delete-task-option-disabled');
+        $('.delete-task-option').addClass('delete-task-option-enabled');
     }
 </script>

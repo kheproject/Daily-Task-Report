@@ -1,6 +1,6 @@
 ﻿//--for Keyup/down focusin/out--------------------\/
 function isDash(e) {
-    //return e.keyCode == 45 ? true : false;
+    //return e.keyCode === 45 ? true : false;
     return e.keyCode === 189 ? true : e.keyCode === 109 ? true : false;
 }
 function isArrowKeys(e) {

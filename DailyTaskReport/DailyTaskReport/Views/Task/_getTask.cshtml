@@ -7,7 +7,7 @@
                 @foreach (var tasks in data.taskLists)
                 {
                     <div class="container col-md-12">
-                        <div class="col-xs-6">
+                        <div class="col-xs-5">
                             <div class="container col-xs-12">
                                 <div class="col-xs-5">
                                     Time
@@ -22,22 +22,46 @@
                             </div>
                         </div>
                         <div class="col-xs-6">
-                            <div class="col-xs-3">
+                            <div class="col-xs-2">
                                 Task
                             </div>
-                            <div class="col-xs-9" style="padding-left: 0;">
+                            <div class="col-xs-10" style="padding-left: 0;">
                                 <textarea style="width: 100%; resize: none;" readonly draggable="false">@tasks.task</textarea>
                             </div>
                         </div>
-                        @using (Html.BeginForm("removeTask", "Task", FormMethod.Post, new { @style = "display: normal;" }))
-                        {
-                            @Html.TextBoxFor(m => data.task_date);
-                            @Html.TextBoxFor(m => tasks.taskID, new { @style = "display: normal;" });
-                            <button style="background: none;"
-                                    type="button" onclick="promptMsg('delete task feature is not yet available')">
-                                <img src="~/Images/trash-bin.svg" height="28"/>
-                            </button>
-                        }
+                        <div class = "col-xs-1">
+                            <div class="delete-task-option delete-task-option-disabled">
+                                <div style="margin-left: 10px;">
+                                    @if (!tasks.confirmed)
+                                    {
+                                        using (Html.BeginForm("removeTask", "Task", FormMethod.Post, new { @style = "" }))
+                                        {
+                                            @Html.TextBoxFor(m => m.user, new { @style = "display: none;" });
+                                            @Html.TextBoxFor(m => data.task_date, new { @style = "display: none;" });
+                                            @Html.TextBoxFor(m => tasks.taskID, new { @style = "display: none;" });
+                                            <button id="btnDelete_@tasks.taskID" style="background: none; padding: 7px 0 0 0;" title="delete task"
+                                                    type="button" onclick="promptMsg('delete task feature is not yet available')">
+                                                <script>
+                                                    $('#btnDelete_@tasks.taskID').mouseover(function () {
+                                                        $('#btnDelete_@tasks.taskID' + ' > img.can-cover').addClass('can-cover-open');
+                                                    }).mouseout(function () {
+                                                        $('#btnDelete_@tasks.taskID' + ' > img.can-cover').removeClass('can-cover-open');
+                                                    });
+                                                </script>
+                                                <img class="can-cover" style="display: block;" src="~/Images/trash-cover.svg" width="18" />
+                                                <img class="can-bin" style="display: block;" src="~/Images/trash-can.svg" height="16" />
+                                            </button>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div style="position: relative; height: 40px;">
+                                            <img class="lock-locked" src="~/Images/lock-icon.svg" width="20" title="task is confirmed and locked" />
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 }
             </div>

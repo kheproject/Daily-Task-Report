@@ -69,7 +69,8 @@ namespace DailyTaskReport.Controllers
                                         timeFrom = rdr["timeFrom_formatted"].ToString(),
                                         timeTo = rdr["timeTo_formatted"].ToString(),
                                         task = rdr["Task"].ToString(),
-                                        woNo = rdr["WOno"].ToString()
+                                        woNo = rdr["WOno"].ToString(),
+                                        confirmed = Convert.ToBoolean(rdr["confirmed"].ToString())
                                     });
                                 }
                                 else
@@ -88,19 +89,20 @@ namespace DailyTaskReport.Controllers
                                         timeFrom = rdr["timeFrom_formatted"].ToString(),
                                         timeTo = rdr["timeTo_formatted"].ToString(),
                                         task = rdr["Task"].ToString(),
-                                        woNo = rdr["WOno"].ToString()
+                                        woNo = rdr["WOno"].ToString(),
+                                        confirmed = Convert.ToBoolean(rdr["confirmed"].ToString())
                                     });
                                 }
                             }
 
-                            //final daily add from last date result
+                            //final daily add from last date result-
                             daily.Add(new daily_task
                             {
                                 task_date = Convert.ToDateTime(currDate),
                                 taskLists = tasks
                             });
 
-                            data = new user_tasks { user = encdata.AESDecrypt(Session["_user"].ToString().Replace(' ', '+'), encStringKey), tasks = daily };
+                            data = new user_tasks { user = taskSearch.encUser, tasks = daily };
                         }
                         else
                         {
