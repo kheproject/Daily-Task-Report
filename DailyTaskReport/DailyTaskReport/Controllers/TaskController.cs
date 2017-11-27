@@ -149,9 +149,44 @@ namespace DailyTaskReport.Controllers
         }
 
         [HttpPost]
-        public JsonResult removeTask()
+        public JsonResult deleteTask(user_tasks taskDetails)
         {
-            return new JsonResult { };
+            TaskResponse response = new TaskResponse();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(connection))
+                {
+                    con.Open();
+                    MySqlTransaction trans = con.BeginTransaction(IsolationLevel.ReadCommitted);
+                    using (MySqlCommand cmd = con.CreateCommand())
+                    {
+                        string currentMonth = taskDetails.tasks[0].task_date.Month > 9 ? taskDetails.tasks[0].task_date.Month.ToString() 
+                                                                                       : "0" + taskDetails.tasks[0].task_date.Month.ToString();
+                        cmd.CommandText = "DELETE FROM `kpDailyTask`.`Report" + currentMonth + "` WHERE taskid=@taskID AND USER = @user AND task = @task";
+                        cmd.Parameters.AddWithValue("user", encdata.AESDecrypt(taskDetails.user, encStringKey).ToUpper());
+                        cmd.Parameters.AddWithValue("taskID", taskDetails.tasks[0].taskLists[0].taskID);
+                        cmd.Parameters.AddWithValue("task", taskDetails.tasks[0].taskLists[0].task);
+
+                        if (cmd.ExecuteNonQuery() > 0)
+                        {
+                            trans.Commit();
+                            response.code = 1;
+                            response.message = "Task Successfully Deleted!";
+                        }
+                        else
+                        {
+                            response.code = 0;
+                            response.message = "Server error upon deleting task, please try again";
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                response.code = -1;
+                response.message = "Unable to determine user, please refresh the page...";
+            }
+            return new JsonResult { Data = response };
         }
 
         private DateTime getServerDate()

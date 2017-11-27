@@ -52,12 +52,14 @@ function isLetterPress(e) { //for lowercase letters, isLetter is uppercase
 }
 
 function numberOnly() {
+    console_log('number only bind...');
     $('.numberOnly').keydown(function (e) {
         if (!isNumber(e) && !isBackSpace(e) && !isEnter(e) && !isTab(e) && !isArrowKeys(e) && !isDelete(e))
             e.preventDefault();
     });
 }
 function namesOnly() {
+    console_log('names only bind...');
     $('.namesOnly').keydown(function (e) {
         if (!isLetter(e) && !isBackSpace(e) && !isEnter(e) && !isTab(e) && !isArrowKeys(e) && !isSpace(e) && !isDelete(e)
             //prevents multiple 'spaces' after each word
@@ -68,12 +70,14 @@ function namesOnly() {
     });
 }
 function userOnly() {
+    console_log('user only bind...');
     $('.userOnly').keydown(function (e) {
         if (!isLetter(e) && !isNumber(e) && !isBackSpace(e) && !isEnter(e) && !isTab(e) && !isArrowKeys(e) && !isDelete(e))
             e.preventDefault();
     });
 }
 function workOrderFormatOnly() {
+    console_log('work order format only bind...');
     $('.workOrderFormatOnly').keydown(function (e) {
         if ((!isLetter(e) && !isBackSpace(e) && !isEnter(e) && !isTab(e) && !isArrowKeys(e) && !isDelete(e) && !isDash(e) && !isNumber(e)) || isSpace(e))
             e.preventDefault();

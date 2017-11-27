@@ -5,7 +5,7 @@
             <div class="date-content ">@data.task_date.ToString("D")</div>
             <div class="data-content">
                 @foreach (var tasks in data.taskLists)
-                {
+                {                    
                     <div class="container col-md-12">
                         <div class="col-xs-5">
                             <div class="container col-xs-12">
@@ -34,13 +34,14 @@
                                 <div style="margin-left: 10px;">
                                     @if (!tasks.confirmed)
                                     {
-                                        using (Html.BeginForm("removeTask", "Task", FormMethod.Post, new { @style = "" }))
+                                        using (Html.BeginForm("deleteTask", "Task", FormMethod.Post, new { @class = "delete-task"}))
                                         {
                                             @Html.TextBoxFor(m => m.user, new { @style = "display: none;" });
-                                            @Html.TextBoxFor(m => data.task_date, new { @style = "display: none;" });
-                                            @Html.TextBoxFor(m => tasks.taskID, new { @style = "display: none;" });
+                                            @Html.TextBoxFor(m => data.task_date, new { @style = "display: none;", @Name = "tasks[0].task_date" });
+                                            @Html.TextBoxFor(m => tasks.task, new { @style = "display: none;", @Name = "tasks[0].taskLists[0].task" });
+                                            @Html.TextBoxFor(m => tasks.taskID, new { @style = "display: none;", @Name = "tasks[0].taskLists[0].taskID" });
                                             <button id="btnDelete_@tasks.taskID" style="background: none; padding: 7px 0 0 0;" title="delete task"
-                                                    type="button" onclick="promptMsg('delete task feature is not yet available')">
+                                                    type="submit" @*onclick="promptMsg('delete task feature is not yet available')"*@>
                                                 <script>
                                                     $('#btnDelete_@tasks.taskID').mouseover(function () {
                                                         $('#btnDelete_@tasks.taskID' + ' > img.can-cover').addClass('can-cover-open');
@@ -73,3 +74,8 @@
         <div style="text-align: center;">@ViewBag.message</div>
     }
 }
+<script>
+    $(function () {
+        deleteTask();
+    });
+</script>

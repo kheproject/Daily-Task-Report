@@ -1,4 +1,50 @@
-﻿
+﻿<script>
+    if ("@Session["_user"]" == "") {
+        console.log("Session expired.");
+        promptMsg("Current session has expired. <br /> Please login again", true);
+    }
+    else {
+        $(function () {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+            if (dd < 10) dd = '0' + dd;
+            if (mm < 10) mm = '0' + mm;
+            var today = yyyy + '-' + mm + '-' + dd;
+            document.getElementById('tasks_0__task_date').value = today;
+
+            $('#frmAddTask').on("submit", function (e) {
+                console_log('adding task(s)...');
+                e.preventDefault();
+                toggleUIBlocker();
+                $.ajax({
+                    async: true,
+                    type: 'POST',
+                    url: $(this).attr("action"),
+                    data: $('form :input').serializeArray(),
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    dataType: 'json',
+                    cache: false,
+                    success: function (response) {
+                        if (response.code == 1) {
+                            promptMsg(response.message, false, function () { return getTaskView() });
+                        }
+                        else if (response.code == 0)
+                            promptMsg(response.message, false);
+                        else if (response.code == -1)
+                            promptMsg(response.message, true);
+                        else
+                            promptMsg("unidentified response from server. <br /> Please contact admin", true);
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        ajaxErrorHandler("frmAddTask on submit", status, errorThrown);
+                    }
+                });
+            });
+        });
+    }
+</script>
 <style>
     .add-task-holder {
         width: 800px;
@@ -26,45 +72,3 @@
         Html.RenderPartial("_addTask");
     }
 </div>
-
-<script>
-    $(function () {
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1; //January is 0!
-        var yyyy = today.getFullYear();
-        if (dd < 10) dd ='0'+ dd;
-        if (mm < 10) mm = '0' + mm;
-        var today = yyyy + '-' + mm + '-' + dd;
-        document.getElementById('tasks_0__task_date').value = today;
-
-        $('#frmAddTask').on("submit", function (e) {
-            console_log('adding task(s)...');
-            e.preventDefault();
-            toggleUIBlocker();
-            $.ajax({
-                async: true,
-                type: 'POST',
-                url: $(this).attr("action"),
-                data: $('form :input').serializeArray(),
-                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                dataType: 'json',
-                cache: false,
-                success: function (response) {
-                    if (response.code == 1) {
-                        promptMsg(response.message, false, function () { return getTaskView() });
-                    }
-                    else if (response.code == 0)
-                        promptMsg(response.message, false);
-                    else if (response.code == -1)
-                        promptMsg(response.message, true);
-                    else
-                        promptMsg("unidentified response from server. <br /> Please contact admin", true);
-                },
-                error: function (xhr, status, errorThrown) {
-                    ajaxErrorHandler("frmAddTask on submit", status, errorThrown);
-                }
-            });
-        });
-    });
-</script>

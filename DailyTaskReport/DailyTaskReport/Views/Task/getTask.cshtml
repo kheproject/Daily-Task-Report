@@ -6,6 +6,13 @@
     else {
         $(function () {
             toggleUIBlocker(false);
+            numberOnly();
+            getListOftheMonth();
+            $("#frmTaskSearch").on('submit', function (e) {
+                e.preventDefault();
+                console_log("task searching : " + $("#Month option:selected").text() + " " + $("#Year").val());
+                getListOftheMonth();
+            });
         });
     }
 </script>
@@ -129,25 +136,55 @@
 </div>
 
 <script>
-    $(function () {
-        numberOnly();
-        getListOftheMonth();
-        $("#frmTaskSearch").on('submit', function (e) {
+    function deleteTask() {
+        console_log('delete-task bind');
+        $('form.delete-task').on('submit', function (e) {
+            console_log('deleting task...');
             e.preventDefault();
-            console_log("task searching : " + $("#Month option:selected").text() + " " + $("#Year").val());
-            getListOftheMonth();
+            toggleUIBlocker();
+            $.ajax({
+                async: true,
+                type: $(this).attr("method"),
+                url: $(this).attr("action"),
+                data: $(this).serializeArray(),
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                cache: false,
+                success: function (response) {
+                    if (response !== "") {
+                        if (response.code == 1) {
+                            promptMsg(response.message, false, function () { return getTaskView() });
+                        }
+                        else if (response.code == 0)
+                            promptMsg(response.message, false);
+                        else if (response.code == -1)
+                            promptMsg(response.message, true);
+                        else
+                            promptMsg("unidentified response from server. <br /> Please contact admin", true);
+                        console_log(response.code);
+                    }
+                    else {
+                        promptSessionExpired();
+                    }
+                },
+                error: function (xhr, status, errorThrown) {
+                    ajaxErrorHandler('deleting task', status, errorThrown);
+                }
+            })
         });
-    });
-
-    function blockContent(){
+    }
+    function blockContent() {
+        console_log('block content');
         $('div#uiBlocker').removeClass('elementHide');
         $('div#uiBlocker').addClass('elementShow');
     }
     function unblockContent() {
+        console_log('unblock content');
         $('div#uiBlocker').removeClass('elementShow');
         $('div#uiBlocker').addClass('elementHide');
     }
     function getListOftheMonth() {
+        console_log('getting list of tasks for the month');
         toggleUIBlocker();
         $.ajax({
             async: true,
@@ -175,6 +212,7 @@
         });
     }
     function enableDeleteOption() {
+        console_log('enabling delete options');
         if ($('.delete-task-option').hasClass('delete-task-option-disabled')) {
             $('.delete-task-option').removeClass('delete-task-option-disabled');
             $('.delete-task-option').addClass('delete-task-option-enabled');
